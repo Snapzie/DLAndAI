@@ -20,6 +20,8 @@ def get_config():
 from pathlib import Path
 from custom_datasets import TranslationDataset
 
+import torch
+import numpy as np
 from torch.utils.data import random_split, DataLoader
 
 from datasets import load_dataset
@@ -53,26 +55,28 @@ def get_dataset():
     tokenizer_src = get_or_build_tokenizer(raw_data,'da')
     tokenizer_tgt = get_or_build_tokenizer(raw_data,'en')
 
+    # Filter the data to ensure all sentences are smaller than seq_len
+    print('Filtering size of dataset...')
+    raw_data = raw_data.filter(lambda x: len(tokenizer_src.encode(x['translation']['da'])) < _seq_len and len(tokenizer_src.encode(x['translation']['en'])) < _seq_len)
+    max_len_src = 0
+    max_len_tgt = 0
+    for item in raw_data:
+        src_ids = tokenizer_src.encode(item['translation']['da']).ids
+        tgt_ids = tokenizer_tgt.encode(item['translation']['en']).ids
+        max_len_src = max(max_len_src, len(src_ids))
+        max_len_tgt = max(max_len_tgt, len(tgt_ids))
+
+    print(f'Max length of source sentence: {max_len_src}')
+    print(f'Max length of target sentence: {max_len_tgt}')
+    print(f'Size of dataset: {len(raw_data)}')
+
+    # Create training and validation sets
     train_ds_size = int(0.9 * len(raw_data))
     val_ds_size = len(raw_data) - train_ds_size
     train_ds_raw, val_ds_raw = random_split(raw_data,[train_ds_size,val_ds_size])
 
-    print('Loading dataset...')
     train_ds = TranslationDataset(train_ds_raw,tokenizer_src,tokenizer_tgt,_seq_len)
-    val_ds = TranslationDataset(val_ds_raw,tokenizer_src,tokenizer_tgt,_seq_len)
-
-    # print('Finding max size of dataset...')
-    # max_len_src = 0
-    # max_len_tgt = 0
-    # for item in raw_data:
-    #     src_ids = tokenizer_src.encode(item['translation']['da']).ids
-    #     tgt_ids = tokenizer_tgt.encode(item['translation']['en']).ids
-    #     max_len_src = max(max_len_src, len(src_ids))
-    #     max_len_tgt = max(max_len_tgt, len(tgt_ids))
-
-    # print(f'Max length of source sentence: {max_len_src}')
-    # print(f'Max length of target sentence: {max_len_tgt}')
-    
+    val_ds = TranslationDataset(val_ds_raw,tokenizer_src,tokenizer_tgt,_seq_len)    
 
     train_dataloader = DataLoader(train_ds, batch_size=_batch_size, shuffle=True)
     val_dataloader = DataLoader(val_ds, batch_size=1, shuffle=True)
