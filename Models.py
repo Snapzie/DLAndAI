@@ -24,12 +24,12 @@ class EncoderLoop(nn.Module):
         self.norm2 = nn.LayerNorm(d_model)
         self.dropout = nn.Dropout(dropout)
 
-    def forward(self,x):
+    def forward(self,x,mask):
         # Attention(QW,KW,VW): x @ w <==> (seq,d_model) @ (d_model,d_model) --> (seq,d_model)
         print(f'Encoder in: {x.shape}')
         x_residual1 = x
         #self.register_buffer('tril', torch.tril(torch.ones((self.seq_len,self.seq_len),dtype=bool),diagonal=0))
-        x,attn_scores = self.MHA.forward(x,x,x) # ,attn_mask=self.tril)
+        x,attn_scores = self.MHA.forward(x,x,x,attn_mask=mask) # ,attn_mask=self.tril)
         x_residual2 = self.norm1(x + x_residual1)
         x = self.dropout(f.relu(self.lin1(x_residual2)))
         x = self.lin2(x)
@@ -63,12 +63,11 @@ class DecoderLoop(nn.Module):
         self.lin2 = nn.Linear(d_model,d_model)
         self.dropout = nn.Dropout(dropout)
 
-    def forward(self,x,encoder_output):
+    def forward(self,x,encoder_output,mask):
         # Attention(QW,KW,VW): x @ w <==> (seq,d_model) @ (d_model,d_model) --> (seq,d_model)
         print(f'Decoder in {x.shape}')
         x_residual1 = x
-        self.register_buffer('tril', torch.tril(torch.ones((self.seq_len,self.seq_len),dtype=bool),diagonal=0))
-        x,attn_scores = self.SA(x,x,x,attn_mask=self.tril)
+        x,attn_scores = self.SA(x,x,x,attn_mask=mask)
         x_residual2 = self.norm1(x + x_residual1)
         x,attn_scores = self.CA(x,encoder_output,encoder_output)
         x_residual3 = self.norm2(x + x_residual2)
