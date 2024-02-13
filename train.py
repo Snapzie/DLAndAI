@@ -57,20 +57,30 @@ def get_dataset():
     val_ds_size = len(raw_data) - train_ds_size
     train_ds_raw, val_ds_raw = random_split(raw_data,[train_ds_size,val_ds_size])
 
-    train_ds = TranslationDataset(train_ds_raw,tokenizer_src,tokenizer_tgt,'da','en',_seq_len)
-    val_ds = TranslationDataset(val_ds_raw,tokenizer_src,tokenizer_tgt,'da','en',_seq_len)
+    print('Loading dataset...')
+    train_ds = TranslationDataset(train_ds_raw,tokenizer_src,tokenizer_tgt,_seq_len)
+    val_ds = TranslationDataset(val_ds_raw,tokenizer_src,tokenizer_tgt,_seq_len)
 
-    for item in raw_data:
-        src_ids = tokenizer_src.encode(item['translation']['da']).ids
-        tgt_ids = tokenizer_tgt.encode(item['translation']['en']).ids
-        max_len_src = max(max_len_src, len(src_ids))
-        max_len_tgt = max(max_len_tgt, len(tgt_ids))
+    # print('Finding max size of dataset...')
+    # max_len_src = 0
+    # max_len_tgt = 0
+    # for item in raw_data:
+    #     src_ids = tokenizer_src.encode(item['translation']['da']).ids
+    #     tgt_ids = tokenizer_tgt.encode(item['translation']['en']).ids
+    #     max_len_src = max(max_len_src, len(src_ids))
+    #     max_len_tgt = max(max_len_tgt, len(tgt_ids))
 
-    print(f'Max length of source sentence: {max_len_src}')
-    print(f'Max length of target sentence: {max_len_tgt}')
+    # print(f'Max length of source sentence: {max_len_src}')
+    # print(f'Max length of target sentence: {max_len_tgt}')
     
 
     train_dataloader = DataLoader(train_ds, batch_size=_batch_size, shuffle=True)
     val_dataloader = DataLoader(val_ds, batch_size=1, shuffle=True)
 
     return train_dataloader, val_dataloader, tokenizer_src, tokenizer_tgt
+
+ds,_,_,_ = get_dataset()
+for dic in ds:
+    print(dic['encoder_input'])
+    print(dic['decoder_input'])
+    break
