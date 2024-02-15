@@ -17,74 +17,54 @@ def get_config():
 
 # Inpired by https://www.youtube.com/watch?v=ISNdQcPhsts&ab_channel=UmarJamil
 
-from pathlib import Path
-from custom_datasets import TranslationDataset
-
 import torch
-import numpy as np
-from torch.utils.data import random_split, DataLoader
-
-from datasets import load_dataset
-from tokenizers import Tokenizer
-from tokenizers.models import WordLevel
-from tokenizers.trainers import WordLevelTrainer
-from tokenizers.pre_tokenizers import Whitespace
+import torch.nn as nn
+from tqdm import tqdm
+from utilities import get_dataset
+from Models import Transformer
+# from .utilities import get_dataset
+# from .Models import Transformer
 
 # hyper parameters
 _seq_len = 350
-_batch_size = 8
+_batch_size = 16
+_d_model = 512
+_num_heads = 8
+_ds_size_cap = 250000
+lr = 1e-4
+label_smoothing = 0.1
+num_epochs = 5
+device = 'cuda' if torch.cuda.is_available() else 'cpu'
+print("Using device:", device)
 
-def get_all_sentences(ds, lang):
-    for item in ds:
-        yield item['translation'][lang]
+print('Loading data...')
+X_train, X_val, src_tokenizer, tgt_tokenizer = get_dataset(_seq_len,_batch_size,_num_heads,_ds_size_cap)
+print('Loading model...')
+model = Transformer(_d_model,_num_heads,_seq_len,src_tokenizer.get_vocab_size(),tgt_tokenizer.get_vocab_size()).to(device)
+print('Doing setup...')
+loss_fn = nn.CrossEntropyLoss(ignore_index=src_tokenizer.token_to_id('[PAD]'),label_smoothing=label_smoothing).to(device)
+optimizer = torch.optim.Adam(model.parameters(),lr=lr,eps=1e-9)
 
-def get_or_build_tokenizer(ds, lang):
-    tokenizer_path = Path(f'tokenizer_{lang}.json')
-    if not Path.exists(tokenizer_path):
-        tokenizer = Tokenizer(WordLevel(unk_token="[UNK]"))
-        tokenizer.pre_tokenizer = Whitespace()
-        trainer = WordLevelTrainer(special_tokens=["[UNK]", "[PAD]", "[SOS]", "[EOS]"], min_frequency=2)
-        tokenizer.train_from_iterator(get_all_sentences(ds, lang), trainer=trainer)
-        tokenizer.save(str(tokenizer_path))
-    else:
-        tokenizer = Tokenizer.from_file(str(tokenizer_path))
-    return tokenizer
+assert _batch_size % _ds_size_cap == 0, "Last batch will be missing data and result in invalid shape size (batch_size % ds_size_cap =/= 0)"
 
-def get_dataset():
-    raw_data = load_dataset("opus100","da-en",split="train")
-    tokenizer_src = get_or_build_tokenizer(raw_data,'da')
-    tokenizer_tgt = get_or_build_tokenizer(raw_data,'en')
+for epoch in range(num_epochs):
+    torch.cuda.empty_cache()
+    model.train()
+    batch_iterator = tqdm(X_train,desc=f'Processing Epoch {epoch:02d}')
+    for batch in batch_iterator:
+        encoder_input = batch['encoder_input'].to(device) # (batch,seq_len)
+        decoder_input = batch['decoder_input'].to(device) # (batch,seq_len)
+        encoder_mask = batch['encoder_mask'].view(_batch_size*_num_heads,_seq_len,_seq_len).to(device) # (batch*num_heads,seq_len,seq_len)
+        decoder_mask = batch['decoder_mask'].view(_batch_size*_num_heads,_seq_len,_seq_len).to(device) # (batch*num_heads,seq_len,seq_len)
 
-    # Filter the data to ensure all sentences are smaller than seq_len
-    print('Filtering size of dataset...')
-    raw_data = raw_data.filter(lambda x: len(tokenizer_src.encode(x['translation']['da'])) < _seq_len and len(tokenizer_src.encode(x['translation']['en'])) < _seq_len)
-    max_len_src = 0
-    max_len_tgt = 0
-    for item in raw_data:
-        src_ids = tokenizer_src.encode(item['translation']['da']).ids
-        tgt_ids = tokenizer_tgt.encode(item['translation']['en']).ids
-        max_len_src = max(max_len_src, len(src_ids))
-        max_len_tgt = max(max_len_tgt, len(tgt_ids))
+        encoder_output = model.Encode(encoder_input,encoder_mask)
+        decoder_output = model.Decode(decoder_input,encoder_output,decoder_mask)
+        predictions = model.Projection(decoder_output)
 
-    print(f'Max length of source sentence: {max_len_src}')
-    print(f'Max length of target sentence: {max_len_tgt}')
-    print(f'Size of dataset: {len(raw_data)}')
+        y = batch['label'].to(device)
+        loss = loss_fn(predictions.view(-1,tgt_tokenizer.get_vocab_size()), y.view(-1))
+        batch_iterator.set_postfix({'loss': f'{loss.item():6.3f}'})
 
-    # Create training and validation sets
-    train_ds_size = int(0.9 * len(raw_data))
-    val_ds_size = len(raw_data) - train_ds_size
-    train_ds_raw, val_ds_raw = random_split(raw_data,[train_ds_size,val_ds_size])
-
-    train_ds = TranslationDataset(train_ds_raw,tokenizer_src,tokenizer_tgt,_seq_len)
-    val_ds = TranslationDataset(val_ds_raw,tokenizer_src,tokenizer_tgt,_seq_len)    
-
-    train_dataloader = DataLoader(train_ds, batch_size=_batch_size, shuffle=True)
-    val_dataloader = DataLoader(val_ds, batch_size=1, shuffle=True)
-
-    return train_dataloader, val_dataloader, tokenizer_src, tokenizer_tgt
-
-ds,_,_,_ = get_dataset()
-for dic in ds:
-    print(dic['encoder_input'])
-    print(dic['decoder_input'])
-    break
+        loss.backward()
+        optimizer.step()
+        optimizer.zero_grad(set_to_none=True)
