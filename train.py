@@ -30,7 +30,7 @@ _seq_len = 350
 _batch_size = 16
 _d_model = 512
 _num_heads = 8
-_ds_size_cap = 250000
+_ds_size_cap = 5000
 lr = 1e-4
 label_smoothing = 0.1
 num_epochs = 5
@@ -45,8 +45,6 @@ print('Doing setup...')
 loss_fn = nn.CrossEntropyLoss(ignore_index=src_tokenizer.token_to_id('[PAD]'),label_smoothing=label_smoothing).to(device)
 optimizer = torch.optim.Adam(model.parameters(),lr=lr,eps=1e-9)
 
-assert _batch_size % _ds_size_cap == 0, "Last batch will be missing data and result in invalid shape size (batch_size % ds_size_cap =/= 0)"
-
 for epoch in range(num_epochs):
     torch.cuda.empty_cache()
     model.train()
@@ -54,8 +52,8 @@ for epoch in range(num_epochs):
     for batch in batch_iterator:
         encoder_input = batch['encoder_input'].to(device) # (batch,seq_len)
         decoder_input = batch['decoder_input'].to(device) # (batch,seq_len)
-        encoder_mask = batch['encoder_mask'].view(_batch_size*_num_heads,_seq_len,_seq_len).to(device) # (batch*num_heads,seq_len,seq_len)
-        decoder_mask = batch['decoder_mask'].view(_batch_size*_num_heads,_seq_len,_seq_len).to(device) # (batch*num_heads,seq_len,seq_len)
+        encoder_mask = batch['encoder_mask'].view(-1,_seq_len,_seq_len).to(device) # (batch*num_heads,seq_len,seq_len)
+        decoder_mask = batch['decoder_mask'].view(-1,_seq_len,_seq_len).to(device) # (batch*num_heads,seq_len,seq_len)
 
         encoder_output = model.Encode(encoder_input,encoder_mask)
         decoder_output = model.Decode(decoder_input,encoder_output,decoder_mask)

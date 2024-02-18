@@ -104,7 +104,6 @@ def get_dataset(seq_len,batch_size,num_heads,ds_size):
     # Filter the data to ensure all sentences are smaller than seq_len
     print('Filtering size of dataset...')
     raw_data = raw_data.filter(lambda x: len(src_tokenizer.encode(x['translation']['da'])) < seq_len and len(src_tokenizer.encode(x['translation']['en'])) < seq_len)
-    print(type(raw_data))
 
     # print('Computing dataset sizes...')
     # max_len_src = 0
