@@ -28,9 +28,6 @@ class TranslationDataset(Dataset):
     
     def __len__(self):
         return len(self.dataset)
-    
-    def get_mask(self,size):
-        return torch.tril(torch.ones((size,size),dtype=bool),diagonal=0)
 
     def __getitem__(self, index):
         item = self.dataset[index]
@@ -73,12 +70,15 @@ class TranslationDataset(Dataset):
             'decoder_input': tgt, # (seq_len)
             # encoder_mask wants to remove the paddings from the attention. Thus broadcasting 1D mask to get a 'block'
             # rather than a triangle as there is no time aspect in the encoder.
-            'encoder_mask': (src != self.PAD).bool().repeat(self.num_heads,self.seq_len,1).view(self.num_heads,self.seq_len,self.seq_len), # (num_heads,seq_len,seq_len)
-            'decoder_mask': ((tgt != self.PAD).bool() & self.get_mask(tgt.size(0))).repeat(self.num_heads,1,1).view(self.num_heads,self.seq_len,self.seq_len), # (seq_len) & (seq_len, seq_len) --> (num_heads,seq_len,seq_len)
+            'encoder_mask': (src != self.PAD).type(torch.bool), #.repeat(self.num_heads,self.seq_len,1).view(self.num_heads,self.seq_len,self.seq_len), # (num_heads,seq_len,seq_len)
+            'decoder_mask': ((tgt != self.PAD).type(torch.bool) & get_mask(tgt.size(0))).repeat(self.num_heads,1,1).view(self.num_heads,self.seq_len,self.seq_len), # (seq_len) & (seq_len, seq_len) --> (num_heads,seq_len,seq_len)
             'label': label, # (seq_len)
             'src_text': src_raw,
             'tgt_text': tgt_raw
         }
+
+def get_mask(size):
+    return torch.tril(torch.ones((size,size),dtype=bool),diagonal=0)
 
 def get_all_sentences(ds, lang):
     for item in ds:
@@ -96,7 +96,7 @@ def get_or_build_tokenizer(ds, lang):
         tokenizer = Tokenizer.from_file(str(tokenizer_path))
     return tokenizer
 
-def get_dataset(seq_len,batch_size,num_heads,ds_size):
+def get_dataset(seq_len,batch_size,num_heads,ds_size,num_translations=5):
     raw_data = load_dataset("opus100","da-en",split="train")
     src_tokenizer = get_or_build_tokenizer(raw_data,'da')
     tgt_tokenizer = get_or_build_tokenizer(raw_data,'en')
@@ -127,8 +127,10 @@ def get_dataset(seq_len,batch_size,num_heads,ds_size):
     val_ds = TranslationDataset(val_ds_raw,src_tokenizer,tgt_tokenizer,seq_len,num_heads)
 
     train_ds = Subset(train_ds,torch.arange(ds_size))
+    tranlation_set = Subset(train_ds,torch.arange(num_translations))
 
     train_dataloader = DataLoader(train_ds, batch_size=batch_size, shuffle=True)
     val_dataloader = DataLoader(val_ds, batch_size=1, shuffle=True)
+    translation_dataloader = DataLoader(tranlation_set, batch_size=1, shuffle=False)
 
-    return train_dataloader, val_dataloader, src_tokenizer, tgt_tokenizer
+    return train_dataloader, val_dataloader, translation_dataloader, src_tokenizer, tgt_tokenizer 

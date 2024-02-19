@@ -2,6 +2,7 @@ import torch
 import torch.nn as nn
 import torch.nn.functional as f
 import math
+from utilities import get_mask
 # Hyper parameters
 _N = 6
 _d_model = 512
@@ -47,7 +48,7 @@ class EncoderLoop(nn.Module):
         # Attention(QW,KW,VW): x @ w <==> (seq,d_model) @ (d_model,d_model) --> (seq,d_model)
         x_residual1 = x
         #self.register_buffer('tril', torch.tril(torch.ones((self.seq_len,self.seq_len),dtype=bool),diagonal=0))
-        x,attn_scores = self.MHA.forward(x,x,x,attn_mask=mask) # ,attn_mask=self.tril)
+        x,attn_scores = self.MHA.forward(x,x,x,key_padding_mask=mask) # ,attn_mask=self.tril)
         x_residual2 = self.norm1(x + x_residual1)
         x = self.dropout(f.relu(self.lin1(x_residual2)))
         x = self.lin2(x)
@@ -82,12 +83,12 @@ class DecoderLoop(nn.Module):
         self.lin2 = nn.Linear(d_model,d_model)
         self.dropout = nn.Dropout(dropout)
 
-    def forward(self,x,encoder_output,mask):
+    def forward(self,x,encoder_output,tgt_mask,src_mask):
         # Attention(QW,KW,VW): x @ w <==> (seq,d_model) @ (d_model,d_model) --> (seq,d_model)
         x_residual1 = x
-        x,attn_scores = self.SA(x,x,x,attn_mask=mask)
+        x,attn_scores = self.SA(x,x,x,attn_mask=tgt_mask)
         x_residual2 = self.norm1(x + x_residual1)
-        x,attn_scores = self.CA(x,encoder_output,encoder_output)
+        x,attn_scores = self.CA(x_residual2,encoder_output,encoder_output,key_padding_mask=src_mask)
         x_residual3 = self.norm2(x + x_residual2)
         x = self.dropout(f.relu(self.lin1(x_residual3)))
         x = self.lin2(x)
@@ -100,16 +101,16 @@ class Decoder(nn.Module):
         self.PosEmbedding = PositionalEmbedding(d_model,seq_len,dropout)
         self.loop = nn.ModuleList([DecoderLoop(d_model,num_heads,seq_len,dropout=dropout) for _ in range(N)])
     
-    def forward(self,x,encoder_output,mask):
+    def forward(self,x,encoder_output,tgt_mask,src_mask):
         B,T = x.shape # (batch,seq_len)
         token_embedding = self.TokentEmbedding(x) # (batch,seq_len,d_model)
         x = self.PosEmbedding(token_embedding) # (batch,seq_len,d_model)
         for decoderLoop in self.loop:
-            x = decoderLoop(x,encoder_output,mask)
+            x = decoderLoop(x,encoder_output,tgt_mask,src_mask)
         return x
 
 class Transformer(nn.Module):
-    def __init__(self,d_model,num_heads,seq_len,vocab_size_src,vocab_size_tgt,dropout=0.1,N=4): #TODO: Distinguish src and tgt vocab sizes
+    def __init__(self,d_model,num_heads,seq_len,vocab_size_src,vocab_size_tgt,dropout=0.1,N=4):
         super().__init__()
         self.encoder = Encoder(d_model,num_heads,seq_len,vocab_size_src,dropout,N)
         self.decoder = Decoder(d_model,num_heads,seq_len,vocab_size_tgt,dropout,N)
@@ -118,8 +119,8 @@ class Transformer(nn.Module):
     def Encode(self,x,mask):
         return self.encoder.forward(x,mask)
 
-    def Decode(self,x,encoder_output,mask):
-        return self.decoder.forward(x,encoder_output,mask)
+    def Decode(self,x,encoder_output,tgt_mask,src_mask):
+        return self.decoder.forward(x,encoder_output,tgt_mask,src_mask)
     
     def Projection(self,x):
         return self.projection(x)
