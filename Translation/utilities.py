@@ -88,14 +88,14 @@ def get_all_sentences(ds, lang):
 
 def get_or_build_tokenizer(ds, lang):
     tokenizer_path = Path(f'tokenizer_{lang}.json')
-    if not Path.exists(tokenizer_path):
-        tokenizer = Tokenizer(WordLevel(unk_token="[UNK]"))
-        tokenizer.pre_tokenizer = Whitespace()
-        trainer = WordLevelTrainer(special_tokens=["[UNK]", "[PAD]", "[SOS]", "[EOS]"], min_frequency=2)
-        tokenizer.train_from_iterator(get_all_sentences(ds, lang), trainer=trainer)
-        tokenizer.save(str(tokenizer_path))
-    else:
-        tokenizer = Tokenizer.from_file(str(tokenizer_path))
+    # if not Path.exists(tokenizer_path):
+    tokenizer = Tokenizer(WordLevel(unk_token="[UNK]"))
+    tokenizer.pre_tokenizer = Whitespace()
+    trainer = WordLevelTrainer(special_tokens=["[UNK]", "[PAD]", "[SOS]", "[EOS]"], min_frequency=2)
+    tokenizer.train_from_iterator(get_all_sentences(ds, lang), trainer=trainer)
+    tokenizer.save(str(tokenizer_path))
+    # else:
+    tokenizer = Tokenizer.from_file(str(tokenizer_path))
     return tokenizer
 
 def get_dataset(seq_len,batch_size,num_heads,ds_size,num_translations=5):
@@ -104,7 +104,7 @@ def get_dataset(seq_len,batch_size,num_heads,ds_size,num_translations=5):
     raw_data = datasets.Dataset.from_pandas(pd_data)
     train_ds_size = ds_size
     val_ds_size = len(raw_data) - train_ds_size
-    train_ds_raw, val_ds_raw = random_split(raw_data,[train_ds_size,val_ds_size])
+    train_ds_raw, val_ds_raw = random_split(raw_data,[train_ds_size,val_ds_size],generator = torch.Generator().manual_seed(42))
 
     src_tokenizer = get_or_build_tokenizer(train_ds_raw,'da')
     tgt_tokenizer = get_or_build_tokenizer(train_ds_raw,'en')
@@ -130,7 +130,7 @@ def get_dataset(seq_len,batch_size,num_heads,ds_size,num_translations=5):
     # train_ds = Subset(train_ds,torch.arange(ds_size))
     tranlation_set = Subset(train_ds,torch.arange(num_translations))
 
-    train_dataloader = DataLoader(train_ds, batch_size=batch_size, shuffle=True)
+    train_dataloader = DataLoader(train_ds, batch_size=batch_size, shuffle=False)
     val_dataloader = DataLoader(val_ds, batch_size=1, shuffle=True)
     translation_dataloader = DataLoader(tranlation_set, batch_size=1, shuffle=False)
 

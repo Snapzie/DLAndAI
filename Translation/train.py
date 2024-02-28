@@ -18,6 +18,7 @@ def get_config():
 # Inpired by https://www.youtube.com/watch?v=ISNdQcPhsts&ab_channel=UmarJamil
 
 import torch
+import numpy as np
 import torch.nn as nn
 from torch.utils.data import Subset
 import torch.nn.functional as F
@@ -28,18 +29,18 @@ from Models import Transformer
 # from .Models import Transformer
 
 # hyper parameters
-_seq_len = 180
+_seq_len = 350
 _batch_size = 16
-_d_model = 128
+_d_model = 512
 _num_heads = 8
-_ds_size_cap = 500
+_ds_size_cap = 200
 _lr = 1e-4
-_label_smoothing = 0.1
+_label_smoothing = 0.05
 _num_epochs = 100000
 _num_translations = 5
 _print_per = 100
-_N = 2
-_dropout = 0.1
+_N = 3
+_dropout = 0.2
 device = 'cuda' if torch.cuda.is_available() else 'cpu'
 print("Using device:", device)
 
@@ -48,11 +49,13 @@ X_train, X_val, translation_set, src_tokenizer, tgt_tokenizer = get_dataset(_seq
 print('Loading model...')
 model = Transformer(_d_model,_num_heads,_seq_len,src_tokenizer.get_vocab_size(),tgt_tokenizer.get_vocab_size(),N=_N,dropout=_dropout).to(device)
 print('Doing setup...')
-loss_fn = nn.CrossEntropyLoss(ignore_index=src_tokenizer.token_to_id('[PAD]'),label_smoothing=_label_smoothing).to(device)
+weights = torch.ones((tgt_tokenizer.get_vocab_size()))
+weights[tgt_tokenizer.token_to_id('[EOS]')] = 0.005
+loss_fn = nn.CrossEntropyLoss(weight=weights,ignore_index=src_tokenizer.token_to_id('[PAD]'),label_smoothing=_label_smoothing).to(device)
 optimizer = torch.optim.Adam(model.parameters(),lr=_lr,eps=1e-9)
 
 for epoch in range(_num_epochs):
-    torch.cuda.empty_cache()
+    # torch.cuda.empty_cache()
     model.train()
     batch_iterator = tqdm(X_train,desc=f'Processing Epoch {epoch:02d}')
     for batch in batch_iterator:
@@ -62,6 +65,7 @@ for epoch in range(_num_epochs):
         # print(decoder_input)
         encoder_mask = batch['encoder_mask'].to(device) # (1,seq_len)
         decoder_mask = batch['decoder_mask'].view(-1,_seq_len,_seq_len).to(device) # (batch*num_heads,seq_len,seq_len)
+        # decoder_mask = torch.where(decoder_mask == True,0,-np.inf)
 
         encoder_output = model.Encode(encoder_input,encoder_mask)
         decoder_output = model.Decode(decoder_input,encoder_output,decoder_mask,encoder_mask)
@@ -97,18 +101,14 @@ for epoch in range(_num_epochs):
                 # print(res_sentence)
 
                 encoder_output = model.Encode(encoder_input,encoder_mask)
-                print(encoder_output)
                 # print(encoder_output)
                 for i in range(_seq_len-1): # no larger sequences than seq_len
                     decoder_mask = (res_sentence != tgt_tokenizer.token_to_id('[PAD]')).type(torch.bool) & get_mask(res_sentence.size(1)).type(torch.bool).to(device) # (seq_len,seq_len)
-                    # print(decoder_mask)
-                    # res_sentence = torch.randint(0,1000,(1,_seq_len)).to(device)
                     decoder_output = model.Decode(res_sentence,encoder_output,decoder_mask,encoder_mask) # (1,seq_len,d_model)
                     # print(decoder_output)
                     # proj = model.Projection(decoder_output[:,i+1]) # (1,d_model) --> (1,vocab_size)
                     proj = model.Projection(decoder_output) # (1,seq_len,d_model) --> (1,seq_len,vocab_size)
-                    probs = F.softmax(proj,dim=1)[:,i+1] # (1,1,vocab_size)
-                    # print(proj)
+                    probs = F.softmax(proj,dim=2)[:,i] # (1,1,vocab_size)
                     # _, next_word = torch.max(proj,dim=1)
                     _,next_word = torch.max(probs,dim=1)
                     res_sentence[0,i+1] = next_word.item()
@@ -117,8 +117,8 @@ for epoch in range(_num_epochs):
                     # res_sentence = torch.cat( # (1,seq)
                     #     [res_sentence, next], dim=1
                     # )
-                    # print(torch.topk(probs,5).values)
-                    # print(torch.topk(probs,5).indices)
+                    print(torch.topk(probs,5).values)
+                    print(torch.topk(probs,5).indices)
                     # print(tgt_tokenizer.id_to_token(next_word.item()))
                     if next_word == tgt_tokenizer.token_to_id('[EOS]'):
                         break
