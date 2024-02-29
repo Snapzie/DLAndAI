@@ -4,6 +4,18 @@ import torch.nn.functional as F
 
 # Inspiration from https://github.com/dome272/Diffusion-Models-pytorch/blob/main/modules.py
 
+class Noise_schedule:
+    def __init__(self,noise_steps=1000,beta_start=1e-4,beta_end=0.02,img_size=64,device='cuda'):
+        self.noise_steps = noise_steps
+        self.beta_start = beta_start
+        self.beta_end = beta_end
+        self.img_size = img_size
+        self.device = device
+
+        self.beta = torch.linspace(self.beta_start,beta_end,self.noise_steps).to(device)
+        self.alpha = 1. - self.beta
+        self.alpha_hat = torch.cumprod(self.alpha,dim=0)
+
 class DoubleConv(nn.Module):
     def __init__(self,in_c,out_c,mid_channels=None,residual=False):
         super().__init__()
