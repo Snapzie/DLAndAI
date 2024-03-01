@@ -15,7 +15,7 @@ def noise_images(x,t,noise_schedule):
 def sample_timestep(n,noise_schedule):
     return torch.randint(low=1,high=noise_schedule.noise_steps,size=(n,))
 
-def sample(model,n,noise_schedule):
+def sample(model,noise_schedule,n):
     model.eval()
     with torch.no_grad():
         x = torch.randn((n,3,noise_schedule.img_size,noise_schedule.img_size)).to(noise_schedule.device)
