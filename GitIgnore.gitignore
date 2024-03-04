@@ -1,8 +1,8 @@
 # Own additions
-Diffusion/Images/*
-Diffusion/models/*
-Diffusion/runs/*
-Diffusion/results/*
+Diffusion/Images/
+Diffusion/models/
+Diffusion/runs/
+Diffusion/results/
 
 Translation/tokenizer_da.json
 Translation/tokenizer_en.json
