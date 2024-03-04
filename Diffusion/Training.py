@@ -16,7 +16,7 @@ _lr = 3e-4
 _device = 'cuda' if torch.cuda.is_available() else 'cpu'
 print("Using device:", _device)
 
-run_name = 'Diffusion'
+run_name = 'Diffusion v2'
 
 setup_logging(run_name)
 data_loader = get_data(_dataset_path,_batch_size,_image_size)
@@ -34,7 +34,7 @@ for epoch in range(_epochs):
         t = sample_timestep(images.shape[0],ns).to(_device)
         x_t, noise = noise_images(images,t,ns)
         pred_noise = model(x_t,t)
-        loss = loss_fn(noise,pred_noise)
+        loss = loss_fn(pred_noise,noise)
 
 
         optimizer.zero_grad()
