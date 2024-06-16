@@ -10,7 +10,7 @@ def noise_images(x,t,noise_schedule):
     sqrt_alpha_hat = torch.sqrt(noise_schedule.alpha_hat[t])[:,None,None,None]
     sqrt_one_minus_alpha_hat = torch.sqrt(1 - noise_schedule.alpha_hat[t])[:,None,None,None]
     eps = torch.randn_like(x)
-    return sqrt_alpha_hat * x * sqrt_one_minus_alpha_hat * eps, eps
+    return sqrt_alpha_hat * x + sqrt_one_minus_alpha_hat * eps, eps
 
 def sample_timestep(n,noise_schedule):
     return torch.randint(low=1,high=noise_schedule.noise_steps,size=(n,))

@@ -8,6 +8,9 @@ Translation/tokenizer_da.json
 Translation/tokenizer_en.json
 Translation/*.parquet
 
+CelebA/celeba/*
+
+MNIST/MNIST/*
 
 
 # Byte-compiled / optimized / DLL files
