@@ -5,8 +5,8 @@ import torch
 import torch.nn as nn
 from torch.nn import functional as F
 import math
-import tiktoken
 import time
+import tiktoken
 import inspect
 
 @dataclass
