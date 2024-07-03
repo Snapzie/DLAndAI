@@ -7,11 +7,12 @@ from torch.nn import functional as F
 import math
 import tiktoken
 import time
+import inspect
 
 @dataclass
 class GPTConfig:
     block_size: int = 1024
-    vocab_size: int = 50257
+    vocab_size: int = 50304
     n_layer: int = 12
     n_head: int = 12
     n_embed: int = 768
@@ -35,10 +36,14 @@ class CausalSelfAttention(nn.Module):
         k = k.view(B,T,self.n_head,C // self.n_head).transpose(1,2) # (B,nh,T,hs)
         q = q.view(B,T,self.n_head,C // self.n_head).transpose(1,2) # (B,nh,T,hs)
         v = v.view(B,T,self.n_head,C // self.n_head).transpose(1,2) # (B,nh,T,hs)
-        att = (q @ k.transpose(-2,-1)) * (1.0 / math.sqrt(k.size(-1)))
-        att = att.masked_fill(self.bias[:,:,:T,:T] == 0, float('-inf'))
-        att = F.softmax(att,dim=-1)
-        y = att @ v # (B,nh,T,T) @ (B,nh,T,hs) -> (B,nh,T,hs)
+        
+        # att = (q @ k.transpose(-2,-1)) * (1.0 / math.sqrt(k.size(-1)))
+        # att = att.masked_fill(self.bias[:,:,:T,:T] == 0, float('-inf'))
+        # att = F.softmax(att,dim=-1)
+        # y = att @ v # (B,nh,T,T) @ (B,nh,T,hs) -> (B,nh,T,hs)
+
+        y = F.scaled_dot_product_attention(q,k,v,is_causal=True)
+
         y = y.transpose(1,2).contiguous().view(B,T,C)
         y = self.c_proj(y)
         return y
@@ -157,7 +162,22 @@ class GPT(nn.Module):
                     sd[k].copy_(sd_hf[k])
 
         return model
-
+    
+    def configure_optimizers(self,weight_decay,learning_rate,device):
+        param_dict = {pn: p for pn,p in self.named_parameters()}
+        param_dict = {pn: p for pn,p in param_dict.items() if p.requires_grad}
+        decay_params = [p for n,p in param_dict.items() if p.dim() >= 2]
+        nodecay_params = [p for n,p in param_dict.items() if p.dim() < 2]
+        optim_groups = [
+            {'params': decay_params, 'weight_decay': weight_decay},
+            {'params': nodecay_params, 'weight_decay': 0.0}
+        ]
+        fused_available = 'fused' in inspect.signature(torch.optim.AdamW).parameters
+        use_fused = fused_available and 'cuda' in device
+        print(f"using fused AdamW: {use_fused}")
+        optimizer = torch.optim.AdamW(optim_groups,lr=learning_rate,betas=(0.9,0.95),eps=1e-8,fused=use_fused)
+        return optimizer
+    
 class DataLoaderLite():
     def __init__(self,B,T):
         self.B = B
@@ -184,34 +204,63 @@ class DataLoaderLite():
 
 device = 'cuda' if torch.cuda.is_available() else 'cpu'
 print(f'Device: {device}')
+torch.manual_seed(1337)
+if torch.cuda.is_available():
+    torch.cuda.manual_seed(1337)
 
-train_loader = DataLoaderLite(B=5,T=900)
+total_batch_size = 524288 # 2**19
+B = 8
+T = 1024
+assert total_batch_size % (B*T) == 0, 'total batch size is not divisible by B*T'
+grad_accum_steps = total_batch_size // (B*T)
+print(f"Total desired batch size: {total_batch_size}")
+print(f"=> calculated gradient accumulation steps: {grad_accum_steps}")
+
+train_loader = DataLoaderLite(B=B,T=T)
 torch.set_float32_matmul_precision('high')
 
 # model = GPT.from_pretrained('gpt2')
 model = GPT(GPTConfig())
 model.to(device)
-model = torch.compile(model)
+model = torch.compile(model) # Not available on Windows
 
-torch.manual_seed(1337)
-if torch.cuda.is_available():
-    torch.cuda.manual_seed(1337)
+max_lr = 6e-4
+min_lr = max_lr * 0.1
+warmup_steps = 10
+max_steps = 50
+def get_lr(it):
+    if it < warmup_steps:
+        return max_lr * (it+1) / warmup_steps
+    if it > max_steps:
+        return min_lr
+    decay_ratio = (it - warmup_steps) / (max_steps - warmup_steps)
+    assert 0 <= decay_ratio <= 1
+    coeff = 0.5 * (1.0 + math.cos(math.pi * decay_ratio))
+    return min_lr + coeff * (max_lr - min_lr)
 
-optimizer = torch.optim.AdamW(model.parameters(),3e-4)
-for i in range(50):
+optimizer = model.configure_optimizers(weight_decay=0.1,learning_rate=6e-4,device=device)
+for step in range(max_steps):
     t0 = time.time()
-    x,y = train_loader.next_batch()
-    x,y = x.to(device),y.to(device)
     optimizer.zero_grad()
-    with torch.autocast(device_type=device,dtype=torch.bfloat16):
-        logits, loss = model(x,y)
-    loss.backward()
+    loss_accum = 0.0
+    for micro_step in range(grad_accum_steps):
+        x,y = train_loader.next_batch()
+        x,y = x.to(device),y.to(device)
+        with torch.autocast(device_type=device,dtype=torch.bfloat16):
+            logits, loss = model(x,y)
+        loss = loss / grad_accum_steps
+        loss_accum += loss.detach()
+        loss.backward()
+    norm = torch.nn.utils.clip_grad_norm_(model.parameters(),1.0)
+    lr = get_lr(step)
+    for param_group in optimizer.param_groups:
+        param_group['lr'] = lr
     optimizer.step()
     torch.cuda.synchronize()
     t1 = time.time()
-    dt = (t1-t0)*1000
-    tokens_per_second = (train_loader.B * train_loader.T) / (t1-t0)
-    print(f'Step {i}, loss: {loss.item()}, dt: {dt:.2f}ms, tok/sec: {tokens_per_second:.2f}')
+    dt = t1-t0
+    tokens_per_second = train_loader.B * train_loader.T * grad_accum_steps / dt
+    print(f'Step {step:4d} | loss: {loss_accum.item():.6f} | lr: {lr:.4e} | norm: {norm:.4f} | dt: {dt*1000:.2f}ms | tok/sec: {tokens_per_second:.2f}')
 
 import sys;sys.exit(0)
 
@@ -236,7 +285,7 @@ while x.size(1) < max_length:
         xcol = torch.gather(topk_indices,-1,ix)
         x = torch.cat((x,xcol),dim=1)
 
-for i in range(num_return_sequence):
-    tokens = x[i,:max_length].tolist()
+for step in range(num_return_sequence):
+    tokens = x[step,:max_length].tolist()
     decoded = enc.decode(tokens)
     print(">", decoded)
