@@ -1,5 +1,7 @@
 # inspired from https://www.youtube.com/watch?v=l8pRSuU81PU&ab_channel=AndrejKarpathy
 
+import os
+import numpy as np
 from dataclasses import dataclass
 import torch
 import torch.nn as nn
@@ -177,20 +179,28 @@ class GPT(nn.Module):
         print(f"using fused AdamW: {use_fused}")
         optimizer = torch.optim.AdamW(optim_groups,lr=learning_rate,betas=(0.9,0.95),eps=1e-8,fused=use_fused)
         return optimizer
-    
+
+def load_tokens(filename):
+    npt = np.load(filename)
+    ptt = torch.tensor(npt,dtype=torch.long)
+    return ptt
+
 class DataLoaderLite():
-    def __init__(self,B,T):
+    def __init__(self,B,T,split):
         self.B = B
         self.T = T
-        self.current_position = 0
 
-        with open('./input.txt','r') as f:
-            text = f.read()
-        enc = tiktoken.get_encoding('gpt2')
-        tokens = enc.encode(text)
-        self.tokens = torch.tensor(tokens)
-        print(f"loaded {len(self.tokens)} tokens")
-        print(f"1 epoch = {len(self.tokens) // (B*T)} batches")
+        data_root = 'edu_fineweb10B'
+        shards = os.listdir(data_root)
+        shards = [s for s in shards if split in s]
+        shards = sorted(shards)
+        shards = [os.path.join(data_root,s) for s in shards]
+        self.shards = shards
+        print(f'found {len(shards)} shards for split {split}')
+        
+        self.current_shard = 0
+        self.tokens = load_tokens(self.shards[self.current_shard])
+        self.current_position = 0
 
     def next_batch(self):
         B,T = self.B,self.T
@@ -199,6 +209,8 @@ class DataLoaderLite():
         y = buf[1:].view(B,T)
         self.current_position += B*T
         if self.current_position + B*T + 1 > len(self.tokens):
+            self.current_shard = (self.current_shard + 1) % len(self.shards)
+            self.tokens = load_tokens(self.shards[self.current_shard])
             self.current_position = 0
         return x,y
 
@@ -216,7 +228,7 @@ grad_accum_steps = total_batch_size // (B*T)
 print(f"Total desired batch size: {total_batch_size}")
 print(f"=> calculated gradient accumulation steps: {grad_accum_steps}")
 
-train_loader = DataLoaderLite(B=B,T=T)
+train_loader = DataLoaderLite(B=B,T=T,split='train')
 torch.set_float32_matmul_precision('high')
 
 # model = GPT.from_pretrained('gpt2')
@@ -226,8 +238,8 @@ model = torch.compile(model) # Not available on Windows
 
 max_lr = 6e-4
 min_lr = max_lr * 0.1
-warmup_steps = 10
-max_steps = 50
+warmup_steps = 715
+max_steps = 19073
 def get_lr(it):
     if it < warmup_steps:
         return max_lr * (it+1) / warmup_steps
