@@ -193,11 +193,14 @@ class DataLoaderLite():
         data_root = 'edu_fineweb10B'
         shards = os.listdir(data_root)
         shards = [s for s in shards if split in s]
-        shards = sorted(shards)
+        # shards = sorted(shards)
+        shards = [sorted(shards)[0]] # Reduce data size
         shards = [os.path.join(data_root,s) for s in shards]
         self.shards = shards
         print(f'found {len(shards)} shards for split {split}')
+        self.reset()
         
+    def reset(self):
         self.current_shard = 0
         self.tokens = load_tokens(self.shards[self.current_shard])
         self.current_position = 0
@@ -220,7 +223,7 @@ torch.manual_seed(1337)
 if torch.cuda.is_available():
     torch.cuda.manual_seed(1337)
 
-total_batch_size = 524288 # 2**19
+total_batch_size = 8192 #524288 # 2**19
 B = 8
 T = 1024
 assert total_batch_size % (B*T) == 0, 'total batch size is not divisible by B*T'
@@ -229,17 +232,23 @@ print(f"Total desired batch size: {total_batch_size}")
 print(f"=> calculated gradient accumulation steps: {grad_accum_steps}")
 
 train_loader = DataLoaderLite(B=B,T=T,split='train')
+val_loader = DataLoaderLite(B=B,T=T,split='val')
 torch.set_float32_matmul_precision('high')
 
 # model = GPT.from_pretrained('gpt2')
 model = GPT(GPTConfig())
 model.to(device)
-model = torch.compile(model) # Not available on Windows
+use_compile = True
+if use_compile:
+    model = torch.compile(model)
+enc = tiktoken.get_encoding("gpt2")
 
 max_lr = 6e-4
 min_lr = max_lr * 0.1
-warmup_steps = 715
-max_steps = 19073
+warmup_steps = 100 #715
+max_steps = 1220 #19073
+
+
 def get_lr(it):
     if it < warmup_steps:
         return max_lr * (it+1) / warmup_steps
@@ -253,6 +262,48 @@ def get_lr(it):
 optimizer = model.configure_optimizers(weight_decay=0.1,learning_rate=6e-4,device=device)
 for step in range(max_steps):
     t0 = time.time()
+
+    if step > 0 and step % 100 == 0:
+        model.eval()
+        val_loader.reset()
+        with torch.no_grad():
+            val_loss_accum = 0.0
+            val_loss_steps = 20
+            for _ in range(val_loss_steps):
+                x,y = val_loader.next_batch()
+                x,y = x.to(device),y.to(device)
+                with torch.autocast(device_type=device,dtype=torch.bfloat16):
+                    logits,loss = model(x,y)
+                loss = loss / val_loss_steps
+                val_loss_accum += loss.detach()
+        print(f'Validation loss: {val_loss_accum.item():.4f}')
+
+    if step > 0 and step % 100 == 0 and not use_compile:
+        model.eval()
+        num_return_sequence = 4
+        max_length = 32
+        tokens = enc.encode("Hello, I'm a language model,")
+        tokens = torch.tensor(tokens,dtype=torch.long)
+        tokens = tokens.unsqueeze(0).repeat(num_return_sequence,1)
+        gen = tokens.to(device)
+        sample_rng = torch.Generator(device=device)
+        sample_rng.manual_seed(42)
+
+        while gen.size(1) < max_length:
+            with torch.no_grad():
+                logits,_ = model(gen)
+                logits = logits[:,-1,:] # (B,T,vocab_size)
+                probs = F.softmax(logits,dim=1)
+                topk_probs,topk_indices = torch.topk(probs,50,dim=1)
+                ix = torch.multinomial(topk_probs,1,generator=sample_rng) # (B,1)
+                xcol = torch.gather(topk_indices,-1,ix) # (B,1)
+                gen = torch.cat((gen,xcol),dim=1)
+        for i in range(num_return_sequence):
+            tokens = gen[i,:max_length].tolist()
+            decoded = enc.decode(tokens)
+            print(f'Sample {i}: {decoded}')
+
+    model.train()
     optimizer.zero_grad()
     loss_accum = 0.0
     for micro_step in range(grad_accum_steps):
