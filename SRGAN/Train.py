@@ -1,6 +1,17 @@
+import sys
+import time
+
+import h5py
+from PIL import Image
+import io
+
+import numpy as np
 import torch
 import torch.nn.functional as F
 import torch.nn as nn
+from torch.utils.data import Dataset, DataLoader
+from torchvision import transforms, utils
+import matplotlib.pyplot as plt
 
 class Gen_res_block(nn.Module):
     def __init__(self):
@@ -82,6 +93,44 @@ class Discriminator(nn.Module):
         x = F.leaky_relu(self.dense_1(x))
         x = self.dense_2(x)
         return F.sigmoid(x)
+
+class ImageNet10k(Dataset):
+    def __init__(self):
+        super().__init__()
+        self.dataset = []
+        pil_to_bytes_h5 = h5py.File('./Data/images.h5','r')
+        for key,value in pil_to_bytes_h5.items():
+            image_array = np.array(value[()])
+            image_buffer = io.BytesIO(image_array)
+            image_pil = Image.open(image_buffer)
+            self.dataset.append(image_pil)
+        pil_to_bytes_h5.close()
+    
+    def __len__(self):
+        return len(self.dataset)
+    
+    def __getitem__(self, idx):
+        im = self.dataset[idx]
+        im = transforms.ToTensor()(im)
+        crop = transforms.RandomCrop((im_size,im_size))(im)
+        y = crop
+        x = transforms.Resize((im_size//4,im_size//4),transforms.InterpolationMode.BICUBIC)(crop)
+        return x,y
+
+im_size = 96
+batch_size = 16
+
+print('Loading data...')
+t0 = time.time()
+dataset = DataLoader(ImageNet10k(),batch_size=batch_size,shuffle=True,pin_memory=True)
+t1 = time.time()
+print(f'Data loaded in {t1-t0:2.2f} seconds')
+count = 0
+for x,y in dataset:
+    if count > 10:
+        break
+    print(x.shape,y.shape)
+    count += 1
 
 g_model = Generator()
 x = torch.rand((1,3,24,24))
