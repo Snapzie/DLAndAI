@@ -10,8 +10,9 @@ import torch
 import torch.nn.functional as F
 import torch.nn as nn
 from torch.utils.data import Dataset, DataLoader
-from torchvision import transforms, utils
+from torchvision import transforms, utils, models
 import matplotlib.pyplot as plt
+import random
 
 class Gen_res_block(nn.Module):
     def __init__(self):
@@ -112,34 +113,41 @@ class ImageNet10k(Dataset):
     def __getitem__(self, idx):
         im = self.dataset[idx]
         im = transforms.ToTensor()(im)
-        crop = transforms.RandomCrop((im_size,im_size))(im)
-        y = crop
-        x = transforms.Resize((im_size//4,im_size//4),transforms.InterpolationMode.BICUBIC)(crop)
+        y = im
+        x = F.interpolate(im.unsqueeze(0),scale_factor=1/4,mode='bicubic').squeeze(0)
+        x = x / torch.max(x)
+
+        x_h,x_w = x.shape[1],x.shape[2]
+        print(x_h,x_w)
+        rh = random.randrange(0,x_h-patch_size+1)
+        rw = random.randrange(0,x_w-patch_size+1)
+        rh_scaled = rh * scale_factor
+        rw_scaled = rw * scale_factor
+
+        x = x[:,rh:rh+patch_size,rw:rw+patch_size]
+        y = y[:,rh_scaled:rh_scaled+(patch_size*scale_factor),rw_scaled:rw_scaled+(patch_size*scale_factor)]
         return x,y
 
 im_size = 96
+scale_factor = 4
+patch_size = 24
 batch_size = 16
 
 print('Loading data...')
 t0 = time.time()
 dataset = DataLoader(ImageNet10k(),batch_size=batch_size,shuffle=True,pin_memory=True)
 t1 = time.time()
-print(f'Data loaded in {t1-t0:2.2f} seconds')
-count = 0
-for x,y in dataset:
-    if count > 10:
-        break
-    print(x.shape,y.shape)
-    count += 1
 
 g_model = Generator()
-x = torch.rand((1,3,24,24))
-print(f'G_in: {x.shape}')
-out = g_model(x)
-print(f'G_out: {out.shape}')
-
 disc_model = Discriminator()
-x = torch.randn((1,3,96,96))
-print(f'Disc_in: {x.shape}')
-out = disc_model(x)
-print(f'Disc_out: {out.shape}')
+
+vgg_out = {}
+def activation(name):
+    def hook(module, input, output):
+        vgg_out[name] = output
+    return hook
+
+vgg = models.vgg19(weights=models.VGG19_Weights.IMAGENET1K_V1)
+for param in vgg.parameters():
+    param.requires_grad = False
+vgg.features[35].register_forward_hook(activation('relu5_4'))
