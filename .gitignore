@@ -18,6 +18,7 @@ GPT2/edu_fineweb10B/
 
 SRGAN/Data
 SRGAN/Samples
+SRGAN/Checkpoints
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

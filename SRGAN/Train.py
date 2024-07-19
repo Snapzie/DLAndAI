@@ -1,5 +1,6 @@
 import sys
 import time
+from tqdm import tqdm
 
 import h5py
 from PIL import Image
@@ -65,11 +66,26 @@ class Generator(nn.Module):
         x = self.conv_3(x)
         return x
     
+    def rescale(self,im):
+        min_val = torch.abs(torch.min(torch.min(im,2)[0],2)[0])
+        min_val = min_val.unsqueeze(2).unsqueeze(3)
+        im = im + min_val
+
+        max_val = torch.max(torch.max(im,2)[0],2)[0]
+        max_val = max_val.unsqueeze(2).unsqueeze(3)
+        im = im/max_val
+        return im
+
     def sample(self,epoch,dataset,n=10):
         x,y = next(iter(dataset))
         y = y.to(device)
         x = x.to(device)
-        g = F.sigmoid(self.forward(x))
+        # g = F.sigmoid(self.forward(x))
+        g = g_model(x)
+        # g = g + torch.abs(torch.min(g)) # Min val now 0
+        # g = g / torch.max(g) # Max val now 1
+        g = self.rescale(g)
+
         for i in range(n):
             fig = plt.figure(figsize=(32,32))
             ax = fig.add_subplot()
@@ -123,10 +139,10 @@ class Discriminator(nn.Module):
         return F.sigmoid(x)
 
 class ImageNet10k(Dataset):
-    def __init__(self):
+    def __init__(self,path):
         super().__init__()
         self.dataset = []
-        pil_to_bytes_h5 = h5py.File('./Data/images.h5','r')
+        pil_to_bytes_h5 = h5py.File(path,'r')
         for key,value in pil_to_bytes_h5.items():
             image_array = np.array(value[()])
             image_buffer = io.BytesIO(image_array)
@@ -164,18 +180,122 @@ def vgg_loss(hr,sr):
     vgg_sr = vgg_out['relu5_4']
     return mse(vgg_hr,vgg_sr) * 0.006
 
+def adveserial_training():
+    iter = 0
+    iterations_per_step = len(train_dset.dataset)
+    while iter < iterations:
+        g_model.train()
+        d_model.train()
+
+        for step,(x,y) in enumerate(train_dset,start=1):
+            x = x.to(device)
+            y = y.to(device)
+            labels_real = torch.ones((x.shape[0],1)).to(device)
+            labels_fake = torch.zeros((x.shape[0],1)).to(device)
+            
+            # Discriminator
+            g_optimizer.zero_grad()
+            d_optimizer.zero_grad()
+
+            g_images = g_model(x)
+            d_fake = d_model(g_images)
+            d_real = d_model(y)
+
+            d_loss = bce(d_real,labels_real) + bce(d_fake,labels_fake)
+            d_loss.backward()
+            d_optimizer.step()
+
+            # Generator
+            g_optimizer.zero_grad()
+            d_optimizer.zero_grad()
+
+            g_images = g_model(x)
+            d_fake = d_model(g_images)
+
+            l_vgg = vgg_loss(y,g_images)
+            l_adv = bce(d_fake,labels_real)
+            g_loss = l_vgg + l_adv * 1e-3
+            g_loss.backward()
+            g_optimizer.step()
+
+            print(f'Iteration {iter} {step:3d}/{steps} | G_loss: {g_loss.item():.4f} | D_loss: {d_loss.item():.6f}')
+        
+        iter += iterations_per_step
+        
+        if iter % (5 * iterations_per_step) == 0:
+            g_model.eval()
+            with torch.no_grad():
+                g_model.sample(iter,val_dset)
+
+def resnet_training():
+    iter = 0
+    iterations_per_step = len(train_dset.dataset)
+    while iter < iterations:
+        g_model.train()
+        loss_accum = 0
+        pbar = tqdm(train_dset,desc=f'Iteration {int(iter/1e3)}e3',ncols=100)
+        for step,(x,y) in enumerate(pbar,start=1):
+            x = x.to(device)
+            y = y.to(device)
+            g_optimizer.zero_grad()
+
+            gen_images = g_model(x)
+            # gen_images = gen_images + torch.abs(torch.min(gen_images)) # Min val now 0
+            # gen_images = gen_images / torch.max(gen_images) # Max val now 1
+            # gen_images = (gen_images*2)-1 # value range now [-1;1]
+            gen_images = g_model.rescale(gen_images)
+            gen_images = (gen_images*2)-1
+            y = (y*2)-1
+
+            assert -1 <= torch.min(gen_images) <= 1, 'gen_images out of range'
+            assert -1 <= torch.min(y) <= 1, 'y out of range'
+
+            loss = mse(gen_images,y)
+            loss_accum += loss.detach().item()
+            loss.backward()
+            g_optimizer.step()
+
+            pbar.set_postfix_str(f'Loss: {(loss_accum / step):.6f}')
+
+        if iter % (20 * iterations_per_step) == 0:
+            g_model.eval()
+            with torch.no_grad():
+                val_loss = 0
+                pbar = tqdm(val_dset,desc=f'Iteration {int(iter/1e3)}e3',ncols=100)
+                for step,(x,y) in enumerate(pbar):
+                    x = x.to(device)
+                    y = y.to(device)
+
+                    gen_images = g_model(x)
+                    # gen_images = gen_images + torch.abs(torch.min(gen_images)) # Min val now 0
+                    # gen_images = gen_images / torch.max(gen_images) # Max val now 1
+                    # gen_images = (gen_images*2)-1 # value range now [-1;1]
+                    gen_images = g_model.rescale(gen_images)
+                    gen_images = (gen_images*2)-1
+                    y = (y*2)-1
+
+                    val_loss += mse(gen_images,y)
+                    pbar.set_postfix_str(f'Val Loss: {(val_loss / step).item():.6f}')
+                g_model.sample(iter,val_dset)
+            torch.save(g_model.state_dict(), f'./Checkpoints/iter_{iter}.pt')
+
+        iter += iterations_per_step
+        
+           
+
 im_size = 96
 scale_factor = 4
 patch_size = 24
 batch_size = 128
-epochs = 1000
+iterations = 17e6
 device = 'cuda' if torch.cuda.is_available() else 'cpu'
 print(f'Using: {device}')
 
 print('Loading data...')
 t0 = time.time()
-dataset = DataLoader(ImageNet10k(),batch_size=batch_size,shuffle=True,pin_memory=True)
-steps = len(dataset)
+train_dset = DataLoader(ImageNet10k('./Data/training.h5'),batch_size=batch_size,shuffle=True,pin_memory=True)
+val_dset = DataLoader(ImageNet10k('./Data/validation.h5'),batch_size=batch_size)
+steps = len(train_dset)
 t1 = time.time()
 
 g_model = Generator().to(device)
@@ -194,56 +314,22 @@ vgg.features[35].register_forward_hook(activation('relu5_4'))
 
 mse = nn.MSELoss()
 bce = nn.BCELoss()
-g_optimizer = torch.optim.AdamW(g_model.parameters(),lr=10e-4)
-d_optimizer = torch.optim.AdamW(d_model.parameters(),lr=10e-4)
+g_optimizer = torch.optim.AdamW(g_model.parameters(),lr=1e-4)
+d_optimizer = torch.optim.AdamW(d_model.parameters(),lr=1e-4)
 
 torch.set_float32_matmul_precision('high')
 
-g_model.compile()
-d_model.compile()
-vgg.compile()
+# model.load_state_dict(torch.load(PATH))
 
-for e in range(epochs):
-    g_model.train()
-    d_model.train()
+# g_model.compile()
+# d_model.compile()
+# vgg.compile()
 
-    for step,(x,y) in enumerate(dataset,start=1):
-        x = x.to(device)
-        y = y.to(device)
-        labels_real = torch.ones((x.shape[0],1)).to(device)
-        labels_fake = torch.zeros((x.shape[0],1)).to(device)
-        
-        # Discriminator
-        g_optimizer.zero_grad()
-        d_optimizer.zero_grad()
+resnet_training()
+# adveserial_training()
 
-        g_images = g_model(x)
-        d_fake = d_model(g_images)
-        d_real = d_model(y)
 
-        d_loss = bce(d_real,labels_real) + bce(d_fake,labels_fake)
-        d_loss.backward()
-        d_optimizer.step()
 
-        # Generator
-        g_optimizer.zero_grad()
-        d_optimizer.zero_grad()
-
-        g_images = g_model(x)
-        d_fake = d_model(g_images)
-
-        l_vgg = vgg_loss(y,g_images)
-        l_adv = bce(d_fake,labels_real)
-        g_loss = l_vgg + l_adv * 10e-3
-        g_loss.backward()
-        g_optimizer.step()
-
-        print(f'Epoch {e} {step:3d}/{steps} | G_loss: {g_loss.item():.4f} | D_loss: {d_loss.item():.6f}')
-    
-    if e % 2 == 0:
-        g_model.eval()
-        with torch.no_grad():
-            g_model.sample(e,dataset)
 
     
         
