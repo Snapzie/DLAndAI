@@ -15,10 +15,30 @@ MNIST/MNIST/
 GAN_MNIST/MNIST/
 
 GPT2/edu_fineweb10B/
+GPT2/Atoms.npy
+GPT2/atomText.txt
+GPT2/html2txt.txt
+GPT2/input.txt
+
+Fashion_mnist_autoencoder/fashion_mnist/
+Fashion_mnist_autoencoder/output/
+
+Kaggle/
+
+TextGen/my_trained_model_directory/merges.txt
+TextGen/my_trained_model_directory/model.safetensors
 
 SRGAN/Data
 SRGAN/Samples
 SRGAN/Checkpoints
+
+Image_upscaling/DIV2K/
+Image_upscaling/Images_HR/
+Image_upscaling/Images_LR/
+Image_upscaling/output/
+Image_upscaling/checkpoint.pth
+
+Small_transformer/sentence_completion_model.pth
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

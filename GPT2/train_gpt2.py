@@ -15,6 +15,7 @@ import inspect
 class GPTConfig:
     block_size: int = 1024
     vocab_size: int = 50304
+    # vocab_size: int = 2265
     n_layer: int = 12
     n_head: int = 12
     n_embed: int = 768
@@ -217,28 +218,56 @@ class DataLoaderLite():
             self.current_position = 0
         return x,y
 
+class DataLoaderHTML():
+    def __init__(self,B,T,fname):
+        self.B = B
+        self.T = T
+        self.fname = fname
+        self.reset()
+    
+    def reset(self):
+        self.current_shard = 0
+        self.tokens = load_tokens(self.fname)
+        self.current_position = 0
+    
+    def next_batch(self):
+        B,T = self.B,self.T
+        buf = self.tokens[self.current_position:self.current_position + B*T + 1]
+        x = buf[:-1].view(B,T) 
+        y = buf[1:].view(B,T)
+        self.current_position += B*T
+        if self.current_position + B*T + 1 > len(self.tokens):
+            self.current_shard = 0
+            self.tokens = load_tokens(self.fname)
+            self.current_position = 0
+        return x,y
+
 device = 'cuda' if torch.cuda.is_available() else 'cpu'
 print(f'Device: {device}')
 torch.manual_seed(1337)
 if torch.cuda.is_available():
     torch.cuda.manual_seed(1337)
 
-total_batch_size = 8192 #524288 # 2**19
-B = 8
-T = 1024
+# total_batch_size = 8192 #524288 # 2**19
+total_batch_size = 11264
+# B = 8
+B = 11
+T = 1024 # 2265
 assert total_batch_size % (B*T) == 0, 'total batch size is not divisible by B*T'
 grad_accum_steps = total_batch_size // (B*T)
 print(f"Total desired batch size: {total_batch_size}")
 print(f"=> calculated gradient accumulation steps: {grad_accum_steps}")
 
-train_loader = DataLoaderLite(B=B,T=T,split='train')
-val_loader = DataLoaderLite(B=B,T=T,split='val')
+# train_loader = DataLoaderLite(B=B,T=T,split='train')
+train_loader = DataLoaderHTML(B=B,T=T,fname='./Atoms.npy')
+# val_loader = DataLoaderLite(B=B,T=T,split='val')
+val_loader = DataLoaderHTML(B=B,T=T,fname='./Atoms.npy')
 torch.set_float32_matmul_precision('high')
 
 # model = GPT.from_pretrained('gpt2')
 model = GPT(GPTConfig())
 model.to(device)
-use_compile = True
+use_compile = False
 if use_compile:
     model = torch.compile(model)
 enc = tiktoken.get_encoding("gpt2")
@@ -282,7 +311,8 @@ for step in range(max_steps):
         model.eval()
         num_return_sequence = 4
         max_length = 32
-        tokens = enc.encode("Hello, I'm a language model,")
+        # tokens = enc.encode("Hello, I'm a language model,")
+        tokens = enc.encode("Atoms are the basic particles of")
         tokens = torch.tensor(tokens,dtype=torch.long)
         tokens = tokens.unsqueeze(0).repeat(num_return_sequence,1)
         gen = tokens.to(device)
