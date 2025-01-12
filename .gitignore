@@ -40,6 +40,12 @@ Image_upscaling/checkpoint.pth
 
 Small_transformer/sentence_completion_model.pth
 
+Image_caption/Data/
+Image_caption/models/
+Image_caption/sample.jpg/
+
+Diffusion_anime/Data/
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
