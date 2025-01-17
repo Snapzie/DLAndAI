@@ -44,7 +44,7 @@ Image_caption/Data/
 Image_caption/models/
 Image_caption/sample.jpg/
 
-Diffusion_anime/Data/
+Diffusion_anime/anime-128/
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
