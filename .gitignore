@@ -45,6 +45,11 @@ Image_caption/models/
 Image_caption/sample.jpg/
 
 Diffusion_anime/anime-128/
+Diffusion_anime/anime-128-own-unet/
+
+Flow_Match/data/*
+
+RAG_Insurance/gguf_dir/*
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
