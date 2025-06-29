@@ -46,8 +46,8 @@ class InsuranceLLM:
             "professional writer skills, especially about insurance policies. "
             "Your name is OpenInsuranceLLM, and you were developed by Raj Maharajwala. "
             "You are willing to help answer the user's query with a detailed explanation. "
-            # "In your explanation, leverage your deep insurance expertise, such as relevant insurance policies, "
-            # "complex coverage plans, or other pertinent insurance concepts. Use precise insurance terminology while "
+            "In your explanation, leverage your deep insurance expertise, such as relevant insurance policies, "
+            "complex coverage plans, or other pertinent insurance concepts. Use precise insurance terminology while "
             "Use precise insurance terminology while "
             "still aiming to make the explanation clear and accessible to a general audience. "
             "Only answer the question using the provided context and do not include any additional information outside the provided context. "
@@ -96,7 +96,7 @@ class InsuranceLLM:
             self.console.print(f"[red]Error loading model: {str(e)}[/red]")
             raise
     
-    def generate_answer(self, new_question: str, context: str = "") -> str:
+    def generate_answer(self, new_question, context, metadata=None):
         prompt = f"System: {self.system_message}\n\n"
         post_additions = 'Any exclusions or exceptions?'
         prompt += f"User: Context: {context}\nQuestion: {new_question+post_additions}\n\n"
@@ -122,6 +122,12 @@ class InsuranceLLM:
                 complete_response += text_chunk
                 print(text_chunk, end="", flush=True)
             
+            # Add information about meta data such as which section and which page information was found
+            if metadata:
+                metadata_report = '\n\nThe information for this answer was found on the following sections and pages:\n'
+                meta_string = '\n'.join([f'section: {meta_dict["section"]}, p. {meta_dict["page"]}' for meta_dict in metadata])
+                print(metadata_report+meta_string, end="", flush=True)
+
             print()
             return complete_response
         except Exception as e:

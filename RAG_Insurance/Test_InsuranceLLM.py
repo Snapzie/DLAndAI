@@ -1,4 +1,5 @@
 from Model import InsuranceLLM, ModelConfig
+from Database import init_nonpersistent_cosine_db
 import Utility as util
 from sentence_transformers import SentenceTransformer
 from sklearn.metrics.pairwise import cosine_similarity
@@ -9,8 +10,9 @@ llm = InsuranceLLM(config)
 llm.load_model()
 embedder = SentenceTransformer('all-MiniLM-L6-v2')
 
-insurance_policy_chunks = {k:v for k,v in enumerate(open('./Chunks.txt').read().split('\n'))}
-chunk_embeddings = {k:embedder.encode(v) for k,v in insurance_policy_chunks.items()}
+# insurance_policy_chunks = {k:v for k,v in enumerate(open('./Chunks.txt').read().split('\n'))}
+# chunk_embeddings = {k:embedder.encode(v) for k,v in insurance_policy_chunks.items()}
+db = init_nonpersistent_cosine_db()
 
 questions = [
     "What type of damages are covered under the property damage section of the policy?",
@@ -40,13 +42,15 @@ context_avg = []
 for q in questions:
     llm.console.print(f"[bold cyan]User:[/bold cyan] {q}")
     q_embed = embedder.encode(q)
-    context = util.get_context(q_embed,chunk_embeddings,insurance_policy_chunks)
-    response = llm.generate_answer(q, context)
+    # context = util.get_context_nondb(q_embed,chunk_embeddings,insurance_policy_chunks)
+    context,_ = util.get_context(q_embed,db)
+    print(context)
+    response = llm.generate_answer(q,context)
 
     question_avg.append(float(abs(cosine_similarity([q_embed],[embedder.encode(response)])[0][0])))
     context_avg.append(float(abs(cosine_similarity([embedder.encode(context)],[embedder.encode(response)])[0][0])))
-llm.console.print(f'[bold green]Question avg. similarity:[/bold green][default] {np.mean(question_avg):.2f}\n{list(map(lambda x: f"{x:.2f}",question_avg))}[/default]')
-llm.console.print(f'[bold green]Context avg. similarity:[/bold green][default] {np.mean(context_avg):.2f}\n{list(map(lambda x: f"{x:.2f}",context_avg))}[/default]')
+llm.console.print(f'[bold green]Question avg. similarity:[/bold green][default] {np.mean(question_avg):.4f}\n{list(map(lambda x: f"{x:.4f}",question_avg))}[/default]')
+llm.console.print(f'[bold green]Context avg. similarity:[/bold green][default] {np.mean(context_avg):.4f}\n{list(map(lambda x: f"{x:.4f}",context_avg))}[/default]')
 
 if llm.llm_ctx:
     del llm.llm_ctx
