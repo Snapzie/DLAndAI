@@ -21,11 +21,13 @@
 ### Considerations
 - Should metadata be part of complete_response?
     - Should it be part of model history?
+- Convert all parsed data to lower-case in case model cites context?
+- When should the model answer, idk?
 
-0.7984
-0.8396
-
-0.7905
-0.7256
-
-[0.7507878541946411, 0.7245298027992249, 0.7083057761192322]
+### Questions
+- Explain everything the insurer should do **
+- What does the product development process generally involve?
+- Which measures should an insurer put in place to identify risks?
+- Give examples of underwriting guidelines
+- Who should establish the risk management framework?
+- Explain the purpose of risk policies

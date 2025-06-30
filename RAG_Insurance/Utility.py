@@ -29,6 +29,8 @@ def get_context(user_input,db):
     # chroma db returns distances as: 1-cosine_similarity. As distances are closer to zero, we experience diminishing returns
     # on comparisons. Thus, we convert the distances to similarities before comparison
     best = max(map(lambda x: 1-x,results['distances'][0]))
+    if best < 0.5:
+        return '', ''
     filtered = [
         {
             "id": results['ids'][0][i],

@@ -41,19 +41,23 @@ class InsuranceLLM:
         self.system_message = (
             "This is a chat between a user and an artificial intelligence assistant. "
             "The assistant gives helpful, detailed, and polite answers to the user's questions based on the context. "
-            "The assistant should also indicate when the answer cannot be found in the context. "
-            "You are an expert from the Insurance domain with extensive insurance knowledge and "
-            "professional writer skills, especially about insurance policies. "
-            "Your name is OpenInsuranceLLM, and you were developed by Raj Maharajwala. "
-            "You are willing to help answer the user's query with a detailed explanation. "
-            "In your explanation, leverage your deep insurance expertise, such as relevant insurance policies, "
-            "complex coverage plans, or other pertinent insurance concepts. Use precise insurance terminology while "
-            "Use precise insurance terminology while "
-            "still aiming to make the explanation clear and accessible to a general audience. "
-            "Only answer the question using the provided context and do not include any additional information outside the provided context. "
+            # "The assistant should also indicate when the answer cannot be found in the context. "
+            # "You are an expert from the Insurance domain with extensive insurance knowledge and "
+            # "professional writer skills, especially about insurance policies. "
+            # "Your name is OpenInsuranceLLM, and you were developed by Raj Maharajwala. "
+            # "You are willing to help answer the user's query with a detailed explanation. "
+            # "In your explanation, leverage your deep insurance expertise, such as relevant insurance policies, "
+            # "complex coverage plans, or other pertinent insurance concepts. Use precise insurance terminology while "
+            # "Use precise insurance terminology while "
+            # "still aiming to make the explanation clear and accessible to a general audience. "
+            # "Only answer the question using the provided context and do not include any additional information outside the provided context. "
             "You should always assume the user is not covered by anything optional. "
-            "Always add to the answer anything excluded."
-            # "When answering, always consider all types of exclusions and exceptions in the context and always include them in the answer. "
+            # "Always add to the answer anything excluded. "
+            # "If you are not provided a context, NEVER answer ANYTHING, politely tell the user you do not know the answer to ANY of the provided questions. "
+            "If you are not provided a context always give the answer: 'I do not know the answer to this'. "
+            "You can ONLY answer by stating facts from the provided context. You can NOT answer anything not mentioned in the provided context. "
+            "You always answer the users questions politely if you can find information in the provided context. "
+            "Never give advise or examples not provided in the context."
             
         )
 
@@ -123,13 +127,14 @@ class InsuranceLLM:
                 print(text_chunk, end="", flush=True)
             
             # Add information about meta data such as which section and which page information was found
+            meta_string = ''
             if metadata:
                 metadata_report = '\n\nThe information for this answer was found on the following sections and pages:\n'
                 meta_string = '\n'.join([f'section: {meta_dict["section"]}, p. {meta_dict["page"]}' for meta_dict in metadata])
                 print(metadata_report+meta_string, end="", flush=True)
 
             print()
-            return complete_response
+            return complete_response,meta_string
         except Exception as e:
             self.console.print(f"\n[red]Error generating response: {str(e)}[/red]")
             return f"I encountered an error while generating a response. Please try again or ask a different question.", 0, 0

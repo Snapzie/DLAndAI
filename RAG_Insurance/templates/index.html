@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>RAG Demo</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+
+<body>
+    <h2>Ask the RAG System</h2>
+    <form id="ragForm">
+        <input type="text" id="user_input" name="user_input" placeholder="Enter your question" required />
+        <button type="submit">Submit</button>
+    </form>
+
+    <h3>Response:</h3>
+    <div id="responseBox"></div>
+
+    <script>
+        $('#ragForm').on('submit', function (e) {
+            e.preventDefault();
+            $.ajax({
+                type: 'POST',
+                url: '/ask',
+                data: {
+                    user_input: $('#user_input').val()
+                },
+                success: function (data) {
+                    $('#responseBox').text(data.response);
+                },
+                error: function () {
+                    $('#responseBox').text('An error occurred.');
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>

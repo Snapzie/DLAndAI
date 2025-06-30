@@ -50,7 +50,9 @@ Diffusion_anime/anime-128-own-unet/
 Flow_Match/data/*
 
 RAG_Insurance/gguf_dir/*
+RAG_Insurance/RAG/*
 
+*.Identifier
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]

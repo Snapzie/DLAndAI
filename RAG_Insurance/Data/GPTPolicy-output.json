@@ -1,0 +1,1278 @@
+[
+    {
+        "element_id": "256b825a806e80c48bd025304c827c70",
+        "metadata": {
+            "coordinates": {
+                "layout_height": 792.0,
+                "layout_width": 612.0,
+                "points": [
+                    [
+                        72.0,
+                        78.2
+                    ],
+                    [
+                        72.0,
+                        106.2
+                    ],
+                    [
+                        253.5,
+                        106.2
+                    ],
+                    [
+                        253.5,
+                        78.2
+                    ]
+                ],
+                "system": "PixelSpace"
+            },
+            "file_directory": "./Data",
+            "filename": "GPTPolicy.pdf",
+            "filetype": "application/pdf",
+            "languages": [
+                "eng"
+            ],
+            "last_modified": "2025-06-30T07:09:36",
+            "page_number": 1
+        },
+        "text": "Insurance policy",
+        "type": "Title"
+    },
+    {
+        "element_id": "a2232cecefc51680b38770ed67e12505",
+        "metadata": {
+            "coordinates": {
+                "layout_height": 792.0,
+                "layout_width": 612.0,
+                "points": [
+                    [
+                        72.0,
+                        128.6
+                    ],
+                    [
+                        72.0,
+                        148.6
+                    ],
+                    [
+                        294.7,
+                        148.6
+                    ],
+                    [
+                        294.7,
+                        128.6
+                    ]
+                ],
+                "system": "PixelSpace"
+            },
+            "file_directory": "./Data",
+            "filename": "GPTPolicy.pdf",
+            "filetype": "application/pdf",
+            "languages": [
+                "eng"
+            ],
+            "last_modified": "2025-06-30T07:09:36",
+            "page_number": 1
+        },
+        "text": "Property Damage Coverage",
+        "type": "Title"
+    },
+    {
+        "element_id": "ff9eabb1d2e8c1ec7cec85441995c19c",
+        "metadata": {
+            "coordinates": {
+                "layout_height": 792.0,
+                "layout_width": 612.0,
+                "points": [
+                    [
+                        72.0,
+                        159.2
+                    ],
+                    [
+                        72.0,
+                        239.0
+                    ],
+                    [
+                        538.5,
+                        239.0
+                    ],
+                    [
+                        538.5,
+                        159.2
+                    ]
+                ],
+                "system": "PixelSpace"
+            },
+            "file_directory": "./Data",
+            "filename": "GPTPolicy.pdf",
+            "filetype": "application/pdf",
+            "languages": [
+                "eng"
+            ],
+            "last_modified": "2025-06-30T07:09:36",
+            "page_number": 1,
+            "parent_id": "a2232cecefc51680b38770ed67e12505"
+        },
+        "text": "This insurance policy provides coverage for damages to residential properties, including structural damages caused by natural events like fires, windstorms, hail, and vandalism. Coverage extends to both the physical building and its interior contents, ensuring that property owners are protected in case of unexpected damage. Additionally, the policy includes the repair costs for damage to windows, doors, plumbing, and electrical systems.",
+        "type": "NarrativeText"
+    },
+    {
+        "element_id": "bcec871d338b04d991cf64a01fa942dd",
+        "metadata": {
+            "coordinates": {
+                "layout_height": 792.0,
+                "layout_width": 612.0,
+                "points": [
+                    [
+                        72.0,
+                        252.0
+                    ],
+                    [
+                        72.0,
+                        315.0
+                    ],
+                    [
+                        536.1,
+                        315.0
+                    ],
+                    [
+                        536.1,
+                        252.0
+                    ]
+                ],
+                "system": "PixelSpace"
+            },
+            "file_directory": "./Data",
+            "filename": "GPTPolicy.pdf",
+            "filetype": "application/pdf",
+            "languages": [
+                "eng"
+            ],
+            "last_modified": "2025-06-30T07:09:36",
+            "page_number": 1,
+            "parent_id": "a2232cecefc51680b38770ed67e12505"
+        },
+        "text": "Exclusions: This coverage does not apply to damages caused by wear and tear, lack of maintenance, or intentional destruction by the property owner. Furthermore, the policy does not cover damages arising from acts of terrorism or military action, including nuclear incidents.",
+        "type": "NarrativeText"
+    },
+    {
+        "element_id": "f5a61d562b5114761963dc9815fdf086",
+        "metadata": {
+            "coordinates": {
+                "layout_height": 792.0,
+                "layout_width": 612.0,
+                "points": [
+                    [
+                        72.0,
+                        339.5
+                    ],
+                    [
+                        72.0,
+                        359.6
+                    ],
+                    [
+                        345.0,
+                        359.6
+                    ],
+                    [
+                        345.0,
+                        339.5
+                    ]
+                ],
+                "system": "PixelSpace"
+            },
+            "file_directory": "./Data",
+            "filename": "GPTPolicy.pdf",
+            "filetype": "application/pdf",
+            "languages": [
+                "eng"
+            ],
+            "last_modified": "2025-06-30T07:09:36",
+            "page_number": 1
+        },
+        "text": "Liability Coverage for Bodily Injury",
+        "type": "Title"
+    },
+    {
+        "element_id": "2bb01b5c3da95445367b90f4d72d942b",
+        "metadata": {
+            "coordinates": {
+                "layout_height": 792.0,
+                "layout_width": 612.0,
+                "points": [
+                    [
+                        72.0,
+                        370.2
+                    ],
+                    [
+                        72.0,
+                        450.1
+                    ],
+                    [
+                        529.1,
+                        450.1
+                    ],
+                    [
+                        529.1,
+                        370.2
+                    ]
+                ],
+                "system": "PixelSpace"
+            },
+            "file_directory": "./Data",
+            "filename": "GPTPolicy.pdf",
+            "filetype": "application/pdf",
+            "languages": [
+                "eng"
+            ],
+            "last_modified": "2025-06-30T07:09:36",
+            "page_number": 1,
+            "parent_id": "f5a61d562b5114761963dc9815fdf086"
+        },
+        "text": "Liability coverage under this policy protects the insured against bodily injuries caused to others on their property. If a person is injured while on the insured property, this coverage will pay for medical bills, lost wages, and any legal fees associated with defending the insured in court. This policy also includes coverage for accidents caused by property defects, such as broken fences or unsafe staircases.",
+        "type": "NarrativeText"
+    },
+    {
+        "element_id": "12cb4d872659360f5549009c0508e6a5",
+        "metadata": {
+            "coordinates": {
+                "layout_height": 792.0,
+                "layout_width": 612.0,
+                "points": [
+                    [
+                        72.0,
+                        463.1
+                    ],
+                    [
+                        72.0,
+                        509.0
+                    ],
+                    [
+                        540.6,
+                        509.0
+                    ],
+                    [
+                        540.6,
+                        463.1
+                    ]
+                ],
+                "system": "PixelSpace"
+            },
+            "file_directory": "./Data",
+            "filename": "GPTPolicy.pdf",
+            "filetype": "application/pdf",
+            "languages": [
+                "eng"
+            ],
+            "last_modified": "2025-06-30T07:09:36",
+            "page_number": 1,
+            "parent_id": "f5a61d562b5114761963dc9815fdf086"
+        },
+        "text": "Exclusions: This liability coverage does not apply if the injury was caused by the intentional actions of the insured. Additionally, injuries resulting from illegal activities, or those caused by a failure to comply with local safety regulations, are excluded.",
+        "type": "NarrativeText"
+    },
+    {
+        "element_id": "d3e7c08a96d3c48262148966d526598b",
+        "metadata": {
+            "coordinates": {
+                "layout_height": 792.0,
+                "layout_width": 612.0,
+                "points": [
+                    [
+                        72.0,
+                        533.6
+                    ],
+                    [
+                        72.0,
+                        553.6
+                    ],
+                    [
+                        272.2,
+                        553.6
+                    ],
+                    [
+                        272.2,
+                        533.6
+                    ]
+                ],
+                "system": "PixelSpace"
+            },
+            "file_directory": "./Data",
+            "filename": "GPTPolicy.pdf",
+            "filetype": "application/pdf",
+            "languages": [
+                "eng"
+            ],
+            "last_modified": "2025-06-30T07:09:36",
+            "page_number": 1
+        },
+        "text": "Flood Damage Coverage",
+        "type": "Title"
+    },
+    {
+        "element_id": "c333792152eef2238c26616f83231cbd",
+        "metadata": {
+            "coordinates": {
+                "layout_height": 792.0,
+                "layout_width": 612.0,
+                "points": [
+                    [
+                        72.0,
+                        564.2
+                    ],
+                    [
+                        72.0,
+                        627.1
+                    ],
+                    [
+                        541.7,
+                        627.1
+                    ],
+                    [
+                        541.7,
+                        564.2
+                    ]
+                ],
+                "system": "PixelSpace"
+            },
+            "file_directory": "./Data",
+            "filename": "GPTPolicy.pdf",
+            "filetype": "application/pdf",
+            "languages": [
+                "eng"
+            ],
+            "last_modified": "2025-06-30T07:09:36",
+            "page_number": 1,
+            "parent_id": "d3e7c08a96d3c48262148966d526598b"
+        },
+        "text": "This policy includes flood damage coverage to protect against damages caused by water inundation resulting from natural disasters such as heavy rain, storms, or rivers overflowing their banks. Coverage includes property repairs and damage to belongings, as well as costs associated with water removal and mold prevention.",
+        "type": "NarrativeText"
+    },
+    {
+        "element_id": "0bebfcaf761adcbae5b6b19924294173",
+        "metadata": {
+            "coordinates": {
+                "layout_height": 792.0,
+                "layout_width": 612.0,
+                "points": [
+                    [
+                        72.0,
+                        640.1
+                    ],
+                    [
+                        72.0,
+                        703.0
+                    ],
+                    [
+                        541.5,
+                        703.0
+                    ],
+                    [
+                        541.5,
+                        640.1
+                    ]
+                ],
+                "system": "PixelSpace"
+            },
+            "file_directory": "./Data",
+            "filename": "GPTPolicy.pdf",
+            "filetype": "application/pdf",
+            "languages": [
+                "eng"
+            ],
+            "last_modified": "2025-06-30T07:09:36",
+            "page_number": 1,
+            "parent_id": "d3e7c08a96d3c48262148966d526598b"
+        },
+        "text": "Exclusions: Flood damage resulting from sewer backups or water rising from the ground beneath the insured property is not covered. Additionally, damages caused by the insured\u2019s failure to take reasonable steps to prevent further damage during the event, such as not moving items to higher ground, are excluded.",
+        "type": "NarrativeText"
+    },
+    {
+        "element_id": "2ccef890125edbbcec0e833654ae4939",
+        "metadata": {
+            "coordinates": {
+                "layout_height": 792.0,
+                "layout_width": 612.0,
+                "points": [
+                    [
+                        72.0,
+                        76.4
+                    ],
+                    [
+                        72.0,
+                        96.4
+                    ],
+                    [
+                        319.5,
+                        96.4
+                    ],
+                    [
+                        319.5,
+                        76.4
+                    ]
+                ],
+                "system": "PixelSpace"
+            },
+            "file_directory": "./Data",
+            "filename": "GPTPolicy.pdf",
+            "filetype": "application/pdf",
+            "languages": [
+                "eng"
+            ],
+            "last_modified": "2025-06-30T07:09:36",
+            "page_number": 2
+        },
+        "text": "Theft and Vandalism Coverage",
+        "type": "Title"
+    },
+    {
+        "element_id": "c426b0280ee6f7f473ca6c1a0f44272d",
+        "metadata": {
+            "coordinates": {
+                "layout_height": 792.0,
+                "layout_width": 612.0,
+                "points": [
+                    [
+                        72.0,
+                        107.0
+                    ],
+                    [
+                        72.0,
+                        186.9
+                    ],
+                    [
+                        541.3,
+                        186.9
+                    ],
+                    [
+                        541.3,
+                        107.0
+                    ]
+                ],
+                "system": "PixelSpace"
+            },
+            "file_directory": "./Data",
+            "filename": "GPTPolicy.pdf",
+            "filetype": "application/pdf",
+            "languages": [
+                "eng"
+            ],
+            "last_modified": "2025-06-30T07:09:36",
+            "page_number": 2,
+            "parent_id": "2ccef890125edbbcec0e833654ae4939"
+        },
+        "text": "In the event of theft or vandalism, this policy will reimburse the policyholder for the value of stolen or damaged property, up to the policy's coverage limits. This includes items such as electronics, furniture, and personal belongings that have been damaged or taken by thieves. The policy also covers repairs for damages caused by burglars attempting to break into the home.",
+        "type": "NarrativeText"
+    },
+    {
+        "element_id": "b9fab8e85b42552dcd4e6f7a8682e970",
+        "metadata": {
+            "coordinates": {
+                "layout_height": 792.0,
+                "layout_width": 612.0,
+                "points": [
+                    [
+                        72.0,
+                        199.8
+                    ],
+                    [
+                        72.0,
+                        245.7
+                    ],
+                    [
+                        535.9,
+                        245.7
+                    ],
+                    [
+                        535.9,
+                        199.8
+                    ]
+                ],
+                "system": "PixelSpace"
+            },
+            "file_directory": "./Data",
+            "filename": "GPTPolicy.pdf",
+            "filetype": "application/pdf",
+            "languages": [
+                "eng"
+            ],
+            "last_modified": "2025-06-30T07:09:36",
+            "page_number": 2,
+            "parent_id": "2ccef890125edbbcec0e833654ae4939"
+        },
+        "text": "Exclusions: The policy does not cover losses arising from the theft of property that was left unattended in plain sight or in an unlocked space. Losses due to unauthorized access or theft by family members or people residing in the household are also excluded.",
+        "type": "NarrativeText"
+    },
+    {
+        "element_id": "305e26d75497ff93b5b8a2aa01b49168",
+        "metadata": {
+            "coordinates": {
+                "layout_height": 792.0,
+                "layout_width": 612.0,
+                "points": [
+                    [
+                        72.0,
+                        270.4
+                    ],
+                    [
+                        72.0,
+                        290.5
+                    ],
+                    [
+                        256.3,
+                        290.5
+                    ],
+                    [
+                        256.3,
+                        270.4
+                    ]
+                ],
+                "system": "PixelSpace"
+            },
+            "file_directory": "./Data",
+            "filename": "GPTPolicy.pdf",
+            "filetype": "application/pdf",
+            "languages": [
+                "eng"
+            ],
+            "last_modified": "2025-06-30T07:09:36",
+            "page_number": 2
+        },
+        "text": "Fire Damage Coverage",
+        "type": "Title"
+    },
+    {
+        "element_id": "b5b1bd28b7c40f661b90941aad37853c",
+        "metadata": {
+            "coordinates": {
+                "layout_height": 792.0,
+                "layout_width": 612.0,
+                "points": [
+                    [
+                        72.0,
+                        301.0
+                    ],
+                    [
+                        72.0,
+                        363.9
+                    ],
+                    [
+                        537.4,
+                        363.9
+                    ],
+                    [
+                        537.4,
+                        301.0
+                    ]
+                ],
+                "system": "PixelSpace"
+            },
+            "file_directory": "./Data",
+            "filename": "GPTPolicy.pdf",
+            "filetype": "application/pdf",
+            "languages": [
+                "eng"
+            ],
+            "last_modified": "2025-06-30T07:09:36",
+            "page_number": 2,
+            "parent_id": "305e26d75497ff93b5b8a2aa01b49168"
+        },
+        "text": "This policy provides coverage for damages to the insured property caused by fire, including structural damage and damage to personal property. It covers the cost of rebuilding or repairing the property, as well as the replacement of damaged personal items, such as furniture and clothing.",
+        "type": "NarrativeText"
+    },
+    {
+        "element_id": "17ef0dc7f9c23558c1fbbde3d72a792f",
+        "metadata": {
+            "coordinates": {
+                "layout_height": 792.0,
+                "layout_width": 612.0,
+                "points": [
+                    [
+                        72.0,
+                        376.9
+                    ],
+                    [
+                        72.0,
+                        439.8
+                    ],
+                    [
+                        537.8,
+                        439.8
+                    ],
+                    [
+                        537.8,
+                        376.9
+                    ]
+                ],
+                "system": "PixelSpace"
+            },
+            "file_directory": "./Data",
+            "filename": "GPTPolicy.pdf",
+            "filetype": "application/pdf",
+            "languages": [
+                "eng"
+            ],
+            "last_modified": "2025-06-30T07:09:36",
+            "page_number": 2,
+            "parent_id": "305e26d75497ff93b5b8a2aa01b49168"
+        },
+        "text": "Exclusions: Fire damage caused by arson, negligence, or failure to maintain fire safety equipment is excluded from the coverage. Additionally, any fire-related losses occurring in a property that has been unoccupied for an extended period, or during illegal activities, are not covered.",
+        "type": "NarrativeText"
+    },
+    {
+        "element_id": "bac75c3778b8dd3d2977b8d535986bcc",
+        "metadata": {
+            "coordinates": {
+                "layout_height": 792.0,
+                "layout_width": 612.0,
+                "points": [
+                    [
+                        72.0,
+                        464.4
+                    ],
+                    [
+                        72.0,
+                        484.4
+                    ],
+                    [
+                        254.8,
+                        484.4
+                    ],
+                    [
+                        254.8,
+                        464.4
+                    ]
+                ],
+                "system": "PixelSpace"
+            },
+            "file_directory": "./Data",
+            "filename": "GPTPolicy.pdf",
+            "filetype": "application/pdf",
+            "languages": [
+                "eng"
+            ],
+            "last_modified": "2025-06-30T07:09:36",
+            "page_number": 2
+        },
+        "text": "Loss of Rent Coverage",
+        "type": "Title"
+    },
+    {
+        "element_id": "fddc3fff149f74ac462bf66208a185fb",
+        "metadata": {
+            "coordinates": {
+                "layout_height": 792.0,
+                "layout_width": 612.0,
+                "points": [
+                    [
+                        72.0,
+                        495.1
+                    ],
+                    [
+                        72.0,
+                        558.0
+                    ],
+                    [
+                        529.1,
+                        558.0
+                    ],
+                    [
+                        529.1,
+                        495.1
+                    ]
+                ],
+                "system": "PixelSpace"
+            },
+            "file_directory": "./Data",
+            "filename": "GPTPolicy.pdf",
+            "filetype": "application/pdf",
+            "languages": [
+                "eng"
+            ],
+            "last_modified": "2025-06-30T07:09:36",
+            "page_number": 2,
+            "parent_id": "bac75c3778b8dd3d2977b8d535986bcc"
+        },
+        "text": "If your property becomes uninhabitable due to a covered event, this policy will reimburse you for lost rental income. The coverage includes both long-term and short-term rental income, ensuring that you can continue to pay your mortgage and maintain financial stability while your property is being repaired.",
+        "type": "NarrativeText"
+    },
+    {
+        "element_id": "bfca101867516546888fd17980eaefd1",
+        "metadata": {
+            "coordinates": {
+                "layout_height": 792.0,
+                "layout_width": 612.0,
+                "points": [
+                    [
+                        72.0,
+                        570.9
+                    ],
+                    [
+                        72.0,
+                        616.9
+                    ],
+                    [
+                        540.6,
+                        616.9
+                    ],
+                    [
+                        540.6,
+                        570.9
+                    ]
+                ],
+                "system": "PixelSpace"
+            },
+            "file_directory": "./Data",
+            "filename": "GPTPolicy.pdf",
+            "filetype": "application/pdf",
+            "languages": [
+                "eng"
+            ],
+            "last_modified": "2025-06-30T07:09:36",
+            "page_number": 2,
+            "parent_id": "bac75c3778b8dd3d2977b8d535986bcc"
+        },
+        "text": "Exclusions: Losses of rent due to the insured's own failure to maintain the property, or if the property is being renovated or remodeled, are excluded. Also, any rental income losses that result from tenant eviction or non-payment are not covered by this policy.",
+        "type": "NarrativeText"
+    },
+    {
+        "element_id": "4ef27f46c21d0e1235db62e964d27fb3",
+        "metadata": {
+            "coordinates": {
+                "layout_height": 792.0,
+                "layout_width": 612.0,
+                "points": [
+                    [
+                        72.0,
+                        641.5
+                    ],
+                    [
+                        72.0,
+                        661.6
+                    ],
+                    [
+                        286.4,
+                        661.6
+                    ],
+                    [
+                        286.4,
+                        641.5
+                    ]
+                ],
+                "system": "PixelSpace"
+            },
+            "file_directory": "./Data",
+            "filename": "GPTPolicy.pdf",
+            "filetype": "application/pdf",
+            "languages": [
+                "eng"
+            ],
+            "last_modified": "2025-06-30T07:09:36",
+            "page_number": 2
+        },
+        "text": "Natural Disaster Coverage",
+        "type": "Title"
+    },
+    {
+        "element_id": "fc61f8416884c672db5696f9ffe548d4",
+        "metadata": {
+            "coordinates": {
+                "layout_height": 792.0,
+                "layout_width": 612.0,
+                "points": [
+                    [
+                        72.0,
+                        672.1
+                    ],
+                    [
+                        72.0,
+                        701.2
+                    ],
+                    [
+                        539.4,
+                        701.2
+                    ],
+                    [
+                        539.4,
+                        672.1
+                    ]
+                ],
+                "system": "PixelSpace"
+            },
+            "file_directory": "./Data",
+            "filename": "GPTPolicy.pdf",
+            "filetype": "application/pdf",
+            "languages": [
+                "eng"
+            ],
+            "last_modified": "2025-06-30T07:09:36",
+            "page_number": 2,
+            "parent_id": "4ef27f46c21d0e1235db62e964d27fb3"
+        },
+        "text": "In the event of a natural disaster, such as an earthquake or volcanic eruption, this policy offers coverage for damages to both the structure and the contents of the insured property.",
+        "type": "NarrativeText"
+    },
+    {
+        "element_id": "bc9fd1e3ea535a82a02d26b2909e8270",
+        "metadata": {
+            "coordinates": {
+                "layout_height": 792.0,
+                "layout_width": 612.0,
+                "points": [
+                    [
+                        72.0,
+                        74.7
+                    ],
+                    [
+                        72.0,
+                        103.6
+                    ],
+                    [
+                        492.2,
+                        103.6
+                    ],
+                    [
+                        492.2,
+                        74.7
+                    ]
+                ],
+                "system": "PixelSpace"
+            },
+            "file_directory": "./Data",
+            "filename": "GPTPolicy.pdf",
+            "filetype": "application/pdf",
+            "languages": [
+                "eng"
+            ],
+            "last_modified": "2025-06-30T07:09:36",
+            "page_number": 3,
+            "parent_id": "4ef27f46c21d0e1235db62e964d27fb3"
+        },
+        "text": "The policy includes costs related to debris removal and temporary housing for the policyholder while the property is being repaired.",
+        "type": "NarrativeText"
+    },
+    {
+        "element_id": "e169ee3f259c529c151c41cf8863cc43",
+        "metadata": {
+            "coordinates": {
+                "layout_height": 792.0,
+                "layout_width": 612.0,
+                "points": [
+                    [
+                        72.0,
+                        116.6
+                    ],
+                    [
+                        72.0,
+                        179.6
+                    ],
+                    [
+                        537.0,
+                        179.6
+                    ],
+                    [
+                        537.0,
+                        116.6
+                    ]
+                ],
+                "system": "PixelSpace"
+            },
+            "file_directory": "./Data",
+            "filename": "GPTPolicy.pdf",
+            "filetype": "application/pdf",
+            "languages": [
+                "eng"
+            ],
+            "last_modified": "2025-06-30T07:09:36",
+            "page_number": 3,
+            "parent_id": "4ef27f46c21d0e1235db62e964d27fb3"
+        },
+        "text": "Exclusions: This coverage does not apply if the natural disaster occurs due to the insured's failure to follow local safety ordinances, such as failing to reinforce the structure in an earthquake-prone area. Additionally, damages caused by the gradual effects of weather, such as erosion or flooding, are excluded.",
+        "type": "NarrativeText"
+    },
+    {
+        "element_id": "bcc740f64b5f8cd57ddc409d37cac436",
+        "metadata": {
+            "coordinates": {
+                "layout_height": 792.0,
+                "layout_width": 612.0,
+                "points": [
+                    [
+                        72.0,
+                        204.2
+                    ],
+                    [
+                        72.0,
+                        224.2
+                    ],
+                    [
+                        303.4,
+                        224.2
+                    ],
+                    [
+                        303.4,
+                        204.2
+                    ]
+                ],
+                "system": "PixelSpace"
+            },
+            "file_directory": "./Data",
+            "filename": "GPTPolicy.pdf",
+            "filetype": "application/pdf",
+            "languages": [
+                "eng"
+            ],
+            "last_modified": "2025-06-30T07:09:36",
+            "page_number": 3
+        },
+        "text": "Medical Payments Coverage",
+        "type": "Title"
+    },
+    {
+        "element_id": "01f1d951f2c8110a4d99854e189076a6",
+        "metadata": {
+            "coordinates": {
+                "layout_height": 792.0,
+                "layout_width": 612.0,
+                "points": [
+                    [
+                        72.0,
+                        234.8
+                    ],
+                    [
+                        72.0,
+                        297.7
+                    ],
+                    [
+                        537.6,
+                        297.7
+                    ],
+                    [
+                        537.6,
+                        234.8
+                    ]
+                ],
+                "system": "PixelSpace"
+            },
+            "file_directory": "./Data",
+            "filename": "GPTPolicy.pdf",
+            "filetype": "application/pdf",
+            "languages": [
+                "eng"
+            ],
+            "last_modified": "2025-06-30T07:09:36",
+            "page_number": 3,
+            "parent_id": "bcc740f64b5f8cd57ddc409d37cac436"
+        },
+        "text": "This insurance policy covers medical expenses for individuals who are injured on the insured property, including visitors or guests. It provides reimbursement for hospital bills, doctor\u2019s visits, ambulance fees, and necessary medical procedures. This coverage applies regardless of who is at fault for the injury.",
+        "type": "NarrativeText"
+    },
+    {
+        "element_id": "e3826d3efd1ee77311d876f72712b976",
+        "metadata": {
+            "coordinates": {
+                "layout_height": 792.0,
+                "layout_width": 612.0,
+                "points": [
+                    [
+                        72.0,
+                        310.6
+                    ],
+                    [
+                        72.0,
+                        373.6
+                    ],
+                    [
+                        540.0,
+                        373.6
+                    ],
+                    [
+                        540.0,
+                        310.6
+                    ]
+                ],
+                "system": "PixelSpace"
+            },
+            "file_directory": "./Data",
+            "filename": "GPTPolicy.pdf",
+            "filetype": "application/pdf",
+            "languages": [
+                "eng"
+            ],
+            "last_modified": "2025-06-30T07:09:36",
+            "page_number": 3,
+            "parent_id": "bcc740f64b5f8cd57ddc409d37cac436"
+        },
+        "text": "Exclusions: Medical payments coverage does not apply to injuries sustained by individuals who are engaged in illegal activities on the insured property or who are intoxicated at the time of the injury. Injuries caused by the deliberate actions of the insured are also excluded from coverage.",
+        "type": "NarrativeText"
+    },
+    {
+        "element_id": "c7b10481b2d27ec5df151a304d7c9029",
+        "metadata": {
+            "coordinates": {
+                "layout_height": 792.0,
+                "layout_width": 612.0,
+                "points": [
+                    [
+                        72.0,
+                        398.2
+                    ],
+                    [
+                        72.0,
+                        418.3
+                    ],
+                    [
+                        269.5,
+                        418.3
+                    ],
+                    [
+                        269.5,
+                        398.2
+                    ]
+                ],
+                "system": "PixelSpace"
+            },
+            "file_directory": "./Data",
+            "filename": "GPTPolicy.pdf",
+            "filetype": "application/pdf",
+            "languages": [
+                "eng"
+            ],
+            "last_modified": "2025-06-30T07:09:36",
+            "page_number": 3
+        },
+        "text": "Legal Defense Coverage",
+        "type": "Title"
+    },
+    {
+        "element_id": "431581d53065fc7217b52cc5973fe29a",
+        "metadata": {
+            "coordinates": {
+                "layout_height": 792.0,
+                "layout_width": 612.0,
+                "points": [
+                    [
+                        72.0,
+                        428.9
+                    ],
+                    [
+                        72.0,
+                        491.7
+                    ],
+                    [
+                        542.1,
+                        491.7
+                    ],
+                    [
+                        542.1,
+                        428.9
+                    ]
+                ],
+                "system": "PixelSpace"
+            },
+            "file_directory": "./Data",
+            "filename": "GPTPolicy.pdf",
+            "filetype": "application/pdf",
+            "languages": [
+                "eng"
+            ],
+            "last_modified": "2025-06-30T07:09:36",
+            "page_number": 3,
+            "parent_id": "c7b10481b2d27ec5df151a304d7c9029"
+        },
+        "text": "If the insured is sued for damages resulting from incidents covered under the policy, this coverage helps pay for legal fees and the costs associated with defending against a lawsuit. This includes the costs of hiring a lawyer, court fees, and any settlement payments required to resolve the case.",
+        "type": "NarrativeText"
+    },
+    {
+        "element_id": "cca9d52a93fc2a8e1de057f806be2cef",
+        "metadata": {
+            "coordinates": {
+                "layout_height": 792.0,
+                "layout_width": 612.0,
+                "points": [
+                    [
+                        72.0,
+                        504.7
+                    ],
+                    [
+                        72.0,
+                        550.7
+                    ],
+                    [
+                        532.5,
+                        550.7
+                    ],
+                    [
+                        532.5,
+                        504.7
+                    ]
+                ],
+                "system": "PixelSpace"
+            },
+            "file_directory": "./Data",
+            "filename": "GPTPolicy.pdf",
+            "filetype": "application/pdf",
+            "languages": [
+                "eng"
+            ],
+            "last_modified": "2025-06-30T07:09:36",
+            "page_number": 3,
+            "parent_id": "c7b10481b2d27ec5df151a304d7c9029"
+        },
+        "text": "Exclusions: Legal defense coverage does not apply to lawsuits that arise from contractual obligations or claims not related to covered property events. Additionally, if the insured is found to have acted maliciously or in bad faith, the coverage may be denied.",
+        "type": "NarrativeText"
+    },
+    {
+        "element_id": "99952a45be07388e0d334114b67cf32d",
+        "metadata": {
+            "coordinates": {
+                "layout_height": 792.0,
+                "layout_width": 612.0,
+                "points": [
+                    [
+                        72.0,
+                        575.3
+                    ],
+                    [
+                        72.0,
+                        595.3
+                    ],
+                    [
+                        246.8,
+                        595.3
+                    ],
+                    [
+                        246.8,
+                        575.3
+                    ]
+                ],
+                "system": "PixelSpace"
+            },
+            "file_directory": "./Data",
+            "filename": "GPTPolicy.pdf",
+            "filetype": "application/pdf",
+            "languages": [
+                "eng"
+            ],
+            "last_modified": "2025-06-30T07:09:36",
+            "page_number": 3
+        },
+        "text": "Earthquake Coverage",
+        "type": "Title"
+    },
+    {
+        "element_id": "e6098075b43e8b3983951df5f440fa15",
+        "metadata": {
+            "coordinates": {
+                "layout_height": 792.0,
+                "layout_width": 612.0,
+                "points": [
+                    [
+                        72.0,
+                        605.9
+                    ],
+                    [
+                        72.0,
+                        651.8
+                    ],
+                    [
+                        538.5,
+                        651.8
+                    ],
+                    [
+                        538.5,
+                        605.9
+                    ]
+                ],
+                "system": "PixelSpace"
+            },
+            "file_directory": "./Data",
+            "filename": "GPTPolicy.pdf",
+            "filetype": "application/pdf",
+            "languages": [
+                "eng"
+            ],
+            "last_modified": "2025-06-30T07:09:36",
+            "page_number": 3,
+            "parent_id": "99952a45be07388e0d334114b67cf32d"
+        },
+        "text": "This policy offers comprehensive coverage for damages caused by earthquakes, including structural damage to buildings and loss of personal property. The coverage extends to both minor and major tremors, as well as any damage caused by aftershocks.",
+        "type": "NarrativeText"
+    },
+    {
+        "element_id": "15cedda8fb6fca36310e8a3bcb50e0f2",
+        "metadata": {
+            "coordinates": {
+                "layout_height": 792.0,
+                "layout_width": 612.0,
+                "points": [
+                    [
+                        72.0,
+                        664.8
+                    ],
+                    [
+                        72.0,
+                        693.8
+                    ],
+                    [
+                        531.9,
+                        693.8
+                    ],
+                    [
+                        531.9,
+                        664.8
+                    ]
+                ],
+                "system": "PixelSpace"
+            },
+            "file_directory": "./Data",
+            "filename": "GPTPolicy.pdf",
+            "filetype": "application/pdf",
+            "languages": [
+                "eng"
+            ],
+            "last_modified": "2025-06-30T07:09:36",
+            "page_number": 3,
+            "parent_id": "99952a45be07388e0d334114b67cf32d"
+        },
+        "text": "Exclusions: Damage caused by landslides, sinkholes, or the subsequent effects of earthquakes, such as fires or flooding, is excluded. Additionally, the policy does not cover",
+        "type": "NarrativeText"
+    },
+    {
+        "element_id": "523f28099c9597cda50a7737ad78b4e2",
+        "metadata": {
+            "coordinates": {
+                "layout_height": 792.0,
+                "layout_width": 612.0,
+                "points": [
+                    [
+                        72.0,
+                        74.7
+                    ],
+                    [
+                        72.0,
+                        103.6
+                    ],
+                    [
+                        508.9,
+                        103.6
+                    ],
+                    [
+                        508.9,
+                        74.7
+                    ]
+                ],
+                "system": "PixelSpace"
+            },
+            "file_directory": "./Data",
+            "filename": "GPTPolicy.pdf",
+            "filetype": "application/pdf",
+            "languages": [
+                "eng"
+            ],
+            "last_modified": "2025-06-30T07:09:36",
+            "page_number": 4,
+            "parent_id": "99952a45be07388e0d334114b67cf32d"
+        },
+        "text": "damages resulting from the insured\u2019s failure to make repairs to earthquake-damaged structures that were not properly reinforced.",
+        "type": "NarrativeText"
+    }
+]

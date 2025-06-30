@@ -3,7 +3,7 @@ from sentence_transformers import SentenceTransformer
 import json
 
 def parse_json():
-    with open("documents.json", "r", encoding="utf-8") as f:
+    with open("output.json", "r", encoding="utf-8") as f:
         data = json.load(f)
     texts = []
     metadata = []

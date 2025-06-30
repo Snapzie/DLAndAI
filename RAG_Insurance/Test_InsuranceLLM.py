@@ -45,7 +45,7 @@ for q in questions:
     # context = util.get_context_nondb(q_embed,chunk_embeddings,insurance_policy_chunks)
     context,_ = util.get_context(q_embed,db)
     print(context)
-    response = llm.generate_answer(q,context)
+    response,_ = llm.generate_answer(q,context)
 
     question_avg.append(float(abs(cosine_similarity([q_embed],[embedder.encode(response)])[0][0])))
     context_avg.append(float(abs(cosine_similarity([embedder.encode(context)],[embedder.encode(response)])[0][0])))
