@@ -11,6 +11,9 @@ from sklearn.metrics.pairwise import cosine_similarity
 
 @dataclass
 class ModelConfig:
+    '''
+    Model configurations for the LLM. Most have been left as default settings
+    '''
     # Optimized parameters for coherent responses and efficient performance on devices like MacBook Air M2
     model_name: str = "Raj-Maharajwala/Open-Insurance-LLM-Llama3-8B-GGUF"
     model_file: str = "open-insurance-llm-q4_k_m.gguf"
@@ -32,11 +35,15 @@ class ModelConfig:
 
 
 class InsuranceLLM:
+    '''
+    InsuranceLLM is a Quantized Language Model building on the Llama architecture and has been finetuned
+    for insurance-related queries and conversations.\n
+    https://huggingface.co/Raj-Maharajwala/Open-Insurance-LLM-Llama3-8B-GGUF
+    '''
     def __init__(self, config: ModelConfig):
         self.config = config
         self.llm_ctx = None
         self.console = Console()
-        self.conversation_history: List[Dict[str, str]] = []
         
         self.system_message = (
             "This is a chat between a user and an artificial intelligence assistant. "
@@ -62,6 +69,9 @@ class InsuranceLLM:
         )
 
     def download_model(self) -> str:
+        '''
+        Downloads the model in /gguf_dir directory. This only runs the first time the model is used.
+        '''
         try:
             with self.console.status("[bold green]Downloading model..."):
                 model_path = hf_hub_download(
@@ -75,6 +85,9 @@ class InsuranceLLM:
             raise
 
     def load_model(self) -> None:
+        '''
+        Loads and instantiates the model from /gguf_dir directory
+        '''
         try:
             quantized_path = os.path.join(os.getcwd(), "gguf_dir")
             directory = Path(quantized_path)
@@ -101,8 +114,18 @@ class InsuranceLLM:
             raise
     
     def generate_answer(self, new_question, context, metadata=None):
+        '''
+        Generates an answer to a prompt when provided a context. Optionally also outputs metadata
+        surch as section and page numbers of provided context.
+        \nInput:
+        - new_question str: The embedded question the llm should answer
+        - context str: The context the llm should base its answer in
+        - metadata dict[str,str] optional: dict containing metadata about section and page of provided context
+        \nreturns:
+        - str, str: Answer to the provided question and a string representation of the provided metadata
+        '''
         prompt = f"System: {self.system_message}\n\n"
-        post_additions = 'Any exclusions or exceptions?'
+        post_additions = 'Any exclusions or exceptions?' # Always added to all prompts
         prompt += f"User: Context: {context}\nQuestion: {new_question+post_additions}\n\n"
         prompt += "Assistant:"
 
@@ -126,7 +149,7 @@ class InsuranceLLM:
                 complete_response += text_chunk
                 print(text_chunk, end="", flush=True)
             
-            # Add information about meta data such as which section and which page information was found
+            # Add information about metadata such as which section and which page context was found
             meta_string = ''
             if metadata:
                 metadata_report = '\n\nThe information for this answer was found on the following sections and pages:\n'

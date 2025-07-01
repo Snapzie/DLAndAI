@@ -5,13 +5,17 @@ from sentence_transformers import SentenceTransformer
 from sklearn.metrics.pairwise import cosine_similarity
 import numpy as np
 
+################################################################################
+# This script pseudo tests the performance of the llm in terms of its abality
+# to give answers to the provided questions and while using the provided context.
+# This measures the average cosine-similarity between answer and question and
+# between answer and context. Higher score does not necesarilly mean better answers
+################################################################################
+
 config = ModelConfig()
 llm = InsuranceLLM(config)
 llm.load_model()
 embedder = SentenceTransformer('all-MiniLM-L6-v2')
-
-# insurance_policy_chunks = {k:v for k,v in enumerate(open('./Chunks.txt').read().split('\n'))}
-# chunk_embeddings = {k:embedder.encode(v) for k,v in insurance_policy_chunks.items()}
 db = init_nonpersistent_cosine_db()
 
 questions = [
@@ -41,8 +45,8 @@ question_avg = []
 context_avg = []
 for q in questions:
     llm.console.print(f"[bold cyan]User:[/bold cyan] {q}")
+
     q_embed = embedder.encode(q)
-    # context = util.get_context_nondb(q_embed,chunk_embeddings,insurance_policy_chunks)
     context,_ = util.get_context(q_embed,db)
     print(context)
     response,_ = llm.generate_answer(q,context)

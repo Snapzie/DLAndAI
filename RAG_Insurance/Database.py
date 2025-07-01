@@ -3,12 +3,16 @@ from sentence_transformers import SentenceTransformer
 import json
 
 def parse_json():
+    '''
+    Prepares /output.json for upload to chromadb by splitting the text, ids and section + page into three
+    separate lists.
+    '''
     with open("output.json", "r", encoding="utf-8") as f:
         data = json.load(f)
+
     texts = []
     metadata = []
     ids = []
-
     for doc_id, content in data.items():
         texts.append(content["text"])
         metadata.append({
@@ -19,6 +23,11 @@ def parse_json():
     return texts,metadata,ids
 
 def init_nonpersistent_cosine_db():
+    '''
+    Initializes a non-persistent chromadb session with data from '/output.json'.
+    The session is initialized to use cosine-similarity and texts are explicitly
+    embedded using 'all-MiniLM-L6-v2'.
+    '''
     texts,metadata,ids = parse_json()
 
     client = chromadb.Client()
@@ -31,7 +40,6 @@ def init_nonpersistent_cosine_db():
         }
     )
 
-    # texts = open('./Chunks.txt').read().split('\n')
     model = SentenceTransformer('all-MiniLM-L6-v2') # Also default for chromadb
     embeddings = [model.encode(t) for t in texts]
 
@@ -39,17 +47,6 @@ def init_nonpersistent_cosine_db():
         documents=texts,
         embeddings=embeddings,
         metadatas=metadata,
-        # ids=[str(i) for i in range(1,len(texts)+1)]
         ids=ids
     )
     return collection
-
-# query = "What type of damages are covered under the property damage section of the policy?"
-# query_embedding = model.encode(query)
-
-# results = collection.query(
-#     query_embeddings=[query_embedding],
-#     n_results=10
-# )
-
-# print(results)

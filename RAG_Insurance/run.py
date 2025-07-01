@@ -3,13 +3,11 @@ from Database import init_nonpersistent_cosine_db
 import Utility as util
 from sentence_transformers import SentenceTransformer
 
+# Global variables
 config = ModelConfig()
 llm = InsuranceLLM(config)
 llm.load_model()
 embedder = SentenceTransformer('all-MiniLM-L6-v2')
-
-# insurance_policy_chunks = {k:v for k,v in enumerate(open('./Chunks.txt').read().split('\n'))}
-# chunk_embeddings = {k:embedder.encode(v) for k,v in insurance_policy_chunks.items()}
 db = init_nonpersistent_cosine_db()
 
 try:
@@ -20,9 +18,8 @@ try:
             question = llm.console.input("[bold cyan]User: [/bold cyan]").strip()
 
             user_input_embedding = embedder.encode(question)
-            # context = util.get_context_nondb(user_input_embedding,chunk_embeddings,insurance_policy_chunks)
             context,metadata = util.get_context(user_input_embedding,db)
-            print(context)
+            print(context) # Debug
             llm.generate_answer(question, context, metadata)
             print()  # Add a blank line after each response
             

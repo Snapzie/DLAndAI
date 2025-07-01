@@ -2,3 +2,6 @@
 flask
 pip install llama-cpp-python --extra-index-url https://abetlen.github.io/llama-cpp-python/whl/cpu
 rich
+scikit-learn
+chromadb
+sentence_transformers
