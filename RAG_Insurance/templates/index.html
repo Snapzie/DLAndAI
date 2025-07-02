@@ -10,6 +10,12 @@
     <h2>Ask the RAG System</h2>
     <form id="ragForm">
         <input type="text" id="user_input" name="user_input" placeholder="Enter your question" required />
+
+        <select id="option" name="option" required>
+            <option value="GPT">GPT</option>
+            <option value="Risk">Risk</option>
+        </select>
+
         <button type="submit">Submit</button>
     </form>
 
@@ -23,7 +29,8 @@
                 type: 'POST',
                 url: '/ask',
                 data: {
-                    user_input: $('#user_input').val()
+                    user_input: $('#user_input').val(),
+                    option: $('#option').val()
                 },
                 success: function (data) {
                     $('#responseBox').text(data.response);

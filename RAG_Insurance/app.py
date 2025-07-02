@@ -13,9 +13,9 @@ db = init_nonpersistent_cosine_db()
 app = Flask(__name__)
 
 # Mock RAG implementation
-def rag_pipeline(user_query):
+def rag_pipeline(user_query,selected_option):
     q_embed = embedder.encode(user_query)
-    context,metadata = util.get_context(q_embed,db)
+    context,metadata = util.get_context(q_embed,db,selected_option)
     response,metastring = llm.generate_answer(user_query,context,metadata)
     return f"{response}\n{metastring}"
 
@@ -26,10 +26,11 @@ def index():
 @app.route('/ask', methods=['POST'])
 def ask():
     user_input = request.form.get('user_input')
+    option = request.form.get('option')
     if not user_input:
         return jsonify({'response': 'No input provided.'})
     
-    response = rag_pipeline(user_input)
+    response = rag_pipeline(user_input,option)
     return jsonify({'response': response})
 
 if __name__ == '__main__':

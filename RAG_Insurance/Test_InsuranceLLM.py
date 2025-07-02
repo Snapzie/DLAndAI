@@ -47,7 +47,7 @@ for q in questions:
     llm.console.print(f"[bold cyan]User:[/bold cyan] {q}")
 
     q_embed = embedder.encode(q)
-    context,_ = util.get_context(q_embed,db)
+    context,_ = util.get_context(q_embed,db,'GPT')
     print(context)
     response,_ = llm.generate_answer(q,context)
 

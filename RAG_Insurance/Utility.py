@@ -20,7 +20,7 @@ from sklearn.metrics.pairwise import cosine_similarity
 #     # top_k_chunks = {i: insurance_policy_chunks[list(chunk_embeddings.keys())[i]] for i in top_k_indices if abs(cosine_similarities[0][i]) >= 0.25}
 #     return '\n'.join(context_cand[::-1])
 
-def get_context(user_input,db):
+def get_context(user_input,db,query_document):
     '''
     Searches the provided chromadb for relevant context chunks.
     The strategy used involves finding the most similar match to the user input using cosine similarity. 
@@ -36,9 +36,10 @@ def get_context(user_input,db):
     '''
     results = db.query(
         query_embeddings=user_input,
-        n_results=10
+        n_results=10,
+        where={"name": query_document}
     )
-    
+
     # chroma db returns distances as: 1-cosine_similarity. As distances are closer to zero, we experience diminishing returns
     # on comparisons. Thus, we convert the distances to similarities before comparison
     best = max(map(lambda x: 1-x,results['distances'][0]))
@@ -54,7 +55,7 @@ def get_context(user_input,db):
         for i in range(len(results['ids'][0]))
         if 1-results['distances'][0][i] >= best * 0.7
     ]
-    print([1-e['distance'] for e in filtered])
+    # print([1-e['distance'] for e in filtered]) # Debug
     context = '\n'.join([e['document'] for e in filtered])
     metadata = [e['metadata'] for e in filtered]
     return context,metadata

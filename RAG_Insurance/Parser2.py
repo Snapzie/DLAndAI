@@ -14,7 +14,8 @@ def flush_section(counter, section_text, current_section, current_page, output):
     output[str(counter)] = {
         "text": " ".join(clean_text),
         "section": current_section,
-        "page": current_page
+        "page": current_page,
+        "name": 'Risk'
     }
     counter += 1
     return counter
@@ -59,7 +60,7 @@ for el in elements:
 # Last section
 counter = flush_section(counter, section_text, current_section, current_page, output)
 
-with open("output.json", "w", encoding="utf-8") as f:
+with open("RiskManagement.json", "w", encoding="utf-8") as f:
     json.dump(output, f, indent=4, ensure_ascii=False)
 
-print("Output saved as 'output.json'")
+print("PDF converted and saved as 'RiskManagement.json'")

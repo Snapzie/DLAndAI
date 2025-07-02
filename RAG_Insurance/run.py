@@ -12,14 +12,14 @@ db = init_nonpersistent_cosine_db()
 
 try:
     print("\nWelcome to Open-Insurance-LLM!")
-    
+    query_document = llm.console.input("[bold cyan]Document ('GPT': GPTPolicy, 'Risk': RiskManagement): [/bold cyan]").strip()
     while True:
         try:
             question = llm.console.input("[bold cyan]User: [/bold cyan]").strip()
 
             user_input_embedding = embedder.encode(question)
-            context,metadata = util.get_context(user_input_embedding,db)
-            print(context) # Debug
+            context,metadata = util.get_context(user_input_embedding,db,query_document)
+            # print(context) # Debug
             llm.generate_answer(question, context, metadata)
             print()  # Add a blank line after each response
             

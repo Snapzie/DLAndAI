@@ -14,27 +14,24 @@ for el in elements:
         continue
 
     # Update current section if this is a section header or title
-    if el.category in ["Title", "Section Header"]:
+    if el.category in ["Title"]:
         current_section = el.text.strip()
         continue
-
-    # Handle tables as Markdown text
-    if isinstance(el, Table):
-        text = el.to_markdown()
-    else:
-        text = el.text.strip()
+    
+    text = el.text.strip()
 
     page = getattr(el.metadata, "page_number", None)
 
     output[str(counter)] = {
         "text": text,
         "section": current_section,
-        "page": page
+        "page": page,
+        "name": 'GPT'
     }
     counter += 1
 
 # Save to JSON file
-with open("output.json", "w", encoding="utf-8") as f:
+with open("GPTPolicy.json", "w", encoding="utf-8") as f:
     json.dump(output, f, indent=4, ensure_ascii=False)
 
-print("✅ PDF converted to structured JSON as 'output.json'")
+print("PDF converted and saved as 'GPTPolicy.json'")

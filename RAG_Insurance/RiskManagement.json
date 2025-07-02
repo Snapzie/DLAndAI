@@ -2,796 +2,955 @@
     "0": {
         "text": "guidelines on risk management practices for insurance business core activities",
         "section": "GUIDELINES ON RISK MANAGEMENT PRACTICES FOR INSURANCE BUSINESS - CORE ACTIVITIES",
-        "page": 1
+        "page": 1,
+        "name": "Risk"
     },
     "1": {
         "text": "monetary authority of singapore",
         "section": "GUIDELINES ON RISK MANAGEMENT PRACTICES FOR INSURANCE BUSINESS - CORE ACTIVITIES",
-        "page": 1
+        "page": 1,
+        "name": "Risk"
     },
     "2": {
         "text": "table of contents",
         "section": "TABLE OF CONTENTS",
-        "page": 2
+        "page": 2,
+        "name": "Risk"
     },
     "3": {
         "text": "monetary authority of singapore",
         "section": "TABLE OF CONTENTS",
-        "page": 2
+        "page": 2,
+        "name": "Risk"
     },
     "4": {
         "text": "1 introduction and fundamentals",
         "section": "1 INTRODUCTION AND FUNDAMENTALS",
-        "page": 3
+        "page": 3,
+        "name": "Risk"
     },
     "5": {
         "text": "1.1 introduction",
         "section": "1.1 INTRODUCTION",
-        "page": 3
+        "page": 3,
+        "name": "Risk"
     },
     "6": {
         "text": "1.1.1 this chapter provides guidance on sound practices in carrying out insurance business and covers the core activities of product development, pricing, underwriting, claims handling and reinsurance management. it articulates broad principles that should be embedded in a risk management framework covering strategy, organisational structure, policies and procedures for managing risks inherent in these activities. the guidelines contained in this chapter are applicable for both life and general insurance business, unless explicitly stated otherwise.",
         "section": "1.1 INTRODUCTION",
-        "page": 3
+        "page": 3,
+        "name": "Risk"
     },
     "7": {
         "text": "1.1.2 this chapter should be read in conjunction with other relevant guidelines issued or to be issued by the mas, in particular “guidelines on outsourcing” (updated in july 2005), “guidelines on corporate governance for banks, financial holding companies and direct insurers which are incorporated in singapore” (updated in december 2010) and “guidelines on risk management practices” (updated in march 2013).",
         "section": "1.1 INTRODUCTION",
-        "page": 3
+        "page": 3,
+        "name": "Risk"
     },
     "8": {
         "text": "1.1.3 insurers are encouraged to adopt the sound practices recommended in this chapter and the other guidelines where applicable and to the level that is commensurate with the institutions’ risk and business profiles.",
         "section": "1.1 INTRODUCTION",
-        "page": 3
+        "page": 3,
+        "name": "Risk"
     },
     "9": {
         "text": "1.2 fundamentals",
         "section": "1.2 FUNDAMENTALS",
-        "page": 3
+        "page": 3,
+        "name": "Risk"
     },
     "10": {
         "text": "1.2.1 product development, pricing, underwriting, claims handling and reinsurance management represent the core activities of an insurer. in carrying out these core activities, an insurer will face a wide range of risks which are often interlinked and if not properly managed, could threaten the ability of the institution to achieve its objectives and sustain its viability. an insurer should therefore adopt a holistic approach to adequately identify, measure, control and monitor these risks.",
         "section": "1.2 FUNDAMENTALS",
-        "page": 3
+        "page": 3,
+        "name": "Risk"
     },
     "11": {
         "text": "monetary authority of singapore",
         "section": "1.2 FUNDAMENTALS",
-        "page": 3
+        "page": 3,
+        "name": "Risk"
     },
     "12": {
         "text": "risk management framework",
         "section": "RISK MANAGEMENT FRAMEWORK",
-        "page": 4
+        "page": 4,
+        "name": "Risk"
     },
     "13": {
         "text": "2.1 strategy",
         "section": "2.1 STRATEGY",
-        "page": 4
+        "page": 4,
+        "name": "Risk"
     },
     "14": {
         "text": "2.1.1 an insurer should have a sound strategy to manage risks arising from its core activities. the insurer should first determine its risk tolerance, i.e. the level of risk that it is able and prepared to bear, taking into account its business objectives and available resources. in formulating its risk management strategy, the insurer should consider the following: the prevailing and projected economic and market conditions and their impact on the risks inherent in its core activities; the available expertise to achieve its business targets in specific market segments and its ability to identify, monitor and control the risks in those market segments; and its mix of business/type of risks written and the resultant concentration risks which may lead to volatility in profitability. 2.1.2 the insurer should periodically review its risk management strategy taking into account its own financial performance and market developments. when there are material changes to the insurer’s operations or its business strategy, the insurer should review its risk management strategy appropriately to take account of the changes. the strategy should be properly documented and effectively communicated to all relevant staff. there should be a process to approve proposed deviations from the approved strategy, and systems and controls to detect unauthorised deviations.",
         "section": "2.1 STRATEGY",
-        "page": 4
+        "page": 4,
+        "name": "Risk"
     },
     "15": {
         "text": "2.2 structure",
         "section": "2.2 STRUCTURE",
-        "page": 4
+        "page": 4,
+        "name": "Risk"
     },
     "16": {
         "text": "2.2.1 an insurer should adopt a risk management structure that is commensurate with its size and nature of its activities. the organisational structure should facilitate effective management oversight and execution of risk management and control processes.",
         "section": "2.2 STRUCTURE",
-        "page": 4
+        "page": 4,
+        "name": "Risk"
     },
     "17": {
         "text": "2.2.2 the board of directors is ultimately responsible for the sound and prudent management of an insurer. the board should approve the risk management strategy and risk policies pertaining to core insurance activities. it should ensure that adequate resources, expertise and support are provided for the effective implementation of the insurer’s risk management strategy, policies and procedures. it should also be the approving authority for",
         "section": "2.2 STRUCTURE",
-        "page": 4
+        "page": 4,
+        "name": "Risk"
     },
     "18": {
         "text": "monetary authority of singapore",
         "section": "2.2 STRUCTURE",
-        "page": 4
+        "page": 4,
+        "name": "Risk"
     },
     "19": {
         "text": "changes to such policies, and ensure that any exceptions, which can include circumstances where delegation may be proposed, should be escalated and approved by it, where necessary. the reasons for these changes and exceptions should be documented. such documentation should also be available upon request to the internal auditor, external auditor and the regulator.",
         "section": "2.2 STRUCTURE",
-        "page": 5
+        "page": 5,
+        "name": "Risk"
     },
     "20": {
         "text": "2.2.3 the senior management, or a committee comprising members of senior management from both the business operations and control functions, should establish the risk management framework. the framework should cover areas such as approval of business and risk strategy, review of the risk profile, implementation of risk policies approved by the board, delegation of authority and evaluation of the business processes. there should be adequate measures to address potential conflicts of interest. for example, the member of senior management approving the base premium rate of a life insurance product should not have marketing responsibilities and there should be proper segregation of underwriting responsibilities from claims handling and settlement responsibilities. claims should be reported directly to the claims department instead of through the underwriting department.",
         "section": "2.2 STRUCTURE",
-        "page": 5
+        "page": 5,
+        "name": "Risk"
     },
     "21": {
         "text": "2.2.4 the insurer should establish a risk management function, preferably independent from the operational processes, if warranted by the size and complexity of its operations. this function would be primarily responsible for the development of and ensuring compliance with the insurer’s risk management policies and procedures. the risk management function should also establish, implement and maintain appropriate mechanisms and activities to consider risks arising from remuneration arrangements and incentive structures. in order to be effective, this function should have the requisite authority, sufficient resources and be able to raise issues directly to the board or relevant board committees.",
         "section": "2.2 STRUCTURE",
-        "page": 5
+        "page": 5,
+        "name": "Risk"
     },
     "22": {
         "text": "2.3 policies and procedures",
         "section": "2.3 POLICIES AND PROCEDURES",
-        "page": 5
+        "page": 5,
+        "name": "Risk"
     },
     "23": {
         "text": "2.3.1 risk policies should set out the conditions and guidelines for the identification, acceptance, monitoring and management of risks. these policies should be well defined and consistent with the insurer’s risk strategy, as well as adequate for the nature and complexity of its activities. they should also help explain the relationship of the risk management system to the insurer’s overall governance framework and to its corporate culture. the policies should, at a minimum, cover the following: monetary authority of singapore",
         "section": "2.3 POLICIES AND PROCEDURES",
-        "page": 5
+        "page": 5,
+        "name": "Risk"
     },
     "24": {
         "text": "the identification, measurement and communication of key risks to the board; the process by which the board decides on the maximum amount of risk the insurer is able to take, as well as the frequency of review of risk limits; the roles and responsibilities of the respective units and staff involved in acceptance, monitoring and management of risks; the approval structure for product development, pricing, underwriting, claims handling and reinsurance management, including authority to approve deviations and exceptions; the principles and criteria relating to product development, pricing, underwriting, claims handling and reinsurance management; and the management of concentration risk and exposures to catastrophic events, including limits, reinsurance, portfolio monitoring and stress testing. 2.3.2 in order to be effective, policies should be communicated regularly throughout the organisation and should be revised periodically to take into account changing internal and external circumstances. there should also be regular training on risk policies. the insurer should review significant or frequent policy exceptions to determine the potential impact on its risk profile as well as the effectiveness of its guidelines.",
         "section": "2.3 POLICIES AND PROCEDURES",
-        "page": 6
+        "page": 6,
+        "name": "Risk"
     },
     "25": {
         "text": "2.3.3 the insurer should establish appropriate procedures and processes to implement its risk policies in the form of controls, checks and monitoring mechanisms. these should be documented and set out in sufficient detail to provide operational guidance to staff. examples include procedures governing the approval of product launch, significant deviations from standard pricing and terms, and ex gratia claims. the operational procedures should be periodically reviewed and updated to take into account new activities, changes in systems and structural changes in the market.",
         "section": "2.3 POLICIES AND PROCEDURES",
-        "page": 6
+        "page": 6,
+        "name": "Risk"
     },
     "26": {
         "text": "2.3.4 the insurer should have in place proper and effective reporting systems to satisfy the requirements of the board with respect to reporting frequency, level of detail, usefulness of information and recommendations to address issues of concern. there should be clear guidelines on the type of information to be reported to the board on a regular basis as well as when certain information or development ought to be communicated immediately to",
         "section": "2.3 POLICIES AND PROCEDURES",
-        "page": 6
+        "page": 6,
+        "name": "Risk"
     },
     "27": {
         "text": "monetary authority of singapore",
         "section": "2.3 POLICIES AND PROCEDURES",
-        "page": 6
+        "page": 6,
+        "name": "Risk"
     },
     "28": {
         "text": "the board. the head of risk management function should have the authority and obligation to inform the board promptly of any circumstance that may have a material effect on the risk management system of the insurer.",
         "section": "2.3 POLICIES AND PROCEDURES",
-        "page": 7
+        "page": 7,
+        "name": "Risk"
     },
     "29": {
         "text": "monetary authority of singapore",
         "section": "2.3 POLICIES AND PROCEDURES",
-        "page": 7
+        "page": 7,
+        "name": "Risk"
     },
     "30": {
         "text": "risk identification, control and monitoring",
         "section": "RISK IDENTIFICATION, CONTROL AND MONITORING",
-        "page": 8
+        "page": 8,
+        "name": "Risk"
     },
     "31": {
         "text": "3.1 risk management process",
         "section": "3.1 RISK MANAGEMENT PROCESS",
-        "page": 8
+        "page": 8,
+        "name": "Risk"
     },
     "32": {
         "text": "3.1.1 an effective risk management process to address risks arising from core insurance activities; namely product development, pricing, underwriting, claims handling and reinsurance management should include the following: risk identification and measurement",
         "section": "Risk Identification and Measurement",
-        "page": 8
+        "page": 8,
+        "name": "Risk"
     },
     "33": {
         "text": "an insurer should have effective means of obtaining pertinent information to identify and measure its exposure to risks inherent in its core activities. where a risk is not readily quantifiable, for instance some operational risks, an insurer should undertake a qualitative assessment that is appropriate to the risk and sufficiently detailed so that it can be useful for risk management.",
         "section": "Risk Identification and Measurement",
-        "page": 8
+        "page": 8,
+        "name": "Risk"
     },
     "34": {
         "text": "risk evaluation the estimated risks should be compared against the insurer’s risk criteria to decide on the priority to be assigned to address each of the risks and the appropriate responses.",
         "section": "Risk Identification and Measurement",
-        "page": 8
+        "page": 8,
+        "name": "Risk"
     },
     "35": {
         "text": "risk control and mitigation the insurer should implement necessary measures to control and mitigate the identified risks. risk control/mitigation measures include setting appropriate standards and limits that are clearly documented and assigning limits to relevant staff that are commensurate with the experience and competence of the respective individual.",
         "section": "Risk Identification and Measurement",
-        "page": 8
+        "page": 8,
+        "name": "Risk"
     },
     "36": {
         "text": "risk monitoring and review",
         "section": "• Risk Monitoring and Review",
-        "page": 8
+        "page": 8,
+        "name": "Risk"
     },
     "37": {
         "text": "there should be an effective monitoring system to track whether any risk indicators have been triggered, and to ensure that risk standards and limits are complied with as intended and any deviation is duly approved and documented. the insurer should also establish clear procedures to investigate non compliances with the intent of preventing such incidents from recurring. the consequences for non compliance with established limits should be clear and pre determined.",
         "section": "• Risk Monitoring and Review",
-        "page": 8
+        "page": 8,
+        "name": "Risk"
     },
     "38": {
         "text": "the insurer should regularly review whether it has correctly assessed the impact and probability of material risks and",
         "section": "• Risk Monitoring and Review",
-        "page": 8
+        "page": 8,
+        "name": "Risk"
     },
     "39": {
         "text": "monetary authority of singapore",
         "section": "• Risk Monitoring and Review",
-        "page": 8
+        "page": 8,
+        "name": "Risk"
     },
     "40": {
         "text": "effectively treated or mitigated the risks, including identification of lessons that could be learned for future assessment and management of risks.",
         "section": "• Risk Monitoring and Review",
-        "page": 9
+        "page": 9,
+        "name": "Risk"
     },
     "41": {
         "text": "for example, the insurer should put in place an effective system to gather underwriting and claims information to identify any emerging trend and provide feedback to the relevant business units so that these can be taken into account in any subsequent marketing, product development, pricing, underwriting, reserving and reinsurance management decisions.",
         "section": "• Risk Monitoring and Review",
-        "page": 9
+        "page": 9,
+        "name": "Risk"
     },
     "42": {
         "text": "3.1.2 a sound and robust risk management process should include stress testing and scenario analysis to assess the potential impact of probable material adverse events on the insurer’s reputation, liquidity, and overall financial strength. it is also essential to assess the adequacy of reinsurance programmes and other alternative risk transfer arrangements, such as securitisation, that are undertaken to mitigate the impact of possible adverse events on the viability of the insurer.",
         "section": "• Risk Monitoring and Review",
-        "page": 9
+        "page": 9,
+        "name": "Risk"
     },
     "43": {
         "text": "3.1.3 emerging risks relates to risks that do not currently exist but may emerge at some point in time due to changes in the environment, for example, respiratory problems arising from air pollution which could significantly raise the level of medical insurance claims from policyholders.",
         "section": "• Risk Monitoring and Review",
-        "page": 9
+        "page": 9,
+        "name": "Risk"
     },
     "44": {
         "text": "sound practices for the management of emerging risks include: identifying emerging risks through an early warning system where information could be gathered either through internal or external sources; assessing the significance of the emerging risks within the insurer’s portfolio by identifying which business class and policies are likely to be affected by the materialisation of the risk. in evaluating the potential financial impact, the insurer needs to take into account the degree of concentration and potential correlation with other risks already present in the portfolio; and defining appropriate responses to emerging risks. for example, a response could be to mitigate the risk with an appropriate reinsurance programme. monetary authority of singapore",
         "section": "• Risk Monitoring and Review",
-        "page": 9
+        "page": 9,
+        "name": "Risk"
     },
     "45": {
         "text": "3.2 product development",
         "section": "3.2 PRODUCT DEVELOPMENT",
-        "page": 10
+        "page": 10,
+        "name": "Risk"
     },
     "46": {
         "text": "3.2.1 product development is the process of working out the features of a product to be marketed to customers in accordance with the insurer’s business objectives. this includes enhancements or variations to existing products.",
         "section": "3.2 PRODUCT DEVELOPMENT",
-        "page": 10
+        "page": 10,
+        "name": "Risk"
     },
     "47": {
         "text": "3.2.2 the product development process generally involves conducting environment scans, understanding customers’ needs, developing and refining proposals, obtaining the requisite approvals, implementing the approved proposals and conducting post implementation reviews.",
         "section": "3.2 PRODUCT DEVELOPMENT",
-        "page": 10
+        "page": 10,
+        "name": "Risk"
     },
     "48": {
         "text": "3.2.3 risk identification and measurement",
         "section": "3.2.3 Risk Identification and Measurement",
-        "page": 10
+        "page": 10,
+        "name": "Risk"
     },
     "49": {
         "text": "3.2.3.1 an insurer should analyse the information collected to identify emerging trends, and the associated opportunities and threats they may pose to the insurer’s business. the insurer should document its analysis of the potential influence of the market environment and emerging trends on the level of risks and profitability of the product being developed. the potential risks that the insurer need to consider may include: pricing, underwriting and reserving risks",
         "section": "Pricing, Underwriting and Reserving risks",
-        "page": 10
+        "page": 10,
+        "name": "Risk"
     },
     "50": {
         "text": "the insurer should identify and measure the potential risk arising from pricing, underwriting and case reserving as stated in sections 3.3.3, 3.4.3, 3.5.3 and 3.6.3.",
         "section": "Pricing, Underwriting and Reserving risks",
-        "page": 10
+        "page": 10,
+        "name": "Risk"
     },
     "51": {
         "text": "operational risk",
         "section": "• Operational Risk",
-        "page": 10
+        "page": 10,
+        "name": "Risk"
     },
     "52": {
         "text": "the insurer should assess whether all relevant departments are equipped to handle the expected volume of business from the launch of the new product; determine the adequacy of expertise of staff and management; and consider if new systems and procedures need to be put in place. the insurer should also consider the operational risks posed by the proposed distribution channel for the product.",
         "section": "• Operational Risk",
-        "page": 10
+        "page": 10,
+        "name": "Risk"
     },
     "53": {
         "text": "legal, regulatory and reputational risks the insurer should identify the applicable regulatory requirements for the introduction of the product, and the best practice standards for the distribution of the product. it should also evaluate the potential risks to its reputation and legal liabilities that it may incur in the event of non compliance with these requirements and standards. it monetary authority of singapore",
         "section": "• Operational Risk",
-        "page": 10
+        "page": 10,
+        "name": "Risk"
     },
     "54": {
         "text": "should assess the need for additional resources and processes to ensure compliance and to mitigate such risks.",
         "section": "• Operational Risk",
-        "page": 11
+        "page": 11,
+        "name": "Risk"
     },
     "55": {
         "text": "it should also consider the risks that it will be exposed to if contract wordings are ambiguous or inconsistent with the intended coverage for both direct policies and reinsurance outward contracts.",
         "section": "• Operational Risk",
-        "page": 11
+        "page": 11,
+        "name": "Risk"
     },
     "56": {
         "text": "credit risk the insurer should consider the creditworthiness of the reinsurers, intermediaries, policyholders as well as of other counterparties which may give rise to credit risk.",
         "section": "• Operational Risk",
-        "page": 11
+        "page": 11,
+        "name": "Risk"
     },
     "57": {
         "text": "3.2.4 risk control and mitigation",
         "section": "3.2.4 Risk Control and Mitigation",
-        "page": 11
+        "page": 11,
+        "name": "Risk"
     },
     "58": {
         "text": "3.2.4.1 an insurer should verify that the proposed product is consistent with the insurer’s risk strategy and policies. it should also scrutinise assumptions made in product proposals about likely consumer behaviour and market reactions and verify these assumptions where appropriate.",
         "section": "3.2.4 Risk Control and Mitigation",
-        "page": 11
+        "page": 11,
+        "name": "Risk"
     },
     "59": {
         "text": "3.2.4.2 the insurer should ensure that the premium and compensation structure for intermediaries are consistent between products of similar features/duration and distribution channels so as to minimise possible lapse and re entry or churning, and channel conflicts. this is particularly relevant for life insurance business.",
         "section": "3.2.4 Risk Control and Mitigation",
-        "page": 11
+        "page": 11,
+        "name": "Risk"
     },
     "60": {
         "text": "3.2.4.3 the insurer should ensure that the product proposals include the following information to assist the board or senior management in making informed decisions: scope and level of coverage proposed for the product including options and guarantees, if any; risk exposure limits (which can be defined by premiums, sum insured, probable maximum loss or other risk measures and may also include interim limits to manage new product growth); reinsurance protection; pricing methodology; delegation of authority for underwriting and claims; monetary authority of singapore",
         "section": "3.2.4 Risk Control and Mitigation",
-        "page": 11
+        "page": 11,
+        "name": "Risk"
     },
     "61": {
         "text": "underwriting and claims assessment criteria; investment strategy; projection of sales, expenses, profitability and solvency under different scenarios to test the sensitivity of results to different operating conditions. for example, life insurance products often contain guarantees, particularly on investment performance, which can significantly add to the risks written; distribution method; and ability of existing or proposed administrative systems and processes to handle the new or enhanced product. 3.2.4.4 the insurer should ensure that the potential risks identified in section 3.2.3 are adequately addressed under a risk management framework that would cover the key issues when introducing a new product, such as clarity of contract wordings, accuracy and transparency of promotional materials, skills and expertise of the distribution channels, etc. where such a framework is not in place, the insurer should ensure that the product proposal itself has adequately addressed the relevant risks identified.",
         "section": "3.2.4 Risk Control and Mitigation",
-        "page": 12
+        "page": 12,
+        "name": "Risk"
     },
     "62": {
         "text": "3.2.4.5 the insurer should ensure that there is proper documentation of the detailed product proposal, the product approval authority levels, the decisions made by the authorised personnel or committee as well as the rationale and follow up actions. in particular, when a decision has been made by the appropriate approval authority to accept a proposal which does not meet the risk tolerance or profit objectives of the insurer, the approval and rationale for such a decision should be clearly documented.",
         "section": "3.2.4 Risk Control and Mitigation",
-        "page": 12
+        "page": 12,
+        "name": "Risk"
     },
     "63": {
         "text": "3.2.4.6 the insurer should have clearly articulated procedures for withdrawal and re pricing of existing products when pre determined criteria are triggered, such as when it is no longer economically viable to sell the product.",
         "section": "3.2.4 Risk Control and Mitigation",
-        "page": 12
+        "page": 12,
+        "name": "Risk"
     },
     "64": {
         "text": "3.2.5 risk monitoring and review",
         "section": "3.2.5 Risk Monitoring and Review",
-        "page": 12
+        "page": 12,
+        "name": "Risk"
     },
     "65": {
         "text": "3.2.5.1 an insurer should put in place a structure setting out the reporting lines and roles of business units and personnel involved, and procedures and risk indicators to monitor the product implementation and performance after its launch. these may include: monetary authority of singapore",
         "section": "3.2.5 Risk Monitoring and Review",
-        "page": 12
+        "page": 12,
+        "name": "Risk"
     },
     "66": {
         "text": "comparing between key performance indicators and business plan, and actual versus expected results; monitoring adherence to the insurer’s policies and procedures as well as regulatory requirements; monitoring changes in risk profiles and analysing loss experience (particularly large and catastrophic losses); monitoring changes in policyholder’s behaviour leading to higher lapse rates or deteriorating claims experience; for example, prolonged economic recession causing more policyholders to lapse/surrender their life insurance policies or to submit fraudulent property related claims; monitoring changes in the investment and economic environment which may affect the performance of the portfolio; monitoring the number and nature of complaints; monitoring changes in tax, regulatory reserving and capital requirements; and conducting internal audit reviews and actuarial reviews. 3.3 pricing",
         "section": "3.3 PRICING",
-        "page": 13
+        "page": 13,
+        "name": "Risk"
     },
     "67": {
         "text": "3.3.1 the pricing of an insurance product involves the estimation of claims, operational and financing costs and the income arising from investing the premium received.",
         "section": "3.3 PRICING",
-        "page": 13
+        "page": 13,
+        "name": "Risk"
     },
     "68": {
         "text": "3.3.2 the pricing process typically comprises collecting data on the underlying risks to be covered, determining the pricing assumptions and the base rate, setting the final premium rate, and monitoring and reviewing the appropriateness of pricing.",
         "section": "3.3 PRICING",
-        "page": 13
+        "page": 13,
+        "name": "Risk"
     },
     "69": {
         "text": "3.3.3 risk identification and measurement",
         "section": "3.3.3 Risk Identification and Measurement",
-        "page": 13
+        "page": 13,
+        "name": "Risk"
     },
     "70": {
         "text": "3.3.3.1 an insurer should identify the probable scenarios which may lead to its revenue from premiums and investment income being insufficient to meet the payment of anticipated benefits and expenses (including cost of capital and taxes).",
         "section": "3.3.3 Risk Identification and Measurement",
-        "page": 13
+        "page": 13,
+        "name": "Risk"
     },
     "71": {
         "text": "monetary authority of singapore",
         "section": "3.3.3 Risk Identification and Measurement",
-        "page": 13
+        "page": 13,
+        "name": "Risk"
     },
     "72": {
         "text": "3.3.3.2 besides the risk of inadequate pricing, there could also be the risk of inconsistent pricing of the different risk categories within the same product. for example, premium for a risk category which has a higher level of risk for its rating factors should be higher than the premium for a lower risk category. inconsistency can also occur in the pricing of different types of products that share relatively similar features. for example, the premium for a 20 year limited pay whole of life policy should be reasonably similar to a whole of life policy with premiums payable until age 65 if both policies commence at age 45. similarly, workmen’s compensation coverage for the same construction project should be charged similar technical rates whether it is offered on a standalone basis or sold together with engineering risk coverage.",
         "section": "3.3.3 Risk Identification and Measurement",
-        "page": 14
+        "page": 14,
+        "name": "Risk"
     },
     "73": {
         "text": "3.3.3.3 the insurer should also pay particular attention to any inconsistency between the following related assumptions, where applicable: investment return and inflation; investment return and bonus declaration; investment return and policy discontinuance rates; and new business volumes and expense allowance. 3.3.4 risk control and mitigation",
         "section": "3.3.4 Risk Control and Mitigation",
-        "page": 14
+        "page": 14,
+        "name": "Risk"
     },
     "74": {
         "text": "3.3.4.1 an insurer should collect adequate data to validate the reasonableness of the underlying assumptions used for deriving the base rate of the product. the base rate (also known as the technical rate) should represent the amount required to meet the value of anticipated benefits, expenses, and margins for risks and/or profit, independent of the supply and demand in the insurance market and any competitive consideration. data should primarily relate to the insurer’s own historical experience and that of the industry where relevant. these may be supplemented by other internal and external data (such as mortality or morbidity rates from reinsurers, or industry motor insurance statistics), and could include trends observed in claims costs and expenses.",
         "section": "3.3.4 Risk Control and Mitigation",
-        "page": 14
+        "page": 14,
+        "name": "Risk"
     },
     "75": {
         "text": "3.3.4.2 the insurer should ensure that the assumptions chosen to derive the base rate are appropriate, after considering the internal and external experience studies and the financial impact of sensitivity testing of each of the assumptions. assumptions with significant financial impact (“financially significant assumptions”) should be monitored more frequently and comprehensively than non financially significant assumptions. where the insurer has no or little past experience data, it should monitor the assumptions,",
         "section": "3.3.4 Risk Control and Mitigation",
-        "page": 14
+        "page": 14,
+        "name": "Risk"
     },
     "76": {
         "text": "monetary authority of singapore",
         "section": "3.3.4 Risk Control and Mitigation",
-        "page": 14
+        "page": 14,
+        "name": "Risk"
     },
     "77": {
         "text": "especially the financially significant ones, more closely with a view to updating the assumptions once credible past experience has been built up. it should also seek to resolve any inconsistency identified under paragraphs 3.3.3.2 and 3.3.3.3.",
         "section": "3.3.4 Risk Control and Mitigation",
-        "page": 15
+        "page": 15,
+        "name": "Risk"
     },
     "78": {
         "text": "3.3.4.3 the insurer should also have adequate buffers in the premiums to cushion against the risk that actual experience may turn out to be worse than expected.",
         "section": "3.3.4 Risk Control and Mitigation",
-        "page": 15
+        "page": 15,
+        "name": "Risk"
     },
     "79": {
         "text": "3.3.4.4 pricing should be done by modelling all identified risks, using appropriate methodologies depending on the complexity of the risks and available data. these could vary from simple deterministic scenario testing to stochastic modelling on the pricing assumptions. for example, for complex benefit structures such as embedded options, an insurer should evaluate the risk arising from such options through stochastic modelling and stress testing.",
         "section": "3.3.4 Risk Control and Mitigation",
-        "page": 15
+        "page": 15,
+        "name": "Risk"
     },
     "80": {
         "text": "3.3.4.5 the insurer should not restrict itself to using only a single pricing methodology. in particular, where there is little historical experience to base the pricing on or where the nature of business does not lend itself to extensive statistical analysis (e.g. mortality studies on singapore annuitants or studies on many casualty lines), multiple pricing models should be used as a cross check for reasonableness.",
         "section": "3.3.4 Risk Control and Mitigation",
-        "page": 15
+        "page": 15,
+        "name": "Risk"
     },
     "81": {
         "text": "3.3.4.6 the insurer should ensure that there is clear documentation that the base rate has been approved at the requisite level of authority. the premium rate that an insurer eventually charges may be different from the approved base rate after taking into account market and competitive considerations. should the insurer decide to quote a premium rate that deviates significantly from the base rate, e.g. for the launch of a new product, it should ensure that appropriate authorisation is obtained and proper documentation of the approval is maintained.",
         "section": "3.3.4 Risk Control and Mitigation",
-        "page": 15
+        "page": 15,
+        "name": "Risk"
     },
     "82": {
         "text": "3.3.5 risk monitoring and review",
         "section": "3.3.5 Risk Monitoring and Review",
-        "page": 15
+        "page": 15,
+        "name": "Risk"
     },
     "83": {
         "text": "3.3.5.1 an insurer should analyse the profit and loss of its business, including monitoring the effect of premium rate adjustments on its bottom line. there should be procedures in place to monitor emerging trends and changes to the external environment, and risk indicators to trigger a pricing review when there are indications that the insurer’s objectives are not likely to be achieved. for example, a trigger may be based on whether the hurdle rate or other target return measures have been met. another example would be when an experience analysis shows that the key risk driver for a product has deviated significantly from its pricing assumptions.",
         "section": "3.3.5 Risk Monitoring and Review",
-        "page": 15
+        "page": 15,
+        "name": "Risk"
     },
     "84": {
         "text": "monetary authority of singapore",
         "section": "3.3.5 Risk Monitoring and Review",
-        "page": 15
+        "page": 15,
+        "name": "Risk"
     },
     "85": {
         "text": "3.3.5.2 the insurer should also monitor deviations of the final rate from the base rate and review the actual results against the anticipated benefits and expenses that have been factored into the computation of the base rate to improve on future pricing.",
         "section": "3.3.5 Risk Monitoring and Review",
-        "page": 16
+        "page": 16,
+        "name": "Risk"
     },
     "86": {
         "text": "3.3.5.3 the insurer should involve actuaries in the evaluation and provision of advice on product pricing and development matters.",
         "section": "3.3.5 Risk Monitoring and Review",
-        "page": 16
+        "page": 16,
+        "name": "Risk"
     },
     "87": {
         "text": "3.4 underwriting",
         "section": "3.4 UNDERWRITING",
-        "page": 16
+        "page": 16,
+        "name": "Risk"
     },
     "88": {
         "text": "3.4.1 underwriting is the process by which the insurer makes an assessment of the risks to be accepted and determines the terms on which the risks would be acceptable to the insurer. in the case of life insurance, this relates mainly to the assessment of the medical and financial condition of the prospective insured.",
         "section": "3.4 UNDERWRITING",
-        "page": 16
+        "page": 16,
+        "name": "Risk"
     },
     "89": {
         "text": "3.4.2 the underwriting process generally involves obtaining and managing essential underwriting information on the risks, assessing and accepting risks according to underwriting guidelines and authority levels, and monitoring and reviewing the risks accepted. the insurer should involve actuaries in the evaluation and provision of advice on underwriting matters.",
         "section": "3.4 UNDERWRITING",
-        "page": 16
+        "page": 16,
+        "name": "Risk"
     },
     "90": {
         "text": "3.4.3 risk identification and measurement",
         "section": "3.4.3 Risk Identification and Measurement",
-        "page": 16
+        "page": 16,
+        "name": "Risk"
     },
     "91": {
         "text": "3.4.3.1 an insurer should consider the implications associated with selecting, accepting and retaining risks which may deviate from what was envisaged during the product development and pricing stages. such risks may include: accepting risks without imposing adequate loading or conditions; accepting risks which should have been declined given the insurer’s risk tolerance; accepting non homogeneous risks under the same risk category; accepting and retaining risks in excess of the resources available to the insurer (risk accumulation); accepting lives/risks whose experience is worse than that envisaged when pricing the product; monetary authority of singapore",
         "section": "3.4.3 Risk Identification and Measurement",
-        "page": 16
+        "page": 16,
+        "name": "Risk"
     },
     "92": {
         "text": "inadequate reinsurance protection or discrepancies/ inconsistencies between the coverage and terms offered under the direct policies and that under the reinsurance outward contracts; and in the case of life insurance, allowing policyholders to take on more coverage than they can reasonably afford. 3.4.4 risk control and mitigation",
         "section": "3.4.4 Risk Control and Mitigation",
-        "page": 17
+        "page": 17,
+        "name": "Risk"
     },
     "93": {
         "text": "3.4.4.1 as the proposal or application form is commonly the main source of underwriting information, it should be reviewed regularly to ensure that the questions remain reasonably clear and pertinent. it is also important to remind policyholders and the intermediaries of the need to keep the insurer informed of material changes in underwriting information for yearly renewable policies where variable premiums are determined during the annual underwriting process.",
         "section": "3.4.4 Risk Control and Mitigation",
-        "page": 17
+        "page": 17,
+        "name": "Risk"
     },
     "94": {
         "text": "3.4.4.2 an insurer should ensure that the proposal or application form is duly completed and the information relied on are relevant, current and unambiguous in order for the underwriters to form an accurate assessment of the risks to be insured and to better identify emerging risks. the insurer should bear in mind its marketing, distribution and pricing strategies, as well as policyholders’ behaviour when reviewing such underwriting information.",
         "section": "3.4.4 Risk Control and Mitigation",
-        "page": 17
+        "page": 17,
+        "name": "Risk"
     },
     "95": {
         "text": "3.4.4.3 the insurer should have an efficient insurance information system in place that links all key information on underwriting, claims and reinsurance, preferably on the same electronic platform. for example, the system should contain essential and updated underwriting information, claims information, reinsurance limits, underwriting authority limits and risks accumulation information. it should also help to facilitate the peer review and approval process. proper access and editing rights should also be set to protect the integrity of the information system.",
         "section": "3.4.4 Risk Control and Mitigation",
-        "page": 17
+        "page": 17,
+        "name": "Risk"
     },
     "96": {
         "text": "3.4.4.4 the insurer should ensure that the information captured in the insurance information system, including the rationale for the underwriting decision, is up to date and accurate to facilitate monitoring of the progress of the underwriting process and validating the quality of the underwriting decision. proper access and editing rights should be set to protect the integrity of the information system.",
         "section": "3.4.4 Risk Control and Mitigation",
-        "page": 17
+        "page": 17,
+        "name": "Risk"
     },
     "97": {
         "text": "3.4.4.5 the insurer should have clearly documented underwriting guidelines for each of the key types of benefits or products it underwrites so",
         "section": "3.4.4 Risk Control and Mitigation",
-        "page": 17
+        "page": 17,
+        "name": "Risk"
     },
     "98": {
         "text": "monetary authority of singapore",
         "section": "3.4.4 Risk Control and Mitigation",
-        "page": 17
+        "page": 17,
+        "name": "Risk"
     },
     "99": {
         "text": "as to provide sufficient guidance to the underwriters. there should also be clear guidelines on when the underwriters should refer to the reinsurer for underwriting support.",
         "section": "3.4.4 Risk Control and Mitigation",
-        "page": 18
+        "page": 18,
+        "name": "Risk"
     },
     "100": {
         "text": "3.4.4.6 as an illustration, the underwriting guidelines for life insurance business could cover rules on how various types of benefits are being aggregated for purposes of determining the additional medical and financial requirements and underwriting authority limits, the details of such additional requirements, types of restrictions imposed (such as in age, sum assured, type of plans or riders allowed), and proposed loadings.",
         "section": "3.4.4 Risk Control and Mitigation",
-        "page": 18
+        "page": 18,
+        "name": "Risk"
     },
     "101": {
         "text": "3.4.4.7 the underwriting guidelines for general business could include business objectives, risks selection criteria, rating factors, declined risks, referred risks, reinsurance limits and discount policies. senior management should approve the policy for granting discounts on premium rates, have clear delegation of the authority to grant the discounts, and review the policy and delegation arrangement regularly.",
         "section": "3.4.4 Risk Control and Mitigation",
-        "page": 18
+        "page": 18,
+        "name": "Risk"
     },
     "102": {
         "text": "3.4.4.8 the insurer should ensure that any significant deviation of the underwriting decision from the guidelines should be duly approved and the rationale for approval properly documented. no risks should be accepted before the necessary reinsurance protection is finalised and effected.",
         "section": "3.4.4 Risk Control and Mitigation",
-        "page": 18
+        "page": 18,
+        "name": "Risk"
     },
     "103": {
         "text": "3.4.5 risk monitoring and review",
         "section": "3.4.5 Risk Monitoring and Review",
-        "page": 18
+        "page": 18,
+        "name": "Risk"
     },
     "104": {
         "text": "3.4.5.1 an insurer should conduct regular reviews to ensure that the underwriters continue to be competent in the area of their delegated authority and the quality of the underwriting decisions made remains satisfactory.",
         "section": "3.4.5 Risk Monitoring and Review",
-        "page": 18
+        "page": 18,
+        "name": "Risk"
     },
     "105": {
         "text": "3.4.5.2 the insurer should have a systematic method to monitor its accumulation of risks across product types and geographical areas so that the overall risks underwritten by the insurer are always within its reinsurance protection limits and risk appetite. it should also ensure that facultative reinsurance is obtained when necessary.",
         "section": "3.4.5 Risk Monitoring and Review",
-        "page": 18
+        "page": 18,
+        "name": "Risk"
     },
     "106": {
         "text": "3.4.5.3 the insurer should conduct audits or checks of underwriting files regularly. these reviews should be conducted with clear and pre defined terms of reference for example, to check for adherence to underwriting guidelines or underwriting authorities. there should also be an appropriate system to select the files to be reviewed.",
         "section": "3.4.5 Risk Monitoring and Review",
-        "page": 18
+        "page": 18,
+        "name": "Risk"
     },
     "107": {
         "text": "3.4.5.4 the insurer should monitor risk indicators like claims experience for example when an experience analysis shows that claims experience is worse than what was envisaged during pricing. another example of an",
         "section": "3.4.5 Risk Monitoring and Review",
-        "page": 18
+        "page": 18,
+        "name": "Risk"
     },
     "108": {
         "text": "monetary authority of singapore",
         "section": "3.4.5 Risk Monitoring and Review",
-        "page": 18
+        "page": 18,
+        "name": "Risk"
     },
     "109": {
         "text": "indicator would be the number of complaints against the insurer with respect to the underwriting decisions made or the timeliness of the decisions.",
         "section": "3.4.5 Risk Monitoring and Review",
-        "page": 19
+        "page": 19,
+        "name": "Risk"
     },
     "110": {
         "text": "3.5 claims handling",
         "section": "3.5 CLAIMS HANDLING",
-        "page": 19
+        "page": 19,
+        "name": "Risk"
     },
     "111": {
         "text": "3.5.1 claims handling is the process by which an insurer processes and pays claims in accordance to the terms and conditions specified in the insurance contracts.",
         "section": "3.5 CLAIMS HANDLING",
-        "page": 19
+        "page": 19,
+        "name": "Risk"
     },
     "112": {
         "text": "3.5.2 the process generally comprises registering new claims, setting and revising reserves, obtaining essential information to assess, manage and settle the claim, making reinsurance and other recoveries, and reviewing and closing claim files.",
         "section": "3.5 CLAIMS HANDLING",
-        "page": 19
+        "page": 19,
+        "name": "Risk"
     },
     "113": {
         "text": "3.5.3 risk identification and measurement",
         "section": "3.5.3 Risk Identification and Measurement",
-        "page": 19
+        "page": 19,
+        "name": "Risk"
     },
     "114": {
         "text": "3.5.3.1 an insurer should put in place measures to identify the risks associated with poor claims handling and case reserving, which may include: making claim settlement decisions which are not in accordance with the policy terms and conditions, thereby either incurring liability that is not considered in the pricing or failing to fulfill its contractual obligations to policyholders; inefficient handling of claims leading to slow responses or higher cost overheads, thereby impeding its market competitiveness; and setting inadequate reserves, or delay in revising case reserves for reported claims resulting in under provision of claims liabilities and time lag in adjusting premiums for new policies in the case of general business. 3.5.4 risk control and mitigation",
         "section": "3.5.4 Risk Control and Mitigation",
-        "page": 19
+        "page": 19,
+        "name": "Risk"
     },
     "115": {
         "text": "3.5.4.1 an insurer should have a clear process in place for the notification of claims by the intermediaries or the policyholders. the process should ensure that all claims are reported to the insurer at the earliest opportunity and that relevant information is captured in the insurer’s information system in a timely manner. these guidelines are particularly pertinent for general insurance business.",
         "section": "3.5.4 Risk Control and Mitigation",
-        "page": 19
+        "page": 19,
+        "name": "Risk"
     },
     "116": {
         "text": "monetary authority of singapore",
         "section": "3.5.4 Risk Control and Mitigation",
-        "page": 19
+        "page": 19,
+        "name": "Risk"
     },
     "117": {
         "text": "3.5.4.2 the insurer should review the claims form regularly to ensure that questions remain reasonably clear, unambiguous and pertinent to enable the claims staff to form an accurate assessment of the validity of the claim.",
         "section": "3.5.4 Risk Control and Mitigation",
-        "page": 20
+        "page": 20,
+        "name": "Risk"
     },
     "118": {
         "text": "3.5.4.3 the insurer should have an efficient information system in place as elaborated in paragraph 3.4.4.3. information captured in respect of claims should be up to date and accurate so that the insurer can monitor the progress of the claim handling process and validate the quality of the claim settlement decisions.",
         "section": "3.5.4 Risk Control and Mitigation",
-        "page": 20
+        "page": 20,
+        "name": "Risk"
     },
     "119": {
         "text": "3.5.4.4 the insurer should also have clearly documented claims handling guidelines for each of the key types of claims to provide sufficient guidance to the claims staff. the claims handling guidelines could cover the documents required for verifying the claim, references to warranties or restrictions imposed at acceptance (for example maintaining the car in a roadworthy condition for motor policy and cap on the payout, exclusions, lien for life policy), methodology for calculating the settlement amount, settlement options available and policies on large or ex gratia claims. the insurer should also have clear guidelines on when claims should be referred to the reinsurer or other parties such as lawyers, for claims support or decision. the claims handling guidelines should be regularly reviewed and updated to factor in new developments and trends.",
         "section": "3.5.4 Risk Control and Mitigation",
-        "page": 20
+        "page": 20,
+        "name": "Risk"
     },
     "120": {
         "text": "3.5.4.5 the insurer should have a clear control process for the payment of large claims, for example, getting an official sign off from a member of the management team and the reinsurer, where applicable.",
         "section": "3.5.4 Risk Control and Mitigation",
-        "page": 20
+        "page": 20,
+        "name": "Risk"
     },
     "121": {
         "text": "3.5.4.6 the insurer should endeavour to set case reserves accurately for each claim in a timely manner, especially in respect of general insurance business. the components of case reserves should also be captured in sufficient details to provide useful statistics for in depth analysis. for example, a single claim file could have separate components for own property damage, third party liabilities and fees payable to external parties.",
         "section": "3.5.4 Risk Control and Mitigation",
-        "page": 20
+        "page": 20,
+        "name": "Risk"
     },
     "122": {
         "text": "3.5.4.7 the insurer should have a clear policy, approved by senior management, with regards to ex gratia claim payments. the authority to approve such payments should also be clearly specified and the rationale for the approval should be properly documented.",
         "section": "3.5.4 Risk Control and Mitigation",
-        "page": 20
+        "page": 20,
+        "name": "Risk"
     },
     "123": {
         "text": "3.5.5 risk monitoring and review",
         "section": "3.5.5 Risk Monitoring and Review",
-        "page": 20
+        "page": 20,
+        "name": "Risk"
     },
     "124": {
         "text": "3.5.5.1 an insurer should conduct regular reviews to ensure that the claims assessors continue to be competent in their area of delegated authority and quality of the claims decisions made remains satisfactory. the insurer should",
         "section": "3.5.5 Risk Monitoring and Review",
-        "page": 20
+        "page": 20,
+        "name": "Risk"
     },
     "125": {
         "text": "monetary authority of singapore",
         "section": "3.5.5 Risk Monitoring and Review",
-        "page": 20
+        "page": 20,
+        "name": "Risk"
     },
     "126": {
         "text": "also monitor whether the authority for granting ex gratia payment is exercised sparingly and appropriately, and review the appropriateness of the limits regularly.",
         "section": "3.5.5 Risk Monitoring and Review",
-        "page": 21
+        "page": 21,
+        "name": "Risk"
     },
     "127": {
         "text": "3.5.5.2 the insurer should conduct reviews of claim files regularly. these reviews should be conducted with clear and pre defined objectives for example, to check for adherence to claims settlement authority limits and file closure procedures or to assess the adequacy of the case reserves set, or that case reserves are reviewed and revised on a timely basis. there should also be a systematic way to identify files for review and clear guidelines for follow up actions and closure of files.",
         "section": "3.5.5 Risk Monitoring and Review",
-        "page": 21
+        "page": 21,
+        "name": "Risk"
     },
     "128": {
         "text": "3.5.5.3 the insurer should perform quality reviews of claims to assess whether they are handled professionally and resolved appropriately. one of the performance measures could be the number and nature of complaints against the insurer with respect to their claims settlement decisions. the insurer should also monitor the level of claims which should not have been paid or are overpaid and the severity of delays in claims registration and case reserves revision.",
         "section": "3.5.5 Risk Monitoring and Review",
-        "page": 21
+        "page": 21,
+        "name": "Risk"
     },
     "129": {
         "text": "3.5.5.4 the insurer should have in place regular claims reporting to senior management so as to raise awareness of key claim exposures and losses, especially where a single claim, loss event or series of losses could in aggregate have an impact on its balance sheet.",
         "section": "3.5.5 Risk Monitoring and Review",
-        "page": 21
+        "page": 21,
+        "name": "Risk"
     },
     "130": {
         "text": "3.6 reinsurance management",
         "section": "3.6 REINSURANCE MANAGEMENT",
-        "page": 21
+        "page": 21,
+        "name": "Risk"
     },
     "131": {
         "text": "3.6.1 reinsurance management refers to the control of the reinsurance programme where a portion of the risks assumed by an insurer is ceded to other insurers. risk transfer mechanisms include traditional reinsurance as well as other alternative risk transfer approaches, such as securitisation where the insurance risk is transferred to the capital market.",
         "section": "3.6 REINSURANCE MANAGEMENT",
-        "page": 21
+        "page": 21,
+        "name": "Risk"
     },
     "132": {
         "text": "3.6.2 the process generally involves the review of the insurer’s reinsurance management strategy and assessment of whether its existing reinsurance programme and reinsurance counterparties continue to provide adequate, appropriate and secured risk transfer.",
         "section": "3.6 REINSURANCE MANAGEMENT",
-        "page": 21
+        "page": 21,
+        "name": "Risk"
     },
     "133": {
         "text": "3.6.3 risk identification and measurement",
         "section": "3.6.3 Risk Identification and Measurement",
-        "page": 21
+        "page": 21,
+        "name": "Risk"
     },
     "134": {
         "text": "3.6.3.1 an insurer should analyse its risk profile in conjunction with the legal, economic, social and political environment in which it operates, to",
         "section": "3.6.3 Risk Identification and Measurement",
-        "page": 21
+        "page": 21,
+        "name": "Risk"
     },
     "135": {
         "text": "monetary authority of singapore",
         "section": "3.6.3 Risk Identification and Measurement",
-        "page": 21
+        "page": 21,
+        "name": "Risk"
     },
     "136": {
         "text": "identify the potential sources of risk and estimate the probability and consequence of each risk. such risks may include: underwriting risk",
         "section": "• Underwriting Risk",
-        "page": 22
+        "page": 22,
+        "name": "Risk"
     },
     "137": {
         "text": "the insurer has to decide what and how much risks to retain taking into consideration its risk appetite, and the availability and cost of reinsurance. it should identify the source and magnitude of concentration of risks and assess the impact of likely adverse events. it also has to be mindful of possible gaps in the reinsurance programme, resulting in more risks being retained than intended. in alternative risk transfer mechanisms, such as insurance securitisation, the insurer may also face basis risk whereby the losses recoverable under the arrangement may not exactly match the actual losses suffered by the insurer.",
         "section": "• Underwriting Risk",
-        "page": 22
+        "page": 22,
+        "name": "Risk"
     },
     "138": {
         "text": "legal risk another material risk faced by the insurer is the risk that the contract wordings do not accurately reflect the intent for the purchase of the reinsurance cover or the contract is not legally enforceable.",
         "section": "• Underwriting Risk",
-        "page": 22
+        "page": 22,
+        "name": "Risk"
     },
     "139": {
         "text": "credit risk",
         "section": "• Credit Risk",
-        "page": 22
+        "page": 22,
+        "name": "Risk"
     },
     "140": {
         "text": "the insurer also faces credit risk arising from potential defaults by its reinsurers as it is contractually obligated to pay all claims in respect of the underlying policies in full.",
         "section": "• Credit Risk",
-        "page": 22
+        "page": 22,
+        "name": "Risk"
     },
     "141": {
         "text": "liquidity risk",
         "section": "• Liquidity Risk",
-        "page": 22
+        "page": 22,
+        "name": "Risk"
     },
     "142": {
         "text": "the insurer is particularly exposed to liquidity risk in the event of large losses whereby it may have to pay the claims prior to receiving all the reinsurance recoverables.",
         "section": "• Liquidity Risk",
-        "page": 22
+        "page": 22,
+        "name": "Risk"
     },
     "143": {
         "text": "3.6.4 risk control and mitigation",
         "section": "3.6.4 Risk Control and Mitigation",
-        "page": 22
+        "page": 22,
+        "name": "Risk"
     },
     "144": {
         "text": "3.6.4.1 an insurer’s risk tolerance level should be clearly defined so that the board and senior management will be able to assess the expected maximum impact of one or more major catastrophes on the financial position of the insurer. the insurer’s risk tolerance level should be reviewed by senior management annually and approved by the board.",
         "section": "3.6.4 Risk Control and Mitigation",
-        "page": 22
+        "page": 22,
+        "name": "Risk"
     },
     "145": {
         "text": "monetary authority of singapore",
         "section": "3.6.4 Risk Control and Mitigation",
-        "page": 22
+        "page": 22,
+        "name": "Risk"
     },
     "146": {
         "text": "3.6.4.2 when designing the reinsurance programme to mitigate risk, the insurer should take into account relevant factors including the following: business plans and strategies; underwriting philosophy and capabilities; size and profile of each line of business; frequency and size of loss by line of business; geographical distribution of the business; and financial strength. 3.6.4.3 the insurer should ensure that its reinsurance contracts cover all applicable lines of business and the limits of cover are adequate. the terms, conditions and exclusions stipulated in the reinsurance contracts should also be aligned with those of the underlying business. the insurer should also assess the impact of likely adverse events through stress testing and realistic disaster scenario analysis to ensure that its catastrophe reinsurance cover can be relied upon to reduce the impact of most conceivable calamities to a magnitude that will not threaten its viability.",
         "section": "3.6.4 Risk Control and Mitigation",
-        "page": 23
+        "page": 23,
+        "name": "Risk"
     },
     "147": {
         "text": "3.6.4.4 the insurer should not adopt a “deal now, detail later” philosophy as lack of contract certainty could lead to potential legal disputes and unintended assumption of liabilities. it should put in place appropriate systems and processes to facilitate achieving contract certainty, including prompt commencement of review of the reinsurance programme and vetting of contract wordings.",
         "section": "3.6.4 Risk Control and Mitigation",
-        "page": 23
+        "page": 23,
+        "name": "Risk"
     },
     "148": {
         "text": "3.6.4.5 the insurer is also encouraged to adopt the industry definition, guidance and best market practices and standards, in the areas of contract certainty.",
         "section": "3.6.4 Risk Control and Mitigation",
-        "page": 23
+        "page": 23,
+        "name": "Risk"
     },
     "149": {
         "text": "3.6.4.6 the reinsurance management guidelines should spell out clear criteria for the selection of reinsurers and outline the information that is required to assess the financial soundness of a reinsurer. the insurer should maintain an up to date list of reinsurers that meet its criteria and the appropriate level of exposure for each approved reinsurer or group of related reinsurers.",
         "section": "3.6.4 Risk Control and Mitigation",
-        "page": 23
+        "page": 23,
+        "name": "Risk"
     },
     "150": {
         "text": "monetary authority of singapore",
         "section": "3.6.4 Risk Control and Mitigation",
-        "page": 23
+        "page": 23,
+        "name": "Risk"
     },
     "151": {
         "text": "3.6.4.7 in the event that any previously approved reinsurer no longer meets the insurer’s criteria, there should be clear guidance on the follow up actions required. should there be an exceptional circumstance that merits a deviation from the original approved limits or guidelines, the endorsement of the appropriate approving authority should be obtained.",
         "section": "3.6.4 Risk Control and Mitigation",
-        "page": 24
+        "page": 24,
+        "name": "Risk"
     },
     "152": {
         "text": "3.6.4.8 if an insurer relies on the recommendation of a reinsurance broker in respect of the design of the reinsurance program and selection of reinsurance counterparties, it should satisfy itself that the advice given is sound. it should always maintain sufficient oversight and control over the design and placement of its reinsurance programme, regardless of whether an intermediary is involved.",
         "section": "3.6.4 Risk Control and Mitigation",
-        "page": 24
+        "page": 24,
+        "name": "Risk"
     },
     "153": {
         "text": "3.6.4.9 the insurer should render reinsurance statements and perform reconciliation of accounts regularly and promptly as failure to do so may cause balances due from reinsurers to build up or result in disputes over the outstanding balances, thereby increasing credit/asset risk.",
         "section": "3.6.4 Risk Control and Mitigation",
-        "page": 24
+        "page": 24,
+        "name": "Risk"
     },
     "154": {
         "text": "3.6.4.10 the insurer should ensure that there is good communication between the different business units in the institution to facilitate early identification of any potential liquidity strain, such as large claims triggering cash calls to reinsurers. staff involved should be familiar with and adhere to clear procedures spelled out to facilitate prompt collection of reinsurance recoverables.",
         "section": "3.6.4 Risk Control and Mitigation",
-        "page": 24
+        "page": 24,
+        "name": "Risk"
     },
     "155": {
         "text": "3.6.5 risk monitoring and review",
         "section": "3.6.5 Risk Monitoring and Review",
-        "page": 24
+        "page": 24,
+        "name": "Risk"
     },
     "156": {
         "text": "3.6.5.1 an insurer should monitor that only approved reinsurers are used and track aggregate exposures to individual reinsurers or groups of related reinsurers against exposure limits established. it should also monitor the outstanding balances from its reinsurance counterparties and the credit standing of the reinsurers on its panel on an ongoing basis. the amount and ageing of reinsurance recoverables and/or amount of doubtful debts and write offs can be some of the performance measures to ascertain the effectiveness of its selection of reinsurance counterparties. the insurer should also review whether its reinsurance programme has, over a period of time, supported its business objectives and strategies, and helped to mitigate its losses to within its risk tolerance level.",
         "section": "3.6.5 Risk Monitoring and Review",
-        "page": 24
+        "page": 24,
+        "name": "Risk"
     },
     "157": {
         "text": "monetary authority of singapore",
         "section": "3.6.5 Risk Monitoring and Review",
-        "page": 24
+        "page": 24,
+        "name": "Risk"
     },
     "158": {
         "text": "",
         "section": "3.6.5 Risk Monitoring and Review",
-        "page": 24
+        "page": 24,
+        "name": "Risk"
     }
 }
