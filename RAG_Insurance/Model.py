@@ -1,13 +1,9 @@
 import os
-import time
 from pathlib import Path
 from llama_cpp import Llama
 from rich.console import Console
 from huggingface_hub import hf_hub_download
 from dataclasses import dataclass
-from typing import List, Dict, Any, Tuple
-import numpy as np
-from sklearn.metrics.pairwise import cosine_similarity
 
 @dataclass
 class ModelConfig:

@@ -1,6 +1,5 @@
 from unstructured.partition.pdf import partition_pdf
 from unstructured.cleaners.core import clean
-# from unstructured.documents.elements import Table
 import json
 
 def flush_section(counter, section_text, current_section, current_page, output):

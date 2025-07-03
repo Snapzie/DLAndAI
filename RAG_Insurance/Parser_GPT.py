@@ -1,5 +1,4 @@
 from unstructured.partition.pdf import partition_pdf
-from unstructured.documents.elements import Table
 import json
 
 # Load the PDF
