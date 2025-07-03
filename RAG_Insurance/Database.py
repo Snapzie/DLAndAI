@@ -36,7 +36,7 @@ def init_nonpersistent_cosine_db():
     \nReturns:
     - chromadb collection: Database object
     '''
-    for filename in ['GPTPolicy.json','RiskManagement.json']:
+    for filename in ['Data/GPTPolicy.json','Data/RiskManagement.json']:
         texts,metadata,ids = parse_json(filename)
 
         client = chromadb.Client()

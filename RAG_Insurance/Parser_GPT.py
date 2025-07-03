@@ -30,7 +30,7 @@ for el in elements:
     counter += 1
 
 # Save to JSON file
-with open("GPTPolicy.json", "w", encoding="utf-8") as f:
+with open("Data/GPTPolicy.json", "w", encoding="utf-8") as f:
     json.dump(output, f, indent=4, ensure_ascii=False)
 
 print("PDF converted and saved as 'GPTPolicy.json'")

@@ -59,7 +59,7 @@ for el in elements:
 # Last section
 counter = flush_section(counter, section_text, current_section, current_page, output)
 
-with open("RiskManagement.json", "w", encoding="utf-8") as f:
+with open("Data/RiskManagement.json", "w", encoding="utf-8") as f:
     json.dump(output, f, indent=4, ensure_ascii=False)
 
 print("PDF converted and saved as 'RiskManagement.json'")
