@@ -33,7 +33,6 @@ def get_context(user_input,db,query_document):
         for i in range(len(results['ids'][0]))
         if 1-results['distances'][0][i] >= best * 0.7
     ]
-    # print([1-e['distance'] for e in filtered]) # Debug
     context = '\n'.join([e['document'] for e in filtered])
     metadata = [e['metadata'] for e in filtered]
     return context,metadata

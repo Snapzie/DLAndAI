@@ -19,7 +19,6 @@ try:
 
             user_input_embedding = embedder.encode(question)
             context,metadata = util.get_context(user_input_embedding,db,query_document)
-            # print(context) # Debug
             llm.generate_answer(question, context, metadata)
             print()  # Add a blank line after each response
             
