@@ -52,6 +52,15 @@ Flow_Match/data/*
 RAG_Insurance/gguf_dir/*
 RAG_Insurance/RAG/*
 
+dog_chat/Extraction
+dog_chat/Database
+dog_chat/app
+dog_chat/.env
+dog_chat/.data
+dog_chat/.venv
+dog_chat/todo.md
+dog_chat/uv.lock
+
 *.Identifier
 # Byte-compiled / optimized / DLL files
 __pycache__/
