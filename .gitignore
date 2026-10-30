@@ -54,7 +54,7 @@ RAG_Insurance/RAG/*
 
 dog_chat/Extraction
 dog_chat/Database
-dog_chat/app
+dog_chat/App
 dog_chat/.env
 dog_chat/.data
 dog_chat/.venv
