@@ -1,7 +1,8 @@
 from datetime import date
+from typing import Literal
 from langchain.tools import tool
 import functions
-from schemas import DogTitleResult
+from schemas import Award, DogTitleResult
 
 @tool
 def search_dogs(pedigree_name: str) -> dict:
@@ -195,6 +196,69 @@ def search_show(show_location: str | None = None, show_interval_start: date | No
     return functions.search_show(show_location, show_interval_start, show_interval_end)
 
 @tool
-def get_show_results(dog_id: int, year: int | None = None) -> dict:
-    """Not implemented"""
-    raise NotImplementedError
+def get_show_results(show_ids: list[int] | None = None, dog_ids: list[int] | None = None, show_interval_start: date | None = None, show_interval_end: date | None = None, sex_placements: list[Literal[1, 2, 3, 4, "unplaced"]] | None = None, awards: list[Award] | None = None) -> dict:
+    """Retrieve recorded show results for shows, dogs, or both.
+
+    Args:
+        show_ids: Optional list of show IDs established through previous tool
+            results. Never guess IDs.
+        dog_ids: Optional list of dog IDs established through previous tool
+            results. Supply a list even for one dog.
+        show_interval_start: Optional inclusive start date in YYYY-MM-DD format.
+        show_interval_end: Optional inclusive end date in YYYY-MM-DD format.
+            For a whole year, use January 1 through December 31.
+        sex_placements: Optional list matching any supplied sex placement:
+            1, 2, 3, 4, or "unplaced". "Not placed" and "Ikke placeret" mean
+            outside the top four and map to "unplaced". Use [1] for first place,
+            [1, 2] for the top two, and ["unplaced"] for outside the top four.
+            None or an empty list means no sex-placement filter.
+        awards: Optional list of normalized award labels. Results match any
+            supplied award; None or an empty list means no award filter.
+            Resolve abbreviations to these labels:
+            - CK: CK.
+            - BIK: Bedst i Klasse.
+            - Vet.CERT: Veteran CERT.
+            - Vet.CACIB: Veteran CACIB.
+            - N-VCAC: Nordisk Veteran CERT.
+            - R.CACIB: Reserve CACIB.
+            - NCAC: Nordisk CERT.
+            - CERT: CERT.
+            - CACIB: CACIB.
+            - BIM: Best of Sex.
+            - BIR / BOB / Best of Breed: Best of Breed.
+            - R.CERT: Reserve CERT.
+            - Jun.CERT / J.CERT: Junior CERT.
+            - Jun.CACIB / J.CACIB: Junior CACIB.
+            - N-JCAC: Nordisk Junior CERT.
+            - R.Jun.CERT / R.J.CERT: Reserve Junior CERT.
+            - BIR Junior / BIR Jun.: Junior Best of Breed.
+            - BIM Junior / BIM Jun.: Junior Best of Sex.
+            Keep junior, veteran, and reserve awards distinct. Ask for
+            clarification when the intended award is ambiguous.
+
+    Supply at least one non-empty show_ids or dog_ids list; dates alone are
+    insufficient. Supplied filters combine with AND: when both ID lists are
+    provided, results must match a listed show and a listed dog.
+
+    Returns:
+        A dictionary with results and an optional error. Each result contains
+        show_id, location, date, organizer, judge, dog_id, pedigree_name,
+        show_class, quality_grade, class_placement, sex_placement, and awards.
+        awards is a list of all recorded award strings for that specific result,
+        including awards other than those used to filter.
+        An empty awards list means no awards are recorded for that result,
+        not proof that none were earned. Results without awards are included
+        when no award filter is supplied.
+        Dates use ISO format. Only the top four dogs receive placements.
+        A null class_placement or sex_placement means the dog did not place
+        in the top four of that competition. Quality grades are separate.
+        An empty results list without an error means no matching records.
+        An error is returned if neither ID list contains IDs.
+
+    Use returned pedigree names and show details directly. Preserve recorded
+    classes, grades, and awards; do not guess unfamiliar codes or infer awards
+    from grades or placements. Keep awards attached to their specific result,
+    including when the same dog has multiple results.
+    Missing records do not prove a dog never participated. Never display IDs.
+    """
+    return functions.get_show_results(show_ids, dog_ids, show_interval_start, show_interval_end, sex_placements, awards)

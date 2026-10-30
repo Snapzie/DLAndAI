@@ -38,3 +38,23 @@ show = Table(
     Column("location", Unicode),
     Column("organizer", Unicode),
 )
+
+show_result = Table(
+    "Show_result",
+    metadata,
+    Column("show_result_id", Integer),
+    Column("show_id", Integer),
+    Column("dog_id", Integer),
+    Column("judge", Unicode),
+    Column("class", Unicode),
+    Column("class_placement", Integer),
+    Column("quality_grade", Unicode),
+    Column("sex_placement", Integer),
+)
+
+result_award = Table(
+    "Result_award",
+    metadata,
+    Column("show_result_id", Integer),
+    Column("award", Unicode)
+)

@@ -5,7 +5,7 @@ from langchain_openai import ChatOpenAI
 from langgraph.checkpoint.memory import InMemorySaver
 from middleware import NoInternalIDsMiddleware
 from prompts import SYSTEM_PROMPT
-from tools import search_dogs, get_dog_profile, get_litter_dogs, get_dog_titles, get_dogs_by_titles, search_show
+from tools import search_dogs, get_dog_profile, get_litter_dogs, get_dog_titles, get_dogs_by_titles, search_show, get_show_results
 
 
 def build_agent():
@@ -33,6 +33,7 @@ def build_agent():
             get_dog_titles,
             get_dogs_by_titles,
             search_show,
+            get_show_results,
         ],
         system_prompt=SYSTEM_PROMPT,
         checkpointer=InMemorySaver(),

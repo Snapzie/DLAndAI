@@ -1,8 +1,10 @@
 from sqlalchemy import case, func, or_, select
+from typing import Literal
 from datetime import date
 from db import engine
-from tables import dog, litter, titles, show
-from schemas import DogSearchItem, DogSearchResult, DogLitter, DogProfile, DogProfileResult, LitterDogsResult, LitterDogsGroup, DogTitle, DogTitleResult, ShowItem, ShowSearchResult
+from schemas import Award
+from tables import dog, litter, titles, show, show_result, result_award
+from schemas import DogSearchItem, DogSearchResult, DogLitter, DogProfile, DogProfileResult, LitterDogsResult, LitterDogsGroup, DogTitle, DogTitleResult, ShowItem, ShowSearchResult, ShowResultItem, ShowResult
 
 
 def search_dogs(pedigree_name: str) -> dict:
@@ -264,3 +266,83 @@ def search_show(show_location: str | None = None, show_interval_start: date | No
         has_more = len(rows) > search_limit
     )
     return result.model_dump(mode='json',exclude_none=True)
+
+def get_show_results(
+        show_ids: list[int] | None = None, 
+        dog_ids: list[int] | None = None, 
+        show_interval_start: date | None = None, 
+        show_interval_end: date | None = None,
+        sex_placements: list[Literal[1, 2, 3, 4, "unplaced"]] | None = None,
+        awards: list[Award] | None = None
+    ) -> dict:
+
+    if not show_ids and not dog_ids:
+        return ShowResult(
+            results = [],
+            error = "Provide a more narrow search by supplying show IDs or Dog IDs."
+        ).model_dump(mode='json')
+
+    statement = (
+        select(
+            show_result.c.show_result_id,
+            show.c.show_id,
+            show.c.location,
+            show.c.date,
+            show.c.organizer,
+            show_result.c.judge,
+            dog.c.dog_id,
+            dog.c.pedigree_name,
+            show_result.c["class"].label("show_class"),
+            show_result.c.quality_grade,
+            show_result.c.class_placement,
+            show_result.c.sex_placement,
+            result_award.c.award
+        )
+        .select_from(dog)
+        .join(show_result,dog.c.dog_id == show_result.c.dog_id)
+        .join(show,show_result.c.show_id == show.c.show_id)
+        .outerjoin(result_award,result_award.c.show_result_id == show_result.c.show_result_id)
+    )
+
+    if show_ids:
+        statement = statement.where(
+            show.c.show_id.in_(show_ids)
+        )
+    if dog_ids:
+        statement = statement.where(
+            dog.c.dog_id.in_(dog_ids)
+        )
+    if show_interval_start is not None:
+        statement = statement.where(
+            show.c.date >= show_interval_start
+        )
+    if show_interval_end is not None:
+        statement = statement.where(
+            show.c.date <= show_interval_end
+        )
+    if sex_placements:
+        placements = [value for value in sex_placements if value != "unplaced"]
+        condition = show_result.c.sex_placement.in_(placements)
+        if "unplaced" in sex_placements:
+            condition = or_(condition, show_result.c.sex_placement.is_(None))
+        statement = statement.where(condition)
+
+    if awards:
+        statement = statement.where(
+            show_result.c.show_result_id.in_(
+                select(result_award.c.show_result_id)
+                .where(result_award.c.award.in_(awards))
+            )
+        )
+
+    with engine.connect() as connection:
+        rows = connection.execute(statement).mappings().all()
+
+    groupings = {}
+    for row in rows:
+        show_result_id = row["show_result_id"]
+        if show_result_id not in groupings:
+            groupings[show_result_id] = ShowResultItem.model_validate(row)
+        if row["award"] is not None:
+            groupings[show_result_id].awards.append(row["award"])
+    return ShowResult(results=list(groupings.values())).model_dump(mode="json")
