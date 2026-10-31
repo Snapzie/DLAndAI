@@ -1,4 +1,4 @@
-"""Run from the project root: uv run uvicorn App.main:app --reload."""
+"""Run: uv run uvicorn --app-dir "App - AI Generated" main:app --reload."""
 
 from contextlib import asynccontextmanager
 import logging
@@ -34,7 +34,7 @@ def create_app(agent_factory=None, database=None):
             sys.path.insert(0, str(ROOT / "src"))
             from agent import build_agent
             from db import engine
-            from App import database as database_queries
+            import database as database_queries
 
             app.state.agent = build_agent()
             app.state.database = database_queries
@@ -71,7 +71,7 @@ def create_app(agent_factory=None, database=None):
 
     @app.get("/", response_class=HTMLResponse)
     def index(request: Request):
-        response = HTMLResponse((ROOT / "App" / "index.html").read_text(), headers={"Cache-Control": "no-store"})
+        response = HTMLResponse(Path(__file__).with_name("index.html").read_text(), headers={"Cache-Control": "no-store"})
         # Finish an active turn before deleting its checkpoints.
         reset_session(request, response, wait=True)
         return response

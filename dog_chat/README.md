@@ -1,7 +1,7 @@
 # DogChat
 
 A minimal FastAPI frontend for the pedigree-dog LangChain agent, backed by SQL
-Server. See [App/README.md](App/README.md) for the interface and local run guide.
+Server. See the [app guide](<App - AI Generated/README.md>) for the interface and local run guide.
 
 ## Run locally
 
@@ -9,7 +9,7 @@ Install Microsoft ODBC Driver 18 for SQL Server, configure `.env`, then run:
 
 ```bash
 uv sync
-uv run uvicorn App.main:app --reload
+uv run uvicorn --app-dir "App - AI Generated" main:app --reload
 ```
 
 Open <http://127.0.0.1:8000>. Local development defaults to `DATABASE_AGENT`.
@@ -39,7 +39,7 @@ both SQLAlchemy and pyodbc pooling are disabled to let idle Azure SQL compute pa
    | --- | --- |
    | Language | Docker |
    | Dockerfile path | `./Dockerfile` |
-   | Root directory | Leave empty |
+   | Root directory | `dog_chat` for the parent DLAndAI repository; leave empty for a standalone DogChat repository |
    | Instance type | Free |
    | Region | A nearby European region, such as Frankfurt if available |
    | Docker command | Leave empty; use the Dockerfile command |
@@ -110,7 +110,7 @@ The Azure firewall must allow your computer's public IP. Open
 ## Tests
 
 ```bash
-uv run python -B -m unittest discover -s App -p 'test_*.py'
+uv run python -B -m unittest discover -s "App - AI Generated" -p 'test_*.py'
 ```
 
 The tests use fake agents and isolated SQLite records, without live OpenAI or

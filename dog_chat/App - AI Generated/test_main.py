@@ -9,7 +9,7 @@ from unittest.mock import Mock, patch
 from fastapi.testclient import TestClient
 from langchain.messages import AIMessage
 
-from App.main import COOKIE, create_app
+from main import COOKIE, create_app
 
 
 class WebTests(unittest.TestCase):
@@ -92,7 +92,7 @@ class WebTests(unittest.TestCase):
 
     def test_failure_hides_details_and_allows_next_turn(self):
         self.agent.invoke.side_effect = RuntimeError("private database details")
-        with patch("App.main.logger"):
+        with patch("main.logger"):
             response = self.client.post("/api/chat", json={"message": "Hello"})
         self.assertEqual(response.status_code, 503)
         self.assertNotIn("private database details", response.text)
@@ -133,7 +133,7 @@ class WebTests(unittest.TestCase):
         from sqlalchemy.exc import OperationalError
 
         self.database.list_dogs.side_effect = OperationalError("private query", {}, Exception("private connection"))
-        with patch("App.main.logger"):
+        with patch("main.logger"):
             response = self.client.get("/api/database/dogs")
         self.assertEqual(response.status_code, 503)
         self.assertNotIn("private", response.text)

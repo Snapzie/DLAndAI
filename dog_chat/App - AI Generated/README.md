@@ -9,7 +9,7 @@ From the project root:
 
 ```bash
 uv sync
-uv run uvicorn App.main:app --reload
+uv run uvicorn --app-dir "App - AI Generated" main:app --reload
 ```
 
 Open <http://127.0.0.1:8000>.
@@ -58,7 +58,7 @@ reach the database. Set the required environment variables through the host's se
 settings, install the project dependencies, and run:
 
 ```bash
-uv run uvicorn App.main:app --host 0.0.0.0 --port 8000 --workers 1
+uv run uvicorn --app-dir "App - AI Generated" main:app --host 0.0.0.0 --port 8000 --workers 1
 ```
 
 Set the port to the value required by your host. Serve the page and API together
@@ -73,7 +73,7 @@ sharing beyond trusted users. Nothing is deployed by creating this folder.
 ## Check the web integration
 
 ```bash
-uv run python -B -m unittest discover -s App -p 'test_*.py'
+uv run python -B -m unittest discover -s "App - AI Generated" -p 'test_*.py'
 ```
 
 These checks use a fake agent and do not access OpenAI, SQL Server, or `.env`.

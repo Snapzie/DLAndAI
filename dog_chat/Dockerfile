@@ -22,9 +22,9 @@ COPY pyproject.toml uv.lock ./
 RUN uv sync --frozen --no-dev --no-install-project \
     --python /usr/local/bin/python --no-python-downloads
 
-COPY App ./App
+COPY ["App - AI Generated", "./App - AI Generated"]
 COPY src ./src
 
 EXPOSE 10000
 
-CMD ["sh", "-c", "exec uvicorn App.main:app --host 0.0.0.0 --port ${PORT:-10000} --workers 1 --proxy-headers --forwarded-allow-ips='*'"]
+CMD ["sh", "-c", "exec uvicorn --app-dir 'App - AI Generated' main:app --host 0.0.0.0 --port ${PORT:-10000} --workers 1 --proxy-headers --forwarded-allow-ips='*'"]

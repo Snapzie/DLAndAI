@@ -16,7 +16,7 @@ class DatabaseTests(unittest.TestCase):
         self.engine = create_engine("sqlite://", execution_options={"schema_translate_map": {"dbo": None}})
         self.addCleanup(self.engine.dispose)
         root = Path(__file__).resolve().parents[1]
-        spec = importlib.util.spec_from_file_location("browser_database_under_test", root / "App" / "database.py")
+        spec = importlib.util.spec_from_file_location("browser_database_under_test", Path(__file__).with_name("database.py"))
         self.database = importlib.util.module_from_spec(spec)
         with patch.object(sys, "path", [str(root / "src"), *sys.path]):
             with patch.dict(sys.modules, {"db": SimpleNamespace(engine=self.engine)}):

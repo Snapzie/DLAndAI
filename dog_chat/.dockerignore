@@ -25,4 +25,4 @@ migration_exports/
 **/*.sqlite3
 **/*.pem
 **/*.key
-App/test_*.py
+App - AI Generated/test_*.py
