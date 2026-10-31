@@ -1,0 +1,23 @@
+# Credentials and local environment
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+.venv/
+__pycache__/
+*.py[cod]
+
+# Database data and exports (keep SQL schema and import scripts tracked)
+.data/
+database_exports/
+migration_exports/
+*.bcp
+*.bak
+*.bacpac
+*.dacpac
+*.mdf
+*.ldf
+*.db
+*.sqlite
+*.sqlite3

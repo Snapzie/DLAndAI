@@ -1,0 +1,407 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#faf9f6">
+  <title>DogChat — a conversation about dogs</title>
+  <style>
+    :root { color-scheme: light; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; color: #292e29; background: #faf9f6; }
+    * { box-sizing: border-box; }
+    body { margin: 0; }
+    button, textarea { font: inherit; }
+    button { cursor: pointer; }
+    button:focus-visible, textarea:focus-visible { outline: 2px solid #59705b; outline-offset: 4px; }
+    button:disabled { cursor: default; opacity: .45; }
+    .app { max-width: calc(50% + 400px); min-height: 100svh; margin: auto; padding: 0 28px; display: flex; flex-direction: column; }
+    header { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 30px 0; border-bottom: 1px solid #e7e7df; }
+    .brand { display: flex; align-items: center; gap: 11px; font-size: 17px; font-weight: 600; letter-spacing: -.4px; }
+    .mark { width: 26px; height: 26px; border: 1px solid #869582; border-radius: 50%; display: grid; place-items: center; color: #59705b; }
+    .mark svg { width: 14px; height: 14px; }
+    #reset { background: none; border: 0; color: #6c7267; font-size: 13px; padding: 8px 0 8px 12px; }
+    #reset:hover { color: #292e29; }
+    main { flex: 1; }
+    #welcome { padding: clamp(76px, 16vh, 155px) 0 72px; max-width: 580px; }
+    .eyebrow { color: #7a8274; text-transform: uppercase; letter-spacing: 2px; font-size: 10px; font-weight: 600; }
+    h1 { font-family: Georgia, "Times New Roman", serif; font-size: clamp(35px, 6vw, 49px); font-weight: 400; line-height: 1.14; letter-spacing: -1.6px; margin: 19px 0; }
+    .intro { color: #757b70; max-width: 400px; font-size: 15px; line-height: 1.75; margin: 0; }
+    .examples { display: flex; flex-wrap: wrap; gap: 9px; margin-top: 30px; }
+    .example { border: 1px solid #dedfd5; border-radius: 6px; background: transparent; padding: 10px 13px; font-size: 12px; color: #606957; text-align: left; }
+    .example:hover { border-color: #9ca993; background: #f1f2eb; }
+    #messages { padding: 12px 0 26px; }
+    .message { margin: 30px 0; font-size: 15px; line-height: 1.8; overflow-wrap: anywhere; }
+    .label { font-size: 10px; font-weight: 600; letter-spacing: 1.5px; text-transform: uppercase; color: #7c8375; margin-bottom: 8px; }
+    .user .content { white-space: pre-wrap; padding: 13px 18px; background: #efefe8; border-radius: 8px; }
+    .content > :first-child { margin-top: 0; }
+    .content > :last-child { margin-bottom: 0; }
+    .content p { margin: 0 0 14px; }
+    .content ul, .content ol { padding-left: 23px; }
+    .content h1, .content h2, .content h3 { font-family: inherit; font-size: 17px; line-height: 1.5; font-weight: 600; letter-spacing: 0; margin: 20px 0 8px; }
+    .content a { color: #526c50; text-underline-offset: 3px; }
+    .content pre { overflow-x: auto; padding: 14px; background: #efefe8; border-radius: 6px; }
+    .content code { font-size: 13px; }
+    .content table { display: block; overflow-x: auto; border-collapse: collapse; max-width: 100%; font-size: 13px; }
+    .content th, .content td { border-bottom: 1px solid #dedfd5; padding: 9px 12px; text-align: left; }
+    .error .content { color: #964b37; }
+    #status { min-height: 26px; font-size: 13px; color: #7a8274; }
+    #status.busy::before { content: ""; display: inline-block; width: 6px; height: 6px; background: #84917b; border-radius: 50%; margin-right: 9px; animation: pulse 1.2s infinite alternate; }
+    @keyframes pulse { to { opacity: .3; } }
+    footer { position: sticky; bottom: 0; background: #faf9f6; padding: 14px 0 20px; }
+    form { display: flex; align-items: flex-end; gap: 10px; padding: 10px; border: 1px solid #d8dcd0; border-radius: 10px; background: #fff; box-shadow: 0 4px 20px #292e2904; }
+    textarea { flex: 1; min-width: 0; resize: none; border: 0; background: transparent; color: #292e29; padding: 8px 9px; line-height: 1.5; max-height: 160px; }
+    textarea::placeholder { color: #92988b; }
+    textarea:focus { outline: none; }
+    form:focus-within { border-color: #86977d; }
+    #send { display: grid; place-items: center; width: 37px; height: 37px; flex-shrink: 0; background: #485e45; color: white; border: 0; border-radius: 7px; }
+    #send:hover:not(:disabled) { background: #354b32; }
+    #send svg { width: 17px; height: 17px; }
+    .note { text-align: center; color: #92988b; font-size: 10px; margin: 12px 0 0; letter-spacing: .1px; }
+    .sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); }
+    [hidden] { display: none !important; }
+    #database-panel { display: none; }
+    @media (min-width: 900px) {
+      .app { margin-left: 280px; max-width: calc(100% - 280px); }
+      #database-panel { display: block; position: fixed; inset: 0 auto 0 0; width: 280px; overflow-y: auto; overscroll-behavior: contain; padding: 30px 18px; background: #f0f1eb; border-right: 1px solid #dcded3; }
+      #database-panel h2 { font-size: 14px; font-weight: 600; margin: 0 0 7px; }
+      .database-note { color: #7a8274; font-size: 11px; line-height: 1.6; margin: 0 0 24px; }
+      .database-content { font-size: 12px; line-height: 1.6; overflow-wrap: anywhere; }
+      .database-content details { border-top: 1px solid #dcded3; }
+      .database-section > dl + details { border-top: 0; }
+      .database-content summary { padding: 12px 0; cursor: pointer; font-size: 12px; font-weight: 500; }
+      .database-content summary:focus-visible { outline: 2px solid #59705b; outline-offset: 2px; }
+      .database-section { padding: 0 0 12px 12px; }
+      .database-section dl { margin: 0 0 15px; }
+      .database-section dt { color: #7a8274; font-size: 10px; margin-top: 9px; }
+      .database-section dd { margin: 1px 0 0; }
+      .database-section h3 { font-size: 12px; font-weight: 600; margin: 12px 0 8px; }
+      .database-result + .database-result { border-top: 1px solid #dcded3; padding-top: 6px; }
+      .database-puppies { padding-left: 16px; margin: 4px 0 14px; }
+      .database-puppies li { margin-bottom: 7px; }
+      .database-retry { font-size: 11px; padding: 5px 9px; border: 1px solid #cbd0c1; border-radius: 4px; background: transparent; color: #485e45; }
+      .database-error { color: #964b37; }
+      .conversation main { display: grid; grid-template-columns: minmax(0, 1fr) 240px; column-gap: 32px; align-content: start; align-items: start; }
+      .conversation #welcome { grid-column: 2; grid-row: 1 / span 2; padding: 42px 0 24px; position: sticky; top: 24px; }
+      .conversation #welcome > :not(.examples) { display: none; }
+      .conversation .examples { flex-direction: column; margin-top: 0; }
+      .conversation #messages { grid-column: 1; grid-row: 1; min-width: 0; }
+      .conversation #status { grid-column: 1; grid-row: 2; }
+    }
+    @media (min-width: 900px) and (max-width: 1199px) {
+      .conversation main { grid-template-columns: minmax(0, 1fr) 180px; column-gap: 20px; }
+    }
+    @media (max-width: 560px) { .app { padding: 0 18px; } header { padding: 22px 0; } #welcome { padding-top: 70px; } .message { font-size: 14px; } }
+    @media (prefers-reduced-motion: reduce) { #status.busy::before { animation: none; } }
+  </style>
+</head>
+<body>
+  <aside id="database-panel" aria-labelledby="database-heading">
+    <h2 id="database-heading">Database</h2>
+    <p class="database-note">Recorded data · separate from your chat</p>
+    <div id="database-dogs" class="database-content" aria-live="polite"></div>
+    <p id="database-note" class="database-note">Selected dogs are shown for clarity. DogChat can answer questions about all dogs and shows recorded in the database.</p>
+  </aside>
+  <div class="app">
+    <header>
+      <div class="brand">
+        <span class="mark" aria-hidden="true"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M10 16V5M4 8V4h12v4M4 8h3m6 0h3M7 12h6"/></svg></span>
+        DogChat
+      </div>
+      <button id="reset" type="button">New conversation <span aria-hidden="true">↗</span></button>
+    </header>
+    <main>
+      <section id="welcome">
+        <span class="eyebrow">A little closer to their story</span>
+        <h1>Every dog has a story.<br>Start with a question.</h1>
+        <p class="intro">Explore pedigrees, family connections, titles, and show results from the records.</p>
+        <div class="examples">
+          <button class="example" type="button">List Tamilan Jingu-Kogo's litters</button>
+          <button class="example" type="button">Which shows took place in 2024?</button>
+          <button class="example" type="button">At which shows did Tamilan Jingu-Kogo place BoB?</button>
+          <button class="example" type="button">Who has the most best of breed placements, Jingu-Kogo or Special agent Z?</button>
+        </div>
+      </section>
+      <div id="messages" role="log" aria-label="Conversation" aria-live="polite"></div>
+      <div id="status" role="status"></div>
+    </main>
+    <footer>
+      <form id="chat-form">
+        <label class="sr-only" for="question">Your question</label>
+        <textarea id="question" rows="1" maxlength="8000" placeholder="Ask about a dog, a title, or a show…" required></textarea>
+        <button id="send" type="submit" aria-label="Send question" disabled><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 19V5m-6 6 6-6 6 6"/></svg></button>
+      </form>
+      <p class="note">Based on recorded information. Records may be incomplete.</p>
+    </footer>
+  </div>
+  <script>
+    const question = document.querySelector('#question');
+    const form = document.querySelector('#chat-form');
+    const send = document.querySelector('#send');
+    const reset = document.querySelector('#reset');
+    const messages = document.querySelector('#messages');
+    const welcome = document.querySelector('#welcome');
+    const status = document.querySelector('#status');
+    const app = document.querySelector('.app');
+    const desktop = window.matchMedia('(min-width: 900px)');
+    let busy = false;
+
+    function setConversation(active) {
+      app.classList.toggle('conversation', active);
+      welcome.hidden = active && !desktop.matches;
+    }
+
+    desktop.addEventListener('change', () => setConversation(app.classList.contains('conversation')));
+
+    function databaseElement(tag, text, className) {
+      const element = document.createElement(tag);
+      if (text !== undefined) element.textContent = text;
+      if (className) element.className = className;
+      return element;
+    }
+
+    async function getRecords(path) {
+      const response = await fetch(path, { cache: 'no-store' });
+      if (!response.ok) throw new Error('Records could not be loaded.');
+      return response.json();
+    }
+
+    function databaseFields(fields) {
+      const list = databaseElement('dl');
+      for (const [label, value] of fields) {
+        list.append(databaseElement('dt', label), databaseElement('dd', value ?? 'Not recorded'));
+      }
+      return list;
+    }
+
+    function databaseFailure(container, retry) {
+      const button = databaseElement('button', 'Try again', 'database-retry');
+      button.type = 'button';
+      button.addEventListener('click', retry);
+      container.replaceChildren(databaseElement('p', 'Records could not be loaded.', 'database-error'), button);
+    }
+
+    function databaseSection(title, load, render) {
+      const details = databaseElement('details');
+      const content = databaseElement('div', undefined, 'database-section');
+      details.append(databaseElement('summary', title), content);
+      let loaded = false;
+      let loading = false;
+      async function populate() {
+        if (loading || loaded) return;
+        loading = true;
+        content.replaceChildren(databaseElement('p', 'Loading records…'));
+        try {
+          const data = await load();
+          content.replaceChildren();
+          render(content, data);
+          loaded = true;
+        } catch (error) {
+          databaseFailure(content, populate);
+        } finally {
+          loading = false;
+        }
+      }
+      details.addEventListener('toggle', () => { if (details.open) populate(); });
+      return details;
+    }
+
+    function renderShowResults(container, data) {
+      if (!data.results.length) {
+        container.append(databaseElement('p', 'No results recorded.'));
+        return;
+      }
+      for (const result of data.results) {
+        const section = databaseElement('section', undefined, 'database-result');
+        section.append(databaseElement('h3', result.show_class || 'Class not recorded'));
+        section.append(databaseFields([
+          ['Judge', result.judge],
+          ['Quality grade', result.quality_grade],
+          ['Class placement', result.class_placement ?? 'Not placed (outside top 4)'],
+          ['Sex placement', result.sex_placement ?? 'Not placed (outside top 4)'],
+          ['Awards', result.awards.length ? result.awards.join(', ') : 'None recorded'],
+        ]));
+        container.append(section);
+      }
+    }
+
+    function renderDogShows(container, data, dogId) {
+      if (!data.shows.length) container.append(databaseElement('p', 'No shows recorded.'));
+      for (const show of data.shows) {
+        container.append(databaseSection(
+          `${show.location || 'Location unavailable'} · ${show.date || 'Date unavailable'}`,
+          () => getRecords(`/api/database/dogs/${dogId}/shows/${show.show_id}/results`),
+          (section, results) => {
+            section.append(databaseFields([['Organizer', show.organizer]]));
+            renderShowResults(section, results);
+          },
+        ));
+      }
+    }
+
+    function renderDogLitters(container, data) {
+      if (!data.litters.length) container.append(databaseElement('p', 'No breeding litters recorded.'));
+      for (const litter of data.litters) {
+        const section = databaseElement('section', undefined, 'database-result');
+        const partner = litter.partner_name || (litter.partner_id == null ? 'Partner not recorded' : 'Partner name unavailable');
+        section.append(databaseElement('h3', `${litter.birth_date || 'Date unavailable'} · ${partner}`));
+        section.append(databaseFields([['Recorded puppy count', litter.puppy_count]]));
+        section.append(databaseElement('h3', 'Puppies'));
+        if (litter.puppies.length) {
+          const puppies = databaseElement('ul', undefined, 'database-puppies');
+          for (const puppy of litter.puppies) {
+            puppies.append(databaseElement('li', `${puppy.pedigree_name || 'Name unavailable'} · ${puppy.birth_date || 'Birth date unavailable'}`));
+          }
+          section.append(puppies);
+        } else {
+          section.append(databaseElement('p', 'No individual puppy records linked to this litter.'));
+        }
+        container.append(section);
+      }
+    }
+
+    function renderDog(container, dog) {
+      container.append(databaseFields([
+        ['Born', dog.birth_date],
+        ['Sex', dog.sex],
+        ['Sire', dog.sire_name || (dog.sire_id == null ? 'Not recorded' : 'Name unavailable')],
+        ['Dam', dog.dam_name || (dog.dam_id == null ? 'Not recorded' : 'Name unavailable')],
+        ['Titles', dog.titles.length ? dog.titles.join(', ') : 'None recorded'],
+      ]));
+      container.append(databaseSection(
+        'Shows',
+        () => getRecords(`/api/database/dogs/${dog.dog_id}/shows`),
+        (section, data) => renderDogShows(section, data, dog.dog_id),
+      ));
+      container.append(databaseSection(
+        'Litters',
+        () => getRecords(`/api/database/dogs/${dog.dog_id}/litters`),
+        renderDogLitters,
+      ));
+    }
+
+    let databaseLoaded = false;
+    let databaseLoading = false;
+    async function loadDatabase() {
+      if (!desktop.matches || databaseLoaded || databaseLoading) return;
+      databaseLoading = true;
+      const container = document.querySelector('#database-dogs');
+      container.replaceChildren(databaseElement('p', 'Loading dogs…'));
+      try {
+        const data = await getRecords('/api/database/dogs');
+        document.querySelector('#database-note').textContent = `Selected dogs are shown for clarity. DogChat can answer questions about all ${data.total_count.toLocaleString()} dogs and ${data.show_count.toLocaleString()} shows recorded in the database.`;
+        container.replaceChildren();
+        if (!data.dogs.length) container.append(databaseElement('p', 'No dogs recorded.'));
+        for (const dog of data.dogs) {
+          container.append(databaseSection(
+            dog.pedigree_name || 'Name unavailable',
+            () => getRecords(`/api/database/dogs/${dog.dog_id}`),
+            renderDog,
+          ));
+        }
+        databaseLoaded = true;
+      } catch (error) {
+        databaseFailure(container, loadDatabase);
+      } finally {
+        databaseLoading = false;
+      }
+    }
+    desktop.addEventListener('change', loadDatabase);
+    loadDatabase();
+
+    function updateInput() {
+      send.disabled = busy || !question.value.trim();
+      question.style.height = 'auto';
+      question.style.height = Math.min(question.scrollHeight, 160) + 'px';
+    }
+
+    function setBusy(value) {
+      busy = value;
+      reset.disabled = value;
+      question.readOnly = value;
+      document.querySelectorAll('.example').forEach(button => button.disabled = value);
+      status.textContent = value ? 'Looking through the records…' : '';
+      status.classList.toggle('busy', value);
+      messages.setAttribute('aria-busy', String(value));
+      updateInput();
+    }
+
+    function addMessage(label, text, html) {
+      const article = document.createElement('article');
+      article.className = 'message ' + label.toLowerCase();
+      const heading = document.createElement('div');
+      heading.className = 'label';
+      heading.textContent = label;
+      const content = document.createElement('div');
+      content.className = 'content';
+      // Only server-rendered Markdown goes through innerHTML. Raw HTML is disabled there.
+      if (html !== undefined) content.innerHTML = html;
+      else content.textContent = text;
+      article.append(heading, content);
+      messages.append(article);
+      return article;
+    }
+
+    async function post(path, body) {
+      const response = await fetch(path, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(body),
+      });
+      const data = await response.json();
+      if (!response.ok) throw new Error(typeof data.detail === 'string' ? data.detail : 'Please check your question and try again.');
+      return data;
+    }
+
+    form.addEventListener('submit', async event => {
+      event.preventDefault();
+      const text = question.value.trim();
+      if (busy || !text) return;
+      setConversation(true);
+      addMessage('You', text);
+      question.value = '';
+      setBusy(true);
+      status.scrollIntoView({ block: 'nearest' });
+      let reply;
+      try {
+        const data = await post('/api/chat', { message: text });
+        reply = addMessage('DogChat', data.text, data.html);
+      } catch (error) {
+        reply = addMessage('Error', error instanceof TypeError ? 'Could not reach the server. Check your connection and try again.' : error.message);
+        question.value = text;
+      } finally {
+        setBusy(false);
+        question.focus({ preventScroll: true });
+        reply?.scrollIntoView({ block: 'start' });
+      }
+    });
+
+    reset.addEventListener('click', async () => {
+      if (busy) return;
+      setBusy(true);
+      try {
+        await post('/api/conversation', {});
+        messages.replaceChildren();
+        setConversation(false);
+        question.value = '';
+      } catch (error) {
+        addMessage('Error', 'Could not start a new conversation. Please try again.');
+      } finally {
+        setBusy(false);
+        question.focus();
+      }
+    });
+
+    question.addEventListener('input', updateInput);
+    question.addEventListener('keydown', event => {
+      if (event.key === 'Enter' && !event.shiftKey && !event.isComposing) {
+        event.preventDefault();
+        if (!busy && question.value.trim()) form.requestSubmit();
+      }
+    });
+    document.querySelectorAll('.example').forEach(button => button.addEventListener('click', () => {
+      question.value = button.textContent;
+      updateInput();
+      question.focus();
+    }));
+  </script>
+</body>
+</html>
